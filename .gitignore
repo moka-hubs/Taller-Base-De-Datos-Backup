@@ -1,4 +1,9 @@
-**/*.localz
-**/*.local
-**/*.git
-**/*.DS_Store
+# Archivos de configuración local
+*.localz
+*.local
+
+# Archivos del sistema operativo (Mac)
+.DS_Store
+
+# Archivos comprimidos pesados
+*.rar
