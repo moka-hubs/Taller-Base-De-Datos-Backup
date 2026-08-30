@@ -10,7 +10,7 @@
 <identifying>false</identifying>
 <nameOnSource>contiene</nameOnSource>
 <nameOnTarget>es contenida</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>
 <sourceEntity>5A188DA2-54F2-8763-D01B-DC81D5B0077B</sourceEntity>

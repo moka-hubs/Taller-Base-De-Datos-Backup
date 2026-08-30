@@ -11,7 +11,7 @@
 <nameOnSource>programa</nameOnSource>
 <nameOnTarget>es programada</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>8F92FA56-4BA4-CD46-A7A2-B294E5A5F125</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

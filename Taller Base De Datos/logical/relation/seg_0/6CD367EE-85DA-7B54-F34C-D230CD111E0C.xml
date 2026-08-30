@@ -11,7 +11,7 @@
 <nameOnSource>procesa</nameOnSource>
 <nameOnTarget>es procesado</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>130613E3-BB31-DB30-AE0E-622805F87C0D</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

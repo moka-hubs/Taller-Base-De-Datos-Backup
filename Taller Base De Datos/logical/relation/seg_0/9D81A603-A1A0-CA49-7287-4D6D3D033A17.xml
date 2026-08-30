@@ -11,7 +11,7 @@
 <nameOnSource>aplica</nameOnSource>
 <nameOnTarget>es aplicada</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>5A188DA2-54F2-8763-D01B-DC81D5B0077B</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

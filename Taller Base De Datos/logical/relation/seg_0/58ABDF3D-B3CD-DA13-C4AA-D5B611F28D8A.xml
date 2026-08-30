@@ -10,7 +10,7 @@
 <identifying>false</identifying>
 <nameOnSource>diseña</nameOnSource>
 <nameOnTarget>es diseñada</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>
 <sourceEntity>70D486B2-4E05-A777-D8A8-489D47354B9F</sourceEntity>

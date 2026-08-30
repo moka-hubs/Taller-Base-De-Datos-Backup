@@ -11,7 +11,7 @@
 <nameOnSource>agrupa</nameOnSource>
 <nameOnTarget>es agrupada</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>E563BA75-FECD-D2C0-ED83-C3FFD62481BD</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

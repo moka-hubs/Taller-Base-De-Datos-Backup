@@ -11,7 +11,7 @@
 <identifying>false</identifying>
 <nameOnSource>ocupa</nameOnSource>
 <nameOnTarget>es ocupada</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>
 <sourceEntity>D4395027-A313-D257-5F94-FAB3D7119491</sourceEntity>

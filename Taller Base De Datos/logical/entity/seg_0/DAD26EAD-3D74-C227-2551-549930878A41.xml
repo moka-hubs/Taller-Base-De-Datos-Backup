@@ -61,12 +61,13 @@
 <engineerTo>
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>4A2DC6C8-1990-01E2-291E-8851D4AFC4F1</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id_agendar" id="B130633B-3352-7E17-0BD5-643E30DFD392">
 <createdBy>moka</createdBy>
@@ -76,12 +77,13 @@
 <engineerTo>
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>318F7183-FEF1-D68F-6DC8-46AE3AD64521</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="fecha_agendar" id="153B032C-2088-32F2-3E9A-55E6EF6FE582">
 <createdBy>moka</createdBy>
@@ -91,6 +93,7 @@
 <engineerTo>
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>807657CE-83EE-4243-1E38-42E260060510</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>

@@ -131,6 +131,7 @@
 <engineerTo>
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <referedAttribute>67F76670-8BE0-BCB9-0C15-827F3FC84B8E</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
