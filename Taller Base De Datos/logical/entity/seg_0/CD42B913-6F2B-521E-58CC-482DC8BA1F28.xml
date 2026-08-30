@@ -77,21 +77,6 @@
 <logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="rut_cliente" id="0B00A04A-E23E-0651-5F32-C9A5C137556D">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 22:47:22 UTC</createdTime>
-<generatorID>6D808551-EC35-184D-0255-245BA2CD47EC</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<referedAttribute>4C4AD86F-A81D-0B7F-347F-18872B98F7B1</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>13</dataTypeSize>
-<ownDataTypeParameters>13,,</ownDataTypeParameters>
-</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="E17999D4-3670-3C0D-8044-AA1B0C1FC5A8" name="FICHA_CLIENTE PK">
