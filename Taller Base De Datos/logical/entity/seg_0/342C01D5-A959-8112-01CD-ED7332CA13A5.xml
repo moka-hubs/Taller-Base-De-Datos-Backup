@@ -80,21 +80,6 @@
 <dataTypeSize>200</dataTypeSize>
 <ownDataTypeParameters>200,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="rut_preparador" id="DFBA825A-0C3A-E0D9-3CFA-EA07E05D5775">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 22:55:23 UTC</createdTime>
-<generatorID>73F90125-BF27-CB10-69A5-FD5772AF9D5C</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<referedAttribute>7F22DEC1-17EB-A415-FA29-0C3C179348D2</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>13</dataTypeSize>
-<ownDataTypeParameters>13,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="rut_cliente" id="954833C0-4952-3850-1725-A5E81AFC24A2">
 <createdBy>moka</createdBy>
 <createdTime>2026-08-28 22:57:38 UTC</createdTime>

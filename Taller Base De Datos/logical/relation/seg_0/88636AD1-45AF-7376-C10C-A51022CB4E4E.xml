@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="CORRESPONDER" directorySegmentName="seg_0" id="88636AD1-45AF-7376-C10C-A51022CB4E4E">
+<createdBy>moka</createdBy>
+<createdTime>2026-08-30 00:19:19 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
+</engineerTo>
+<sourcePk>DFE81758-ABC7-729E-F4B2-80277AA6D950</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>corresponde</nameOnSource>
+<nameOnTarget>es correspondida</nameOnTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>57566A70-AF52-9D5C-4057-25D4ED3B7357</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>CB97C6A2-6AB7-AB75-6D74-E7AC0FF6F0E2</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

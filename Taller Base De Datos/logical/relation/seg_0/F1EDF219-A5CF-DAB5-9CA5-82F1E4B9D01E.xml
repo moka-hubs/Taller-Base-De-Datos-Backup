@@ -13,7 +13,7 @@
 <nameOnTarget>es recibida</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>97C06892-37AD-B44F-14B2-D7260C63932B</sourceEntity>
 <targetCardinalityString>1</targetCardinalityString>
 <targetEntity>5A188DA2-54F2-8763-D01B-DC81D5B0077B</targetEntity>

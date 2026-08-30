@@ -11,15 +11,15 @@
 <gridEnabled>false</gridEnabled>
 <showGrid>true</showGrid>
 <diagramColor>-1</diagramColor>
-<legendPosX>1995</legendPosX>
-<legendPosY>849</legendPosY>
+<legendPosX>1992</legendPosX>
+<legendPosY>963</legendPosY>
 <display>false</display>
 <notation>1</notation>
 <showClassificationTypes>true</showClassificationTypes>
 <objectViews>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="0A2988CA-49ED-CAF8-CA35-4ACCD5692E4C" otype="Entity" vid="98180EA9-3A77-37F2-9016-1831FAFCE530">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="1989" y="494" width="277" height="231"/>
+<bounds x="2042" y="488" width="277" height="232"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="130613E3-BB31-DB30-AE0E-622805F87C0D" otype="Entity" vid="E5E739AB-F717-D7FA-15D6-DC821014E0B9">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
@@ -27,7 +27,7 @@
 </OView>
 <OView class="oracle.dbtools.crest.swingui.TVLegend" oid="1D189BD0-DDE7-9276-3289-5DB15C30F178" otype="Legend" vid="F167353E-8176-3AE9-DE06-2A2C6F4FDAE6">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
-<bounds x="1995" y="849" width="226" height="132"/>
+<bounds x="1992" y="963" width="226" height="129"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="2ECB5A96-C02C-09F0-B0DF-2F39C2469A6F" otype="Entity" vid="BE4C32E3-5924-ECD1-91EA-13B585F31D48">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
@@ -48,6 +48,10 @@
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="51457455-FF99-3BC2-8B9F-E4FF99F5C10C" otype="Entity" vid="EA722A39-6778-C939-6CAC-672F7A9D0F47">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
 <bounds x="2089" y="148" width="204" height="110"/>
+</OView>
+<OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="57566A70-AF52-9D5C-4057-25D4ED3B7357" otype="Entity" vid="6364D037-E14D-C622-1390-73AFF68ADC0A">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="1779" y="740" width="233" height="84"/>
 </OView>
 <OView class="oracle.dbtools.crest.swingui.logical.TVEntity" oid="5A188DA2-54F2-8763-D01B-DC81D5B0077B" otype="Entity" vid="8A357872-E63A-EEB4-54DB-F093F027775F">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
@@ -378,13 +382,34 @@
 <point x="593" y="21"/>
 </points>
 </Connector>
+<Connector class="oracle.dbtools.crest.swingui.logical.TVRelation" oid="88636AD1-45AF-7376-C10C-A51022CB4E4E" otype="Relation" vid_source="6364D037-E14D-C622-1390-73AFF68ADC0A" vid_target="504FA9E0-F4FF-9C77-E7FE-DC92DFF947C9">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<backgroundColor>-16777216</backgroundColor>
+<lineWidth>1</lineWidth>
+<sourceLabel class="oracle.dbtools.crest.model.design.Label">
+<site>0</site>
+<labelBounds x="1847" y="704" width="75" height="30"/>
+<noBackgroundColor>true</noBackgroundColor>
+<noForegroundColor>true</noForegroundColor>
+</sourceLabel>
+<targetLabel class="oracle.dbtools.crest.model.design.Label">
+<site>2</site>
+<labelBounds x="1847" y="647" width="98" height="30"/>
+<noBackgroundColor>true</noBackgroundColor>
+<noForegroundColor>true</noForegroundColor>
+</targetLabel>
+<points>
+<point x="1847" y="740"/>
+<point x="1847" y="603"/>
+</points>
+</Connector>
 <Connector class="oracle.dbtools.crest.swingui.logical.TVRelation" oid="8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7" otype="Relation" vid_source="98180EA9-3A77-37F2-9016-1831FAFCE530" vid_target="C4EF1B5B-3E84-86ED-0C4A-5F82D8816C39">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
 <backgroundColor>-16777216</backgroundColor>
 <lineWidth>1</lineWidth>
 <sourceLabel class="oracle.dbtools.crest.model.design.Label">
 <site>0</site>
-<labelBounds x="2129" y="458" width="60" height="30"/>
+<labelBounds x="2129" y="452" width="60" height="30"/>
 <noBackgroundColor>true</noBackgroundColor>
 <noForegroundColor>true</noForegroundColor>
 </sourceLabel>
@@ -395,7 +420,7 @@
 <noForegroundColor>true</noForegroundColor>
 </targetLabel>
 <points>
-<point x="2129" y="494"/>
+<point x="2129" y="488"/>
 <point x="2129" y="423"/>
 <point x="1555" y="422"/>
 <point x="1303" y="421"/>

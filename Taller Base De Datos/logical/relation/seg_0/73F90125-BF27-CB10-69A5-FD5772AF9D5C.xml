@@ -12,7 +12,7 @@
 <nameOnTarget>es ofrecido</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>70D486B2-4E05-A777-D8A8-489D47354B9F</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
 <targetEntity>342C01D5-A959-8112-01CD-ED7332CA13A5</targetEntity>
