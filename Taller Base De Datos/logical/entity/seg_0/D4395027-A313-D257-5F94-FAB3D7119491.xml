@@ -54,19 +54,33 @@
 <dataTypePrecision>9</dataTypePrecision>
 <ownDataTypeParameters>,9,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="rut_preparador" id="792BEA0C-9A6C-69EF-99EE-D3C9FD9CD2CA">
+<Attribute name="id_agendar" id="9B4A2952-F4BD-EEE7-2A6F-1E36BC12EDCC">
 <createdBy>moka</createdBy>
-<createdTime>2026-08-28 22:56:51 UTC</createdTime>
-<generatorID>98DA834C-370E-7E3B-1A5F-E1A011399DED</generatorID>
+<createdTime>2026-08-30 02:27:13 UTC</createdTime>
+<generatorID>31EDF1F4-8D38-85A5-E489-C35C2F5312A2</generatorID>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
-<referedAttribute>7F22DEC1-17EB-A415-FA29-0C3C179348D2</referedAttribute>
+<referedAttribute>318F7183-FEF1-D68F-6DC8-46AE3AD64521</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>13</dataTypeSize>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_agendar" id="6CBDB0DF-5EC9-3A7C-E2A1-59913C1F7AD1">
+<createdBy>moka</createdBy>
+<createdTime>2026-08-30 02:27:13 UTC</createdTime>
+<generatorID>31EDF1F4-8D38-85A5-E489-C35C2F5312A2</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
+</engineerTo>
+<referedAttribute>807657CE-83EE-4243-1E38-42E260060510</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>

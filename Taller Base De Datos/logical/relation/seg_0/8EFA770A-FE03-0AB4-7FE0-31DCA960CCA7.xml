@@ -12,7 +12,7 @@
 <nameOnTarget>es registrada</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>0A2988CA-49ED-CAF8-CA35-4ACCD5692E4C</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
 <targetEntity>CD42B913-6F2B-521E-58CC-482DC8BA1F28</targetEntity>

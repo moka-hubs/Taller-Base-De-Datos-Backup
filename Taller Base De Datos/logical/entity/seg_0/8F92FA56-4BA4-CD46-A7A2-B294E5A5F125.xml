@@ -79,22 +79,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>13</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_bloque" id="111277D1-5BA1-8771-5514-953211DF6588">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 23:12:36 UTC</createdTime>
-<generatorID>31EDF1F4-8D38-85A5-E489-C35C2F5312A2</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<referedAttribute>0DD01537-8B81-D91E-BA7B-DF898BB88754</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>13,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="rut_cliente" id="328BF46B-6295-DA8C-6D1A-1DB5A423525D">
 <createdBy>moka</createdBy>
@@ -109,7 +94,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>13</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>13,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

@@ -18,4 +18,20 @@
 <targetEntity>7DD684C2-D1BE-A25F-9DFD-17F77D26584E</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<attribute name="SOLO_UN_MEDIO_PAGO" id="B1B270FB-5657-E6C2-3EC0-9C1FAFD0A807">
+<createdBy>moka</createdBy>
+<createdTime>2026-08-30 02:19:31 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+</attribute>
+</attributes>
 </Relation>

@@ -7,14 +7,15 @@
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
 <sourcePk>8F26459E-4D05-5095-A31A-2965D4A00FA5</sourcePk>
+<targetPk>E5A576A9-FDF4-C6F0-9E75-09F68C5A3EA3</targetPk>
 <identifying>false</identifying>
 <nameOnSource>ocupa</nameOnSource>
 <nameOnTarget>es ocupada</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>D4395027-A313-D257-5F94-FAB3D7119491</sourceEntity>
-<targetCardinalityString>*</targetCardinalityString>
+<targetCardinalityString>1</targetCardinalityString>
 <targetEntity>8F92FA56-4BA4-CD46-A7A2-B294E5A5F125</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>

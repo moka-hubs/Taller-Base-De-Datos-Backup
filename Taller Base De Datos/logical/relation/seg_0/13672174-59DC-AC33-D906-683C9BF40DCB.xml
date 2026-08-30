@@ -12,7 +12,7 @@
 <nameOnTarget>es contenida</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>5A188DA2-54F2-8763-D01B-DC81D5B0077B</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
 <targetEntity>A6CE905F-1F77-B384-29CD-DD8186E012F0</targetEntity>

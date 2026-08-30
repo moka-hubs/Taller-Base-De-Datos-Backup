@@ -12,7 +12,7 @@
 <nameOnTarget>es definido</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
-<sourceCardinality>1</sourceCardinality>
+<sourceCardinality>*</sourceCardinality>
 <sourceEntity>70D486B2-4E05-A777-D8A8-489D47354B9F</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
 <targetEntity>D4395027-A313-D257-5F94-FAB3D7119491</targetEntity>
