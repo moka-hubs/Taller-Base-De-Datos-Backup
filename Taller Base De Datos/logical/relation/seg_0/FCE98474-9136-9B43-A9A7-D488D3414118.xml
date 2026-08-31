@@ -10,8 +10,8 @@
 <identifying>false</identifying>
 <nameOnSource>coordina</nameOnSource>
 <nameOnTarget>es coordinada</nameOnTarget>
-<optionalSource>false</optionalSource>
-<optionalTarget>true</optionalTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>70D486B2-4E05-A777-D8A8-489D47354B9F</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

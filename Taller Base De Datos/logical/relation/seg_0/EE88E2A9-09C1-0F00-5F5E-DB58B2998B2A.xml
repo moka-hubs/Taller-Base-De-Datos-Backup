@@ -10,7 +10,7 @@
 <identifying>false</identifying>
 <nameOnSource>especifica</nameOnSource>
 <nameOnTarget>es especificada</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>CD42B913-6F2B-521E-58CC-482DC8BA1F28</sourceEntity>

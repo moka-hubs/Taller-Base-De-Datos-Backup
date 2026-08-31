@@ -12,7 +12,7 @@
 <nameOnSource>suscribir</nameOnSource>
 <nameOnTarget>es suscrito</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>97C06892-37AD-B44F-14B2-D7260C63932B</sourceEntity>
 <targetCardinalityString>1</targetCardinalityString>

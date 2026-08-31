@@ -10,8 +10,8 @@
 <identifying>false</identifying>
 <nameOnSource>agenda</nameOnSource>
 <nameOnTarget>es agendada</nameOnTarget>
-<optionalSource>false</optionalSource>
-<optionalTarget>true</optionalTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>97C06892-37AD-B44F-14B2-D7260C63932B</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>

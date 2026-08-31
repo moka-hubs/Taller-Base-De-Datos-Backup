@@ -7,12 +7,11 @@
 <item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
 </engineerTo>
 <sourcePk>4ED7F267-82FA-1E57-C40A-AC033547862C</sourcePk>
-<targetPk>69E7C950-71A9-2CA1-A857-84162FFE7C63</targetPk>
 <identifying>false</identifying>
 <nameOnSource>recibe</nameOnSource>
 <nameOnTarget>es recibida</nameOnTarget>
 <optionalSource>false</optionalSource>
-<optionalTarget>false</optionalTarget>
+<optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>97C06892-37AD-B44F-14B2-D7260C63932B</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
