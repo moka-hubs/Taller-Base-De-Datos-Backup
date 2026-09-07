@@ -54,17 +54,6 @@
 <dataTypeSize>200</dataTypeSize>
 <ownDataTypeParameters>200,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="fecha_" id="7795F9BE-C66E-D855-6F59-D2B1D40F644C">
-<createdBy>SJ-Alumno</createdBy>
-<createdTime>2026-08-24 13:16:17 UTC</createdTime>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="fecha_observacion" id="2677798A-143C-507A-C626-27B746F21CE7">
 <createdBy>SJ-Alumno</createdBy>
 <createdTime>2026-08-24 13:19:16 UTC</createdTime>
