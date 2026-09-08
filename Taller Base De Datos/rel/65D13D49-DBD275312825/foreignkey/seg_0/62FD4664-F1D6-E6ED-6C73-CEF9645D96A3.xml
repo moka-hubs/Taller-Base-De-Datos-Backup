@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="62FD4664-F1D6-E6ED-6C73-CEF9645D96A3" containerWithKeyObject="240E120D-5553-FEC9-5252-4644F2CC9FAB" localFKIndex="1AE5014C-EC87-D99E-CC97-31BCB3ED779C" name="REGISTRAR_FICHA_CLIENTE_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>FICHA_CLIENTE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>3044A9B9-ACF2-3E58-C780-DE8ADC3F8146</referredTableID>
+<keyObject>0F4C78E2-1E89-458A-9000-817264750AD1</keyObject>
+<referredKeyID>0F4C78E2-1E89-458A-9000-817264750AD1</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_ficha</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

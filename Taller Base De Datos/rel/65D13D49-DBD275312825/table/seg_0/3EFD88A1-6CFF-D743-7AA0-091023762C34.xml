@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3EFD88A1-6CFF-D743-7AA0-091023762C34" name="SESION_ENTRENAMIENTO">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>DAD26EAD-3D74-C227-2551-549930878A41</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_sesion" id="A0CEF0BA-C119-DA91-4F9D-FCA105FB076C">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>00DA8701-9739-BD70-CFC1-7D93D4227172</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_sesion" id="592588C9-A2F9-67E0-F37C-DD9BC8F04154">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>8F26A476-0A62-9A05-5EEE-5A3424B81C17</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="duracion_sesion" id="303D0295-3B45-4D90-C876-77BAF14A6F49">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>959FF8A2-9387-4440-6432-20B55DB2EF6F</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT049</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="RUTINA_id_rutina" id="EBED7B6D-7FBF-AAB1-1DB4-DDAE60809AD5">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>1DB4F493-6817-E729-7634-E78C067CD12A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0D197296-BE51-84B4-5D55-057CFE403266" referredColumn="36544099-6BE8-52EA-547A-49484764B256"/>
+</associations>
+</Column>
+<Column name="AGENDA_id_agendar" id="A7ED550C-5669-93DC-DB74-4E098742F395">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>B130633B-3352-7E17-0BD5-643E30DFD392</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="835E95AD-5031-4EEA-D159-B115042AD903" referredColumn="23896381-8052-D2AF-5318-8623DB3B36AE"/>
+</associations>
+</Column>
+<Column name="AGENDA_fecha_agendar" id="351ED86C-4B2E-54CD-5E73-A0CD8EC13313">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>153B032C-2088-32F2-3E9A-55E6EF6FE582</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="835E95AD-5031-4EEA-D159-B115042AD903" referredColumn="5B328D0E-1C94-B09E-112B-D3DDC80433E9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8FD9A941-D6EB-0D63-96A9-04CB542856C5" name="SESION_ENTRENAMIENTO_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>5FD6D702-9CAE-F5E6-402A-5F755C0B0618</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A0CEF0BA-C119-DA91-4F9D-FCA105FB076C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6CBB93B4-C9E2-57A5-4CDE-C56343DB2925" name="SESION_ENTRENAMIENTO_RUTINA_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>9D81A603-A1A0-CA49-7287-4D6D3D033A17</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EBED7B6D-7FBF-AAB1-1DB4-DDAE60809AD5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="074E8CBF-9382-9A81-FF96-066ABDCD71C8" name="SESION_ENTRENAMIENTO_AGENDA_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>4188176D-3203-B610-ED06-6D63324D02A0</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A7ED550C-5669-93DC-DB74-4E098742F395"/>
+<colUsage columnID="351ED86C-4B2E-54CD-5E73-A0CD8EC13313"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

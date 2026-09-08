@@ -1,0 +1,78 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="895CC0DB-A809-03CE-BB38-668B444E0A20" name="COMUNA">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>E563BA75-FECD-D2C0-ED83-C3FFD62481BD</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_comuna" id="E74DF087-DF08-70F6-1D72-2FEB622DA7E5">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>67F76670-8BE0-BCB9-0C15-827F3FC84B8E</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_comuna" id="520F3FDD-10F9-751A-AB6A-97597DA5BF08">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>FBA0DFB2-3F49-653C-D5C1-0D64BA949B12</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CIUDAD_id_ciudad" id="04BC3717-F4ED-C56E-82C2-714793CDF5ED">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>670387A5-DAE6-C2FD-EAAB-2E2E29A0A1A0</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="001D0FBA-B0FA-A9C7-0997-22CC94767545" referredColumn="D0E85CF3-32BD-7237-1589-E68755A04707"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F5A71119-9F71-3E1B-BCB1-43C0E0D3F67E" name="COMUNA_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>D4F01A40-1793-E7B0-A2DA-9BEC5ED1AC0D</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E74DF087-DF08-70F6-1D72-2FEB622DA7E5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0D84B40D-A85D-2BB9-25C1-817758CC77E4" name="COMUNA_CIUDAD_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>D7B1A412-8097-6AF4-3D95-8D3A7DF7DB80</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="04BC3717-F4ED-C56E-82C2-714793CDF5ED"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

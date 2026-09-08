@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B5046776-24E6-D6BD-BE43-74DEB63F872E" containerWithKeyObject="D3F46194-8858-02A2-842A-A71B766D4DE1" localFKIndex="66AA8369-0C11-4CF1-B375-95A2EFFBA7EC" name="DEFINIR_BLOQUE_HORARIO_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>98DA834C-370E-7E3B-1A5F-E1A011399DED</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>BLOQUE_HORARIO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A21EC720-CC64-91FE-7244-366123333B26</referredTableID>
+<keyObject>0C935666-229A-D00C-7F0D-E467CF951661</keyObject>
+<referredKeyID>0C935666-229A-D00C-7F0D-E467CF951661</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_bloque</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

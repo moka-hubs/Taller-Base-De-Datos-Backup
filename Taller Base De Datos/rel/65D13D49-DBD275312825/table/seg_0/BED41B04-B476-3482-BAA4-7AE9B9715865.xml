@@ -1,0 +1,141 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BED41B04-B476-3482-BAA4-7AE9B9715865" name="PATOLOGIAS">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>CB97C6A2-6AB7-AB75-6D74-E7AC0FF6F0E2</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_patologia" id="94EAF0AF-6F49-7E7E-3C12-750DEFE54F81">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>F7226405-8A9F-1E57-6CDA-1C2F2E2C71EF</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_patologia" id="4772E4CD-FF62-BCB6-AA3A-F05CDDB195A2">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>7156E183-77E9-7AEC-6068-9290DDD7393D</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo_patologia" id="B1BA02C2-57ED-3053-60A1-09B6C8217975">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>31C30E68-F9DC-8273-F285-2EB24914CADF</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="grado_patologia" id="AD8C8F33-ADDC-2296-76D4-440F54A7C78D">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>BFB48DFB-BE33-1E68-A5D6-C2AA818D624E</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="duracion_patologia" id="9C283891-A3C5-2EF2-6324-82E36BE48ECF">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>7C2E2600-D966-FE93-3786-6933063C12E2</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FICHA_CLIENTE_id_ficha" id="166FC129-433D-496D-BD0C-2E57B78E4102">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>78EB5F7E-9CB1-2D56-4E6A-C3AD44DCF13B</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="38FE8A54-DF28-54A7-50D4-6A2405171022" referredColumn="AE09A206-0EF9-9CD6-BFA6-8227CAB60A4F"/>
+</associations>
+</Column>
+<Column name="CAT_PATOLOGIA_id_cat" id="014DAB08-88A7-65EA-C232-0B028A3DEC48">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>2087E1DE-C5DC-B3A8-DFD9-031C005F9C09</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="39E03880-5BF9-F5CC-76FF-043EC13D27D0" referredColumn="A8C08776-5CAA-26BE-3BC9-7B9560D751B9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AAE7AE69-BAD0-FF3D-C047-8CAF5840FFFC" name="PATOLOGIAS_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>325C0932-2624-6D60-B0AC-F5FFA4FA4640</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="94EAF0AF-6F49-7E7E-3C12-750DEFE54F81"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="162C4589-0F76-5D15-31DE-0E64F0901175" name="PATOLOGIAS_CAT_PATOLOGIA_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>88636AD1-45AF-7376-C10C-A51022CB4E4E</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="014DAB08-88A7-65EA-C232-0B028A3DEC48"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5691A53A-A9BF-C58D-64D4-8BFD7D37800E" name="PATOLOGIAS_FICHA_CLIENTE_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>EE88E2A9-09C1-0F00-5F5E-DB58B2998B2A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="166FC129-433D-496D-BD0C-2E57B78E4102"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

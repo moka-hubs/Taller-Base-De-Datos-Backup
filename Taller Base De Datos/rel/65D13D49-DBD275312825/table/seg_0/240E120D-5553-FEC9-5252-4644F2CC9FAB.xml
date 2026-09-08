@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="240E120D-5553-FEC9-5252-4644F2CC9FAB" name="REGISTRAR">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="METRICAS_CLIENTE_id_metrica" id="6F917F0C-0761-ACDB-1B46-1F9779013943">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8576474C-987E-EDCC-2546-1A3D7646D708" referredColumn="8445D119-7B78-330A-4B3E-0BB9B00EF839"/>
+</associations>
+</Column>
+<Column name="FICHA_CLIENTE_id_ficha" id="3C1A18F6-25F2-7BD0-706A-1C703A3D48DF">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62FD4664-F1D6-E6ED-6C73-CEF9645D96A3" referredColumn="AE09A206-0EF9-9CD6-BFA6-8227CAB60A4F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D42D87E0-58E3-CD8D-B033-5C42198473B0" name="REGISTRAR_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F917F0C-0761-ACDB-1B46-1F9779013943"/>
+<colUsage columnID="3C1A18F6-25F2-7BD0-706A-1C703A3D48DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1DF80A69-3E51-E899-2274-219DB3C1B4F0" name="REGISTRAR_METRICAS_CLIENTE_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6F917F0C-0761-ACDB-1B46-1F9779013943"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1AE5014C-EC87-D99E-CC97-31BCB3ED779C" name="REGISTRAR_FICHA_CLIENTE_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-08 13:01:48 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3C1A18F6-25F2-7BD0-706A-1C703A3D48DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
