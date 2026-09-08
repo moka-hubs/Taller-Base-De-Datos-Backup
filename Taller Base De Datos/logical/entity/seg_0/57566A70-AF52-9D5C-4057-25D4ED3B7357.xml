@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_categoria" id="BB297D9F-E43E-AF59-3EFE-B73A973DDC5C">
+<Attribute name="id_cat" id="BB297D9F-E43E-AF59-3EFE-B73A973DDC5C">
 <createdBy>moka</createdBy>
 <createdTime>2026-08-30 00:16:18 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>

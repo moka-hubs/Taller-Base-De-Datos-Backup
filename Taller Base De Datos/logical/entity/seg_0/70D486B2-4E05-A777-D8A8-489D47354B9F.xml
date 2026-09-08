@@ -15,7 +15,7 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="rut_preparador" id="7F22DEC1-17EB-A415-FA29-0C3C179348D2">
+<Attribute name="rut_prep" id="7F22DEC1-17EB-A415-FA29-0C3C179348D2">
 <createdBy>SJ-Alumno</createdBy>
 <createdTime>2026-08-24 13:31:15 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>

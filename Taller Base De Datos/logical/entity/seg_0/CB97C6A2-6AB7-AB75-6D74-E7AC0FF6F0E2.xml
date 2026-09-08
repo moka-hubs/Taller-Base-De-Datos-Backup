@@ -96,7 +96,7 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_categoria" id="2087E1DE-C5DC-B3A8-DFD9-031C005F9C09">
+<Attribute name="id_cat" id="2087E1DE-C5DC-B3A8-DFD9-031C005F9C09">
 <createdBy>moka</createdBy>
 <createdTime>2026-08-30 00:19:19 UTC</createdTime>
 <generatorID>88636AD1-45AF-7376-C10C-A51022CB4E4E</generatorID>
