@@ -81,21 +81,7 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_factura" id="952E4045-9B9C-816B-6974-9ED4F9943D28">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 23:02:31 UTC</createdTime>
-<generatorID>B809C301-2DE5-334B-07D8-57726E68D3DD</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<referedAttribute>0541A3C2-B912-702E-8BA2-B921BB9DAA1B</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,7,</ownDataTypeParameters>
-</Attribute>
+
 <Attribute name="id_metodo_pago" id="D85F9EAA-9208-1EAD-7D63-80C7C25D107F">
 <createdBy>moka</createdBy>
 <createdTime>2026-08-28 23:03:57 UTC</createdTime>
