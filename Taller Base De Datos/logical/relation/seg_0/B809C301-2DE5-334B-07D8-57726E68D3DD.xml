@@ -11,7 +11,7 @@
 <identifying>false</identifying>
 <nameOnSource>documenta</nameOnSource>
 <nameOnTarget>es documentada</nameOnTarget>
-<optionalSource>false</optionalSource>
+<optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>7DD684C2-D1BE-A25F-9DFD-17F77D26584E</sourceEntity>

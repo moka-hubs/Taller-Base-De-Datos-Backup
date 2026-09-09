@@ -165,17 +165,6 @@
 <colUsage columnID="FFF4F57E-37B2-EF78-A111-C2F053C52ED2"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="46651DD0-498A-D9A0-EE0E-753E4A21B8B8" name="CLIENTE__IDX">
-<createdBy>SJ-Alumno</createdBy>
-<createdTime>2026-09-08 13:01:48 UTC</createdTime>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<indexState>Unique Plain Index</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<relationGeneratorID>D8D7C968-3772-2EC1-5F47-958552238902</relationGeneratorID>
-<indexColumnUsage>
-<colUsage columnID="00F2AD06-1CF4-DE26-562E-F8DAE43273F7"/>
-</indexColumnUsage>
-</ind_PK_UK>
 <ind_PK_UK id="BC6A4419-AC7E-58B1-4280-F3F37644C1CB" name="CLIENTE_COMUNA_FK">
 <createdBy>SJ-Alumno</createdBy>
 <createdTime>2026-09-08 13:01:48 UTC</createdTime>

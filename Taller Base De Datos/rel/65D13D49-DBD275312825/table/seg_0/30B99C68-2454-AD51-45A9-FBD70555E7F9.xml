@@ -71,22 +71,6 @@
 <colAssociation fkAssociation="4AD420CE-A3CF-4A38-AEDA-3983F8F88B31" referredColumn="577CF761-3A02-01B9-4B55-56C566F7DB77"/>
 </associations>
 </Column>
-<Column name="FACTURA_id_factura" id="6C2B8229-28F4-1706-BEF2-05DD8F061D38">
-<createdBy>SJ-Alumno</createdBy>
-<createdTime>2026-09-08 13:01:48 UTC</createdTime>
-<generatorID>952E4045-9B9C-816B-6974-9ED4F9943D28</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<previousColumn>false</previousColumn>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="52C2E01E-46F4-A78F-C878-B352A9EB5804" referredColumn="F7A56B6A-241B-45D3-0C4F-DAF11769B930"/>
-</associations>
-</Column>
 <Column name="METODO_PAGO_id_metodo_pago" id="39B47811-9881-8F6A-64C6-EA9A47B71232">
 <createdBy>SJ-Alumno</createdBy>
 <createdTime>2026-09-08 13:01:48 UTC</createdTime>
@@ -115,28 +99,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="C693567A-A221-D0F1-34AC-71B344C97CE7"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="D5F7DF53-1BE2-9E54-9189-B84D134FF342" name="PAGO__IDX">
-<createdBy>SJ-Alumno</createdBy>
-<createdTime>2026-09-08 13:01:48 UTC</createdTime>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<indexState>Unique Plain Index</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<relationGeneratorID>B809C301-2DE5-334B-07D8-57726E68D3DD</relationGeneratorID>
-<indexColumnUsage>
-<colUsage columnID="6C2B8229-28F4-1706-BEF2-05DD8F061D38"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="C077D1E9-39B4-C198-AA83-483EDD0A4F51" name="PAGO_FACTURA_FK">
-<createdBy>SJ-Alumno</createdBy>
-<createdTime>2026-09-08 13:01:48 UTC</createdTime>
-<generatorID>B809C301-2DE5-334B-07D8-57726E68D3DD</generatorID>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="6C2B8229-28F4-1706-BEF2-05DD8F061D38"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="69C5F24E-A3AE-0525-2FBF-E19439FA98A2" name="PAGO_CONTRATO_FK">
