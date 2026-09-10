@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5A5F10B5-F8D2-502A-70B3-B1210ED75109" name="FACTURA">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>51457455-FF99-3BC2-8B9F-E4FF99F5C10C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_factura" id="997D50D8-AEB0-7BBC-B120-40952B4A01BD">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>0541A3C2-B912-702E-8BA2-B921BB9DAA1B</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_emision" id="DA39E425-494E-3605-E348-EA5E4F5D78E3">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>55CC3AB8-C330-5D38-7044-77519F94FB83</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="total_factura" id="2641B8C4-6B5A-1B31-2882-4BB501934052">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>35113570-4FAF-6F87-AD27-5E6EF5DA0FED</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PAGO_id_pago" id="F0E43BA5-53A2-9C62-3247-EB1283992098">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>6475786F-43EC-A996-89D7-A9FD711D02D8</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="78900260-A8E8-B29F-4E5C-90B66CABCF75" referredColumn="0DCEEF46-AADF-2579-F2DA-80E7D459FEC6"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="66708CD2-368D-9CC5-0835-69A93291F0DC" name="FACTURA_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>D6128E3A-9017-82BD-1A0C-695BADE9EFC8</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="997D50D8-AEB0-7BBC-B120-40952B4A01BD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6EF96B8F-F0AF-EC1D-7301-96592E9EA76B" name="FACTURA__IDX">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>B809C301-2DE5-334B-07D8-57726E68D3DD</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="F0E43BA5-53A2-9C62-3247-EB1283992098"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B90DC9D7-3B3C-B447-17B5-3122A2CE6A5C" name="FACTURA_PAGO_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>B809C301-2DE5-334B-07D8-57726E68D3DD</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F0E43BA5-53A2-9C62-3247-EB1283992098"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F10844B1-2341-E005-3A73-14CB6935EB14" name="FICHA_CLIENTE">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>CD42B913-6F2B-521E-58CC-482DC8BA1F28</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_ficha" id="C9D0FDA0-7DA5-A72E-E9B7-69434705BEF5">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>C68F1866-5F6F-E0A9-B16C-1E641D95CB54</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_creacion" id="FC5BC1BD-682B-C4EA-1F65-0ED2BE63A284">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>4A3910C8-E450-807F-6765-6788944AD67B</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="observaciones" id="1340BC3C-92F6-7A34-248D-2ED113AE1765">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>2B7C241B-69E7-A061-DC4B-D178F8EC1439</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_observacion" id="F4A51FD1-47B3-AE3E-38F4-27A4DEE79BA0">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>2677798A-143C-507A-C626-27B746F21CE7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C5E60F4B-BDF0-D82C-2660-181761293154" name="FICHA_CLIENTE_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>E17999D4-3670-3C0D-8044-AA1B0C1FC5A8</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C9D0FDA0-7DA5-A72E-E9B7-69434705BEF5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

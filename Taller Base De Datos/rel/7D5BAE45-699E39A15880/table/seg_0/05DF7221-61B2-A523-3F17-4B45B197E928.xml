@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="05DF7221-61B2-A523-3F17-4B45B197E928" name="REGION">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>634DE76C-D199-C0DE-DF36-C6506337EE7F</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_region" id="B5E4FB05-6538-E92B-072A-17F5C154BD0D">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>C2C86BB5-4976-DB47-30C7-31D4AB19F7FC</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_region" id="F370CDB3-923E-0B6A-0AD2-F98C6C809B26">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8442F3E2-919E-8B06-3C1B-92738437FB4E</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PAIS_id_pais" id="5D09BEB8-C5E5-9CF4-0A8A-F1B33AF35569">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>67EE8A69-1684-9F3F-75C1-4A688EB9846A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BE10D8E4-298C-D452-F19A-3D6876A32908" referredColumn="33C9AF54-ACBD-340C-A512-042BE786ABCF"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="73113E74-42B5-7EA4-3263-A05868333E11" name="REGION_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>DD3C5E2B-6A2D-A55E-22D1-3E6ACA2490D0</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B5E4FB05-6538-E92B-072A-17F5C154BD0D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FD4582CB-27D2-8D00-14BB-540B82BD5BFB" name="REGION_PAIS_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>209EE93F-ED25-3A4F-8E17-78DFB27D8CA1</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5D09BEB8-C5E5-9CF4-0A8A-F1B33AF35569"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

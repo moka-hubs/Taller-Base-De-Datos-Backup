@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="472D50BC-8962-7D8E-BAAC-95FFAACBD94A" name="CAT_PATOLOGIA">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>57566A70-AF52-9D5C-4057-25D4ED3B7357</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_cat" id="9102DA7F-ADD9-0C4E-436A-25FE118B0867">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>BB297D9F-E43E-AF59-3EFE-B73A973DDC5C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_categoria" id="728BE084-E043-8E7D-C9C1-E93E6EB2C4BD">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>BC3FD424-57BE-6608-B3B8-A17943834706</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E97EA149-DFF4-DB43-8DF8-76C2A49B15B2" name="CAT_PATOLOGIA_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>DFE81758-ABC7-729E-F4B2-80277AA6D950</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9102DA7F-ADD9-0C4E-436A-25FE118B0867"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

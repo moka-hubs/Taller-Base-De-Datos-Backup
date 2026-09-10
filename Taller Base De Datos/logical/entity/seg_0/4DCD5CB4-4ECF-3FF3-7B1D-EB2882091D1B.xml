@@ -3,9 +3,6 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-21 01:46:10 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
 <fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
@@ -19,9 +16,6 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:46:48 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -32,10 +26,6 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:47:00 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -48,9 +38,6 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:46:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
-</engineerTo>
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>BBE37A14-7C4B-16FF-FBD0-7C66FEB2D971</attributeRef>

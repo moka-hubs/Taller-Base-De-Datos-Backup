@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6CDC2B1D-9459-8443-EEE8-A44871140271" name="OFRECER">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PREPARADOR_FISICO_rut_prep" id="53CEEBD7-6A25-17C1-83FD-224113B7B170">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C433C6A9-5291-9B5C-53AE-BFA4DF5EADB6" referredColumn="A528BD14-EAF2-9FB8-64EA-F241EEF15196"/>
+</associations>
+</Column>
+<Column name="PLAN_id_plan" id="F1DBCBDE-A89E-BCA9-EC43-665F46611389">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B367AD08-6217-ABE0-5AF8-9531A70D19B4" referredColumn="7F1FCD4D-13BD-C93C-B91F-20C1DAA188DB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A3DFCC8D-C26A-FF93-F2BC-A3601D15A14B" name="OFRECER_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="53CEEBD7-6A25-17C1-83FD-224113B7B170"/>
+<colUsage columnID="F1DBCBDE-A89E-BCA9-EC43-665F46611389"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3D4A759F-9E40-FC3E-6904-C74B999F6F36" name="OFRECER_PREPARADOR_FISICO_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>73F90125-BF27-CB10-69A5-FD5772AF9D5C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="53CEEBD7-6A25-17C1-83FD-224113B7B170"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="08AB23BA-B317-EE77-133A-4372C1E3B25A" name="OFRECER_PLAN_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>73F90125-BF27-CB10-69A5-FD5772AF9D5C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F1DBCBDE-A89E-BCA9-EC43-665F46611389"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

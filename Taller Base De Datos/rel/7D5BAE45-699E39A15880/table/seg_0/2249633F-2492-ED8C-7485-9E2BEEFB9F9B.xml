@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2249633F-2492-ED8C-7485-9E2BEEFB9F9B" name="TENER">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CLIENTE_rut_cliente" id="E8A2CF77-5E5C-80FA-B6A6-B851D7F701EE">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D62CC7FC-13E4-8340-D2B7-019875FD166D" referredColumn="37771909-75F3-CC6B-B408-A09CBA48A371"/>
+</associations>
+</Column>
+<Column name="FICHA_CLIENTE_id_ficha" id="288CEFBF-B68F-507A-7AEF-9B8DB24B2152">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="55FEEC40-C9EA-7C69-8BAB-2C02039F14C2" referredColumn="C9D0FDA0-7DA5-A72E-E9B7-69434705BEF5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1D089CA3-271B-C6BF-ABD1-A782D1596AD7" name="TENER_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E8A2CF77-5E5C-80FA-B6A6-B851D7F701EE"/>
+<colUsage columnID="288CEFBF-B68F-507A-7AEF-9B8DB24B2152"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="87971DB8-A0FF-0D56-649C-9FF442E660D1" name="TENER_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>6D808551-EC35-184D-0255-245BA2CD47EC</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E8A2CF77-5E5C-80FA-B6A6-B851D7F701EE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2AE82D7A-4358-9A72-9082-C6710DADB894" name="TENER_FICHA_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>6D808551-EC35-184D-0255-245BA2CD47EC</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="288CEFBF-B68F-507A-7AEF-9B8DB24B2152"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

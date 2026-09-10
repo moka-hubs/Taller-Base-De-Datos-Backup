@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C433C6A9-5291-9B5C-53AE-BFA4DF5EADB6" containerWithKeyObject="6CDC2B1D-9459-8443-EEE8-A44871140271" localFKIndex="3D4A759F-9E40-FC3E-6904-C74B999F6F36" name="OFRECER_PREPARADOR_FISICO_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>73F90125-BF27-CB10-69A5-FD5772AF9D5C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>PREPARADOR_FISICO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>18A4C4F7-E81B-2B07-FF46-B000709F6406</referredTableID>
+<keyObject>9B51701A-C744-C2F8-B272-75E6C4266E65</keyObject>
+<referredKeyID>9B51701A-C744-C2F8-B272-75E6C4266E65</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>rut_prep</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

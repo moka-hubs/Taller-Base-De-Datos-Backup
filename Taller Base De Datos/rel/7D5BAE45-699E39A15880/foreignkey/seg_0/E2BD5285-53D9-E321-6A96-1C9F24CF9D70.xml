@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="E2BD5285-53D9-E321-6A96-1C9F24CF9D70" containerWithKeyObject="C3BC61D8-CE19-1088-9D9D-A5621A9A00C4" localFKIndex="3BC90408-3514-1B3C-D893-B13BF852629A" name="PATOLOGIAS_FICHA_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>EE88E2A9-09C1-0F00-5F5E-DB58B2998B2A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>FICHA_CLIENTE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>F10844B1-2341-E005-3A73-14CB6935EB14</referredTableID>
+<keyObject>C5E60F4B-BDF0-D82C-2660-181761293154</keyObject>
+<referredKeyID>C5E60F4B-BDF0-D82C-2660-181761293154</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_ficha</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

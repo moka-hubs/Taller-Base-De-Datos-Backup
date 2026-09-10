@@ -1,0 +1,128 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1943906F-EA0C-8041-EA90-A3705EFB23CA" name="AGENDA">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8F92FA56-4BA4-CD46-A7A2-B294E5A5F125</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_agendar" id="939B5876-6103-7BCD-967C-BA6F737104F6">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>318F7183-FEF1-D68F-6DC8-46AE3AD64521</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_agendar" id="BF972CA0-32C6-9C48-E416-F9024F9FEC9F">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>807657CE-83EE-4243-1E38-42E260060510</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="hora_agendar" id="5B27295B-3ACE-FE8A-9F58-E2FE1A268373">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>69A42877-7962-FD6B-DDBF-47007CB9DB14</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT049</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="estado_agendar" id="D38E65EF-F48F-C825-CFD3-355037941DA2">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>4000C3F7-7768-A83F-DE5C-D653BD2C1A5E</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PREPARADOR_FISICO_rut_prep" id="7C7E3F60-7B28-5C2A-A992-1EA229C6F80B">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>321A0003-01E2-4266-5FF2-C355A8A300A8</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="39CF51ED-08A6-9C09-54E8-DE020B26DC9D" referredColumn="A528BD14-EAF2-9FB8-64EA-F241EEF15196"/>
+</associations>
+</Column>
+<Column name="CLIENTE_rut_cliente" id="16AC0FE7-089C-DE96-C43E-04F1DF5F4C0F">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>328BF46B-6295-DA8C-6D1A-1DB5A423525D</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C7BAC6F0-7D3B-34FF-8EAA-DE2A0AFBE8BA" referredColumn="37771909-75F3-CC6B-B408-A09CBA48A371"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1A6EC820-A371-2CCF-9D28-F4A35FDEA061" name="AGENDA_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>E5A576A9-FDF4-C6F0-9E75-09F68C5A3EA3</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="939B5876-6103-7BCD-967C-BA6F737104F6"/>
+<colUsage columnID="BF972CA0-32C6-9C48-E416-F9024F9FEC9F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F8C79B18-1D87-B372-E0C7-7AD6C62A1681" name="AGENDA_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>588D959E-CF78-E5D4-A855-E8293ACBB4F2</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16AC0FE7-089C-DE96-C43E-04F1DF5F4C0F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1F857A4D-3493-0536-5E8C-87AE1E40EF16" name="AGENDA_PREPARADOR_FISICO_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>FCE98474-9136-9B43-A9A7-D488D3414118</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C7E3F60-7B28-5C2A-A992-1EA229C6F80B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

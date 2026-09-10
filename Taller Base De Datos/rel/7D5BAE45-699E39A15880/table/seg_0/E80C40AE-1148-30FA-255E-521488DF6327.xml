@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E80C40AE-1148-30FA-255E-521488DF6327" name="REGISTRAR">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="METRICAS_CLIENTE_id_metrica" id="00E56786-B87E-5D02-31F6-BEA2C31C51A5">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F66A8C9E-F30B-D759-B681-9B231C0F4831" referredColumn="89F369F8-D727-2C5B-C87B-E5924960D078"/>
+</associations>
+</Column>
+<Column name="FICHA_CLIENTE_id_ficha" id="F5542281-44A7-51FA-2440-61165A97B42B">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6C14976A-D313-ADA5-24ED-0F2E393A18CF" referredColumn="C9D0FDA0-7DA5-A72E-E9B7-69434705BEF5"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D4018864-D6B1-1308-EF7E-8592B754459F" name="REGISTRAR_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00E56786-B87E-5D02-31F6-BEA2C31C51A5"/>
+<colUsage columnID="F5542281-44A7-51FA-2440-61165A97B42B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="774DCCF0-0BDE-3462-66BA-698574980665" name="REGISTRAR_METRICAS_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00E56786-B87E-5D02-31F6-BEA2C31C51A5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D248A449-74FF-FDF1-D022-2CAE0EC3FC3F" name="REGISTRAR_FICHA_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F5542281-44A7-51FA-2440-61165A97B42B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

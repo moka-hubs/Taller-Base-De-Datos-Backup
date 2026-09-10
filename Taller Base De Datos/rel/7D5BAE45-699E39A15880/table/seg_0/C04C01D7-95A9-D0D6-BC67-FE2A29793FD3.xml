@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C04C01D7-95A9-D0D6-BC67-FE2A29793FD3" name="SESION_ENTRENAMIENTO">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>DAD26EAD-3D74-C227-2551-549930878A41</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_sesion" id="68E11344-1629-8A69-43E7-74177BFA97B2">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>00DA8701-9739-BD70-CFC1-7D93D4227172</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_sesion" id="B5927C3D-7F4F-E659-DE82-8623DC4B510D">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8F26A476-0A62-9A05-5EEE-5A3424B81C17</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="duracion_sesion" id="458CFD99-F426-8765-F4AE-B4BBF1D97EA0">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>959FF8A2-9387-4440-6432-20B55DB2EF6F</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT049</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="RUTINA_id_rutina" id="8B0F0085-F81C-CEBB-2CA0-8A80BAE7FD8C">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>1DB4F493-6817-E729-7634-E78C067CD12A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A7C7FFA6-6074-E7C0-7A51-8A1E16CF05E0" referredColumn="F62E65D6-3003-394C-4744-7737D839CEDF"/>
+</associations>
+</Column>
+<Column name="AGENDA_id_agendar" id="D1A333A2-D189-AB72-F792-74B8889173FE">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>B130633B-3352-7E17-0BD5-643E30DFD392</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F12828D2-95B4-5023-A540-B8E9852FBD5C" referredColumn="939B5876-6103-7BCD-967C-BA6F737104F6"/>
+</associations>
+</Column>
+<Column name="AGENDA_fecha_agendar" id="18303AC3-83D4-309A-387A-48AC87437BDA">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>153B032C-2088-32F2-3E9A-55E6EF6FE582</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F12828D2-95B4-5023-A540-B8E9852FBD5C" referredColumn="BF972CA0-32C6-9C48-E416-F9024F9FEC9F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1A274D1D-0189-A2BE-125F-309F8E2E04FC" name="SESION_ENTRENAMIENTO_PK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>5FD6D702-9CAE-F5E6-402A-5F755C0B0618</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="68E11344-1629-8A69-43E7-74177BFA97B2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7618508F-2DFA-76B2-0BA2-2262A1D7D0CF" name="SESION_ENTRENAMIENTO_RUTINA_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>9D81A603-A1A0-CA49-7287-4D6D3D033A17</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8B0F0085-F81C-CEBB-2CA0-8A80BAE7FD8C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6C1BAA7D-1ECC-0A78-1069-0827B7377939" name="SESION_ENTRENAMIENTO_AGENDA_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>4188176D-3203-B610-ED06-6D63324D02A0</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D1A333A2-D189-AB72-F792-74B8889173FE"/>
+<colUsage columnID="18303AC3-83D4-309A-387A-48AC87437BDA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

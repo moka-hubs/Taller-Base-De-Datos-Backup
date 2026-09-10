@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F12828D2-95B4-5023-A540-B8E9852FBD5C" containerWithKeyObject="C04C01D7-95A9-D0D6-BC67-FE2A29793FD3" localFKIndex="6C1BAA7D-1ECC-0A78-1069-0827B7377939" name="SESION_ENTRENAMIENTO_AGENDA_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>4188176D-3203-B610-ED06-6D63324D02A0</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>AGENDA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>1943906F-EA0C-8041-EA90-A3705EFB23CA</referredTableID>
+<keyObject>1A6EC820-A371-2CCF-9D28-F4A35FDEA061</keyObject>
+<referredKeyID>1A6EC820-A371-2CCF-9D28-F4A35FDEA061</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_agendar,fecha_agendar</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

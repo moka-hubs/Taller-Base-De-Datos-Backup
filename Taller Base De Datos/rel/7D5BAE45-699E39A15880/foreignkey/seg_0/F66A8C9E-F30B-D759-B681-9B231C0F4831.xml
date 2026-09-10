@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F66A8C9E-F30B-D759-B681-9B231C0F4831" containerWithKeyObject="E80C40AE-1148-30FA-255E-521488DF6327" localFKIndex="774DCCF0-0BDE-3462-66BA-698574980665" name="REGISTRAR_METRICAS_CLIENTE_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>8EFA770A-FE03-0AB4-7FE0-31DCA960CCA7</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>METRICAS_CLIENTE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>D5DF623A-D6AB-7643-AB69-A9589A298A9A</referredTableID>
+<keyObject>C32803CF-2580-D88E-16FD-CC05A0F32004</keyObject>
+<referredKeyID>C32803CF-2580-D88E-16FD-CC05A0F32004</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_metrica</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

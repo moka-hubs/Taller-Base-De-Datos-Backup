@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="B14D4CC7-3824-B075-6145-7E9BA4EE51C4" containerWithKeyObject="A087F635-FB2D-01CC-27F4-0069D90B2E0E" localFKIndex="0F08888D-1196-BE81-C500-D9C3BA71D840" name="COMUNA_CIUDAD_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-09-10 01:43:29 UTC</createdTime>
+<generatorID>D7B1A412-8097-6AF4-3D95-8D3A7DF7DB80</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>CIUDAD</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>FFD8353D-73DF-2BB0-E1B3-F999D01D2AC3</referredTableID>
+<keyObject>F07F5E33-73A0-E7E1-2174-4A33644E8EE0</keyObject>
+<referredKeyID>F07F5E33-73A0-E7E1-2174-4A33644E8EE0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_ciudad</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
