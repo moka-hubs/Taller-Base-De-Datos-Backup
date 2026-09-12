@@ -1,6 +1,735 @@
--- Inserciones de datos coherentes - Gimnasio (Taller Base de Datos)
--- Geografia chilena real: 1 pais, 16 regiones, 56 ciudades, 346 comunas.
--- El resto de las tablas con 50 registros. RUT con digito verificador valido.
+-- Script unico: creacion y poblacion de tablas - Gimnasio (Taller Base de Datos)
+-- ============================================================
+-- 1) REINICIO: elimina las tablas y sus datos para recargar todo
+-- ============================================================
+DROP TABLE AGENDA CASCADE CONSTRAINTS PURGE;
+DROP TABLE BLOQUE_HORARIO CASCADE CONSTRAINTS PURGE;
+DROP TABLE CAT_PATOLOGIA CASCADE CONSTRAINTS PURGE;
+DROP TABLE CIUDAD CASCADE CONSTRAINTS PURGE;
+DROP TABLE CLIENTE CASCADE CONSTRAINTS PURGE;
+DROP TABLE COMUNA CASCADE CONSTRAINTS PURGE;
+DROP TABLE CONTENERv2 CASCADE CONSTRAINTS PURGE;
+DROP TABLE CONTRATO CASCADE CONSTRAINTS PURGE;
+DROP TABLE DEFINIR CASCADE CONSTRAINTS PURGE;
+DROP TABLE DISEÑAR CASCADE CONSTRAINTS PURGE;
+DROP TABLE EJERCICIO CASCADE CONSTRAINTS PURGE;
+DROP TABLE FACTURA CASCADE CONSTRAINTS PURGE;
+DROP TABLE FICHA_CLIENTE CASCADE CONSTRAINTS PURGE;
+DROP TABLE METODO_PAGO CASCADE CONSTRAINTS PURGE;
+DROP TABLE METRICAS_CLIENTE CASCADE CONSTRAINTS PURGE;
+DROP TABLE OFRECER CASCADE CONSTRAINTS PURGE;
+DROP TABLE PAGO CASCADE CONSTRAINTS PURGE;
+DROP TABLE PAIS CASCADE CONSTRAINTS PURGE;
+DROP TABLE PATOLOGIAS CASCADE CONSTRAINTS PURGE;
+DROP TABLE PLAN CASCADE CONSTRAINTS PURGE;
+DROP TABLE PREPARADOR_FISICO CASCADE CONSTRAINTS PURGE;
+DROP TABLE PROGRE_CLI CASCADE CONSTRAINTS PURGE;
+DROP TABLE REGION CASCADE CONSTRAINTS PURGE;
+DROP TABLE REGISTRAR CASCADE CONSTRAINTS PURGE;
+DROP TABLE RUTINA CASCADE CONSTRAINTS PURGE;
+DROP TABLE SESION_ENTRENAMIENTO CASCADE CONSTRAINTS PURGE;
+DROP TABLE TENER CASCADE CONSTRAINTS PURGE;
+
+-- ============================================================
+-- 2) CREACION DE LAS TABLAS
+-- ============================================================
+
+
+CREATE TABLE AGENDA 
+    ( 
+     id_agendar                 NUMBER (7)  NOT NULL , 
+     fecha_agendar              DATE  NOT NULL , 
+     hora_agendar               INTERVAL DAY (9) TO SECOND (0)  NOT NULL , 
+     estado_agendar             VARCHAR2 (15)  NOT NULL , 
+     PREPARADOR_FISICO_rut_prep VARCHAR2 (13)  NOT NULL , 
+     CLIENTE_rut_cliente        VARCHAR2 (13)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE AGENDA 
+    ADD CONSTRAINT AGENDA_PK PRIMARY KEY ( id_agendar, fecha_agendar ) ;
+
+CREATE TABLE BLOQUE_HORARIO 
+    ( 
+     id_bloque            NUMBER (7)  NOT NULL , 
+     dia_bloque           VARCHAR2 (20)  NOT NULL , 
+     hora_bloque          INTERVAL DAY (9) TO SECOND (0)  NOT NULL , 
+     AGENDA_id_agendar    NUMBER (7) , 
+     AGENDA_fecha_agendar DATE 
+    ) 
+;
+
+ALTER TABLE BLOQUE_HORARIO 
+    ADD CONSTRAINT BLOQUE_HORARIO_PK PRIMARY KEY ( id_bloque ) ;
+
+CREATE TABLE CAT_PATOLOGIA 
+    ( 
+     id_cat           NUMBER (4)  NOT NULL , 
+     nombre_categoria VARCHAR2 (100)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE CAT_PATOLOGIA 
+    ADD CONSTRAINT CAT_PATOLOGIA_PK PRIMARY KEY ( id_cat ) ;
+
+CREATE TABLE CIUDAD 
+    ( 
+     id_ciudad        NUMBER (3)  NOT NULL , 
+     nombre_ciudad    VARCHAR2 (50)  NOT NULL , 
+     REGION_id_region NUMBER (3)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE CIUDAD 
+    ADD CONSTRAINT CIUDAD_PK PRIMARY KEY ( id_ciudad ) ;
+
+CREATE TABLE CLIENTE 
+    ( 
+     rut_cliente          VARCHAR2 (13)  NOT NULL , 
+     pnombre_cliente      VARCHAR2 (150)  NOT NULL , 
+     snombre_cliente      VARCHAR2 (150) , 
+     papellido_cliente    VARCHAR2 (150)  NOT NULL , 
+     sapellido_cliente    VARCHAR2 (150) , 
+     fecha_nac_cliente    DATE  NOT NULL , 
+     nacionalidad_cliente VARCHAR2 (150) , 
+     PLAN_id_plan         NUMBER (7)  NOT NULL , 
+     COMUNA_id_comuna     NUMBER (3) , 
+     telefono_cliente     VARCHAR2 (9)  NOT NULL , 
+     correo_cliente       VARCHAR2 (100)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE CLIENTE 
+    ADD CONSTRAINT CLIENTE_PK PRIMARY KEY ( rut_cliente ) ;
+
+CREATE TABLE COMUNA 
+    ( 
+     id_comuna        NUMBER (3)  NOT NULL , 
+     nombre_comuna    VARCHAR2 (50)  NOT NULL , 
+     CIUDAD_id_ciudad NUMBER (3)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE COMUNA 
+    ADD CONSTRAINT COMUNA_PK PRIMARY KEY ( id_comuna ) ;
+
+CREATE TABLE CONTENERv2 
+    ( 
+     RUTINA_id_rutina       NUMBER (7)  NOT NULL , 
+     EJERCICIO_id_ejercicio NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE CONTENERv2 
+    ADD CONSTRAINT CONTENERv2_PK PRIMARY KEY ( RUTINA_id_rutina, EJERCICIO_id_ejercicio ) ;
+
+CREATE TABLE CONTRATO 
+    ( 
+     id_contrato            NUMBER (7)  NOT NULL , 
+     fecha_inicio_contrato  DATE  NOT NULL , 
+     fecha_termino_contrato DATE  NOT NULL , 
+     estado_contrato        VARCHAR2 (30)  NOT NULL , 
+     PLAN_id_plan           NUMBER (7)  NOT NULL , 
+     fecha_ini              DATE , 
+     fecha_ter              DATE 
+    ) 
+;
+
+ALTER TABLE CONTRATO 
+    ADD CONSTRAINT CONTRATO_PK PRIMARY KEY ( id_contrato ) ;
+
+CREATE TABLE DEFINIR 
+    ( 
+     PREPARADOR_FISICO_rut_prep VARCHAR2 (13)  NOT NULL , 
+     BLOQUE_HORARIO_id_bloque   NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE DEFINIR 
+    ADD CONSTRAINT DEFINIR_PK PRIMARY KEY ( PREPARADOR_FISICO_rut_prep, BLOQUE_HORARIO_id_bloque ) ;
+
+CREATE TABLE DISEÑAR 
+    ( 
+     PREPARADOR_FISICO_rut_prep VARCHAR2 (13)  NOT NULL , 
+     RUTINA_id_rutina           NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE DISEÑAR 
+    ADD CONSTRAINT DISEÑAR_PK PRIMARY KEY ( PREPARADOR_FISICO_rut_prep, RUTINA_id_rutina ) ;
+
+CREATE TABLE EJERCICIO 
+    ( 
+     id_ejercicio           NUMBER (7)  NOT NULL , 
+     nombre_ejercicio       VARCHAR2 (30)  NOT NULL , 
+     descripcion_ejercicio  VARCHAR2 (200)  NOT NULL , 
+     repeticiones_ejercicio NUMBER (2)  NOT NULL , 
+     peso_ejercicio         NUMBER (3)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE EJERCICIO 
+    ADD CONSTRAINT EJERCICIO_PK PRIMARY KEY ( id_ejercicio ) ;
+
+CREATE TABLE FACTURA 
+    ( 
+     id_factura    NUMBER (7)  NOT NULL , 
+     fecha_emision DATE  NOT NULL , 
+     total_factura NUMBER (6)  NOT NULL , 
+     PAGO_id_pago  NUMBER (7)  NOT NULL 
+    ) 
+;
+CREATE UNIQUE INDEX FACTURA__IDX ON FACTURA 
+    ( 
+     PAGO_id_pago ASC 
+    ) 
+;
+
+ALTER TABLE FACTURA 
+    ADD CONSTRAINT FACTURA_PK PRIMARY KEY ( id_factura ) ;
+
+CREATE TABLE FICHA_CLIENTE 
+    ( 
+     id_ficha          NUMBER (7)  NOT NULL , 
+     fecha_creacion    DATE  NOT NULL , 
+     observaciones     VARCHAR2 (200) , 
+     fecha_observacion DATE  NOT NULL 
+    ) 
+;
+
+ALTER TABLE FICHA_CLIENTE 
+    ADD CONSTRAINT FICHA_CLIENTE_PK PRIMARY KEY ( id_ficha ) ;
+
+CREATE TABLE METODO_PAGO 
+    ( 
+     id_metodo_pago          NUMBER (7)  NOT NULL , 
+     nombre_metodo_pago      VARCHAR2 (50)  NOT NULL , 
+     descripcion_metodo_pago VARCHAR2 (100)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE METODO_PAGO 
+    ADD CONSTRAINT METODO_PAGO_PK PRIMARY KEY ( id_metodo_pago ) ;
+
+CREATE TABLE METRICAS_CLIENTE 
+    ( 
+     id_metrica                  NUMBER (3)  NOT NULL , 
+     peso_cliente                NUMBER (5,2)  NOT NULL , 
+     estatura_cliente            NUMBER (5,2)  NOT NULL , 
+     medida_pecho_cliente        NUMBER (5,2)  NOT NULL , 
+     medida_cintura_cliente      NUMBER (5,2)  NOT NULL , 
+     medida_cadera_cliente       NUMBER (5,2)  NOT NULL , 
+     medida_hombros_cliente      NUMBER (5,2)  NOT NULL , 
+     medida_brazos_cliente       NUMBER (5,2)  NOT NULL , 
+     medida_muslos_cliente       NUMBER (5,2)  NOT NULL , 
+     medidas_pantorillas_cliente NUMBER (5,2)  NOT NULL , 
+     fecha_medicion_cliente      DATE  NOT NULL 
+    ) 
+;
+
+ALTER TABLE METRICAS_CLIENTE 
+    ADD CONSTRAINT METRICAS_CLIENTE_PK PRIMARY KEY ( id_metrica ) ;
+
+CREATE TABLE OFRECER 
+    ( 
+     PREPARADOR_FISICO_rut_prep VARCHAR2 (13)  NOT NULL , 
+     PLAN_id_plan               NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE OFRECER 
+    ADD CONSTRAINT OFRECER_PK PRIMARY KEY ( PREPARADOR_FISICO_rut_prep, PLAN_id_plan ) ;
+
+CREATE TABLE PAGO 
+    ( 
+     id_pago                    NUMBER (7)  NOT NULL , 
+     monto_pago                 NUMBER (6)  NOT NULL , 
+     fecha_pago                 DATE  NOT NULL , 
+     estado_pago                VARCHAR2 (30)  NOT NULL , 
+     CONTRATO_id_contrato       NUMBER (7)  NOT NULL , 
+     METODO_PAGO_id_metodo_pago NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PAGO 
+    ADD CONSTRAINT PAGO_PK PRIMARY KEY ( id_pago ) ;
+
+CREATE TABLE PAIS 
+    ( 
+     id_pais     NUMBER (3)  NOT NULL , 
+     nombre_pais VARCHAR2 (50)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PAIS 
+    ADD CONSTRAINT PAIS_PK PRIMARY KEY ( id_pais ) ;
+
+CREATE TABLE PATOLOGIAS 
+    ( 
+     id_patologia           NUMBER (3)  NOT NULL , 
+     nombre_patologia       VARCHAR2 (150)  NOT NULL , 
+     tipo_patologia         VARCHAR2 (150)  NOT NULL , 
+     grado_patologia        VARCHAR2 (150)  NOT NULL , 
+     duracion_patologia     VARCHAR2 (150)  NOT NULL , 
+     FICHA_CLIENTE_id_ficha NUMBER (7) , 
+     CAT_PATOLOGIA_id_cat   NUMBER (4)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PATOLOGIAS 
+    ADD CONSTRAINT PATOLOGIAS_PK PRIMARY KEY ( id_patologia ) ;
+
+CREATE TABLE PLAN 
+    ( 
+     id_plan          NUMBER (7)  NOT NULL , 
+     nombre_plan      VARCHAR2 (50)  NOT NULL , 
+     precio_plan      NUMBER (5)  NOT NULL , 
+     duracion_plan    VARCHAR2 (50)  NOT NULL , 
+     descripcion_plan VARCHAR2 (200)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PLAN 
+    ADD CONSTRAINT PLAN_PK PRIMARY KEY ( id_plan ) ;
+
+CREATE TABLE PREPARADOR_FISICO 
+    ( 
+     rut_prep                VARCHAR2 (13)  NOT NULL , 
+     pnombre_preparador      VARCHAR2 (150)  NOT NULL , 
+     snombre_preparador      VARCHAR2 (150) , 
+     papellido_preparador    VARCHAR2 (150)  NOT NULL , 
+     sapellido_preparador    VARCHAR2 (150) , 
+     fecha_nac_preparador    DATE  NOT NULL , 
+     especialidad_preparador VARCHAR2 (150)  NOT NULL , 
+     COMUNA_id_comuna        NUMBER (3) , 
+     correo_preparador       VARCHAR2 (100)  NOT NULL , 
+     telefono_preparador     VARCHAR2 (9)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PREPARADOR_FISICO 
+    ADD CONSTRAINT PREPARADOR_FISICO_PK PRIMARY KEY ( rut_prep ) ;
+
+CREATE TABLE PROGRE_CLI 
+    ( 
+     id_progreso            NUMBER (7)  NOT NULL , 
+     descripcion_progreso   VARCHAR2 (200)  NOT NULL , 
+     fecha_progreso         DATE  NOT NULL , 
+     FICHA_CLIENTE_id_ficha NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE PROGRE_CLI 
+    ADD CONSTRAINT PROGRE_CLI_PK PRIMARY KEY ( id_progreso ) ;
+
+CREATE TABLE REGION 
+    ( 
+     id_region     NUMBER (3)  NOT NULL , 
+     nombre_region VARCHAR2 (50)  NOT NULL , 
+     PAIS_id_pais  NUMBER (3)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE REGION 
+    ADD CONSTRAINT REGION_PK PRIMARY KEY ( id_region ) ;
+
+CREATE TABLE REGISTRAR 
+    ( 
+     METRICAS_CLIENTE_id_metrica NUMBER (3)  NOT NULL , 
+     FICHA_CLIENTE_id_ficha      NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE REGISTRAR 
+    ADD CONSTRAINT REGISTRAR_PK PRIMARY KEY ( METRICAS_CLIENTE_id_metrica, FICHA_CLIENTE_id_ficha ) ;
+
+CREATE TABLE RUTINA 
+    ( 
+     id_rutina           NUMBER (7)  NOT NULL , 
+     nombre_rutina       VARCHAR2 (50)  NOT NULL , 
+     CLIENTE_rut_cliente VARCHAR2 (13) 
+    ) 
+;
+
+ALTER TABLE RUTINA 
+    ADD CONSTRAINT RUTINA_PK PRIMARY KEY ( id_rutina ) ;
+
+CREATE TABLE SESION_ENTRENAMIENTO 
+    ( 
+     id_sesion            NUMBER (7)  NOT NULL , 
+     fecha_sesion         DATE  NOT NULL , 
+     duracion_sesion      INTERVAL DAY (9) TO SECOND (0)  NOT NULL , 
+     RUTINA_id_rutina     NUMBER (7) , 
+     AGENDA_id_agendar    NUMBER (7) , 
+     AGENDA_fecha_agendar DATE 
+    ) 
+;
+
+ALTER TABLE SESION_ENTRENAMIENTO 
+    ADD CONSTRAINT SESION_ENTRENAMIENTO_PK PRIMARY KEY ( id_sesion ) ;
+
+CREATE TABLE TENER 
+    ( 
+     CLIENTE_rut_cliente    VARCHAR2 (13)  NOT NULL , 
+     FICHA_CLIENTE_id_ficha NUMBER (7)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE TENER 
+    ADD CONSTRAINT TENER_PK PRIMARY KEY ( CLIENTE_rut_cliente, FICHA_CLIENTE_id_ficha ) ;
+
+ALTER TABLE AGENDA 
+    ADD CONSTRAINT AGENDA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     CLIENTE_rut_cliente
+    ) 
+    REFERENCES CLIENTE 
+    ( 
+     rut_cliente
+    ) 
+;
+
+ALTER TABLE AGENDA 
+    ADD CONSTRAINT AGENDA_PREPARADOR_FISICO_FK FOREIGN KEY 
+    ( 
+     PREPARADOR_FISICO_rut_prep
+    ) 
+    REFERENCES PREPARADOR_FISICO 
+    ( 
+     rut_prep
+    ) 
+;
+
+ALTER TABLE BLOQUE_HORARIO 
+    ADD CONSTRAINT BLOQUE_HORARIO_AGENDA_FK FOREIGN KEY 
+    ( 
+     AGENDA_id_agendar,
+     AGENDA_fecha_agendar
+    ) 
+    REFERENCES AGENDA 
+    ( 
+     id_agendar,
+     fecha_agendar
+    ) 
+;
+
+ALTER TABLE CIUDAD 
+    ADD CONSTRAINT CIUDAD_REGION_FK FOREIGN KEY 
+    ( 
+     REGION_id_region
+    ) 
+    REFERENCES REGION 
+    ( 
+     id_region
+    ) 
+;
+
+ALTER TABLE CLIENTE 
+    ADD CONSTRAINT CLIENTE_COMUNA_FK FOREIGN KEY 
+    ( 
+     COMUNA_id_comuna
+    ) 
+    REFERENCES COMUNA 
+    ( 
+     id_comuna
+    ) 
+;
+
+ALTER TABLE CLIENTE 
+    ADD CONSTRAINT CLIENTE_PLAN_FK FOREIGN KEY 
+    ( 
+     PLAN_id_plan
+    ) 
+    REFERENCES PLAN 
+    ( 
+     id_plan
+    ) 
+;
+
+ALTER TABLE COMUNA 
+    ADD CONSTRAINT COMUNA_CIUDAD_FK FOREIGN KEY 
+    ( 
+     CIUDAD_id_ciudad
+    ) 
+    REFERENCES CIUDAD 
+    ( 
+     id_ciudad
+    ) 
+;
+
+ALTER TABLE CONTENERv2 
+    ADD CONSTRAINT CONTENERv2_EJERCICIO_FK FOREIGN KEY 
+    ( 
+     EJERCICIO_id_ejercicio
+    ) 
+    REFERENCES EJERCICIO 
+    ( 
+     id_ejercicio
+    ) 
+;
+
+ALTER TABLE CONTENERv2 
+    ADD CONSTRAINT CONTENERv2_RUTINA_FK FOREIGN KEY 
+    ( 
+     RUTINA_id_rutina
+    ) 
+    REFERENCES RUTINA 
+    ( 
+     id_rutina
+    ) 
+;
+
+ALTER TABLE CONTRATO 
+    ADD CONSTRAINT CONTRATO_PLAN_FK FOREIGN KEY 
+    ( 
+     PLAN_id_plan
+    ) 
+    REFERENCES PLAN 
+    ( 
+     id_plan
+    ) 
+;
+
+ALTER TABLE DEFINIR 
+    ADD CONSTRAINT DEFINIR_BLOQUE_HORARIO_FK FOREIGN KEY 
+    ( 
+     BLOQUE_HORARIO_id_bloque
+    ) 
+    REFERENCES BLOQUE_HORARIO 
+    ( 
+     id_bloque
+    ) 
+;
+
+ALTER TABLE DEFINIR 
+    ADD CONSTRAINT DEFINIR_PREPARADOR_FISICO_FK FOREIGN KEY 
+    ( 
+     PREPARADOR_FISICO_rut_prep
+    ) 
+    REFERENCES PREPARADOR_FISICO 
+    ( 
+     rut_prep
+    ) 
+;
+
+ALTER TABLE DISEÑAR 
+    ADD CONSTRAINT DISEÑAR_PREPARADOR_FISICO_FK FOREIGN KEY 
+    ( 
+     PREPARADOR_FISICO_rut_prep
+    ) 
+    REFERENCES PREPARADOR_FISICO 
+    ( 
+     rut_prep
+    ) 
+;
+
+ALTER TABLE DISEÑAR 
+    ADD CONSTRAINT DISEÑAR_RUTINA_FK FOREIGN KEY 
+    ( 
+     RUTINA_id_rutina
+    ) 
+    REFERENCES RUTINA 
+    ( 
+     id_rutina
+    ) 
+;
+
+ALTER TABLE FACTURA 
+    ADD CONSTRAINT FACTURA_PAGO_FK FOREIGN KEY 
+    ( 
+     PAGO_id_pago
+    ) 
+    REFERENCES PAGO 
+    ( 
+     id_pago
+    ) 
+;
+
+ALTER TABLE OFRECER 
+    ADD CONSTRAINT OFRECER_PLAN_FK FOREIGN KEY 
+    ( 
+     PLAN_id_plan
+    ) 
+    REFERENCES PLAN 
+    ( 
+     id_plan
+    ) 
+;
+
+ALTER TABLE OFRECER 
+    ADD CONSTRAINT OFRECER_PREPARADOR_FISICO_FK FOREIGN KEY 
+    ( 
+     PREPARADOR_FISICO_rut_prep
+    ) 
+    REFERENCES PREPARADOR_FISICO 
+    ( 
+     rut_prep
+    ) 
+;
+
+ALTER TABLE PAGO 
+    ADD CONSTRAINT PAGO_CONTRATO_FK FOREIGN KEY 
+    ( 
+     CONTRATO_id_contrato
+    ) 
+    REFERENCES CONTRATO 
+    ( 
+     id_contrato
+    ) 
+;
+
+ALTER TABLE PAGO 
+    ADD CONSTRAINT PAGO_METODO_PAGO_FK FOREIGN KEY 
+    ( 
+     METODO_PAGO_id_metodo_pago
+    ) 
+    REFERENCES METODO_PAGO 
+    ( 
+     id_metodo_pago
+    ) 
+;
+
+ALTER TABLE PATOLOGIAS 
+    ADD CONSTRAINT PATOLOGIAS_CAT_PATOLOGIA_FK FOREIGN KEY 
+    ( 
+     CAT_PATOLOGIA_id_cat
+    ) 
+    REFERENCES CAT_PATOLOGIA 
+    ( 
+     id_cat
+    ) 
+;
+
+ALTER TABLE PATOLOGIAS 
+    ADD CONSTRAINT PATOLOGIAS_FICHA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     FICHA_CLIENTE_id_ficha
+    ) 
+    REFERENCES FICHA_CLIENTE 
+    ( 
+     id_ficha
+    ) 
+;
+
+ALTER TABLE PREPARADOR_FISICO 
+    ADD CONSTRAINT PREPARADOR_FISICO_COMUNA_FK FOREIGN KEY 
+    ( 
+     COMUNA_id_comuna
+    ) 
+    REFERENCES COMUNA 
+    ( 
+     id_comuna
+    ) 
+;
+
+ALTER TABLE PROGRE_CLI 
+    ADD CONSTRAINT PROGRE_CLI_FICHA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     FICHA_CLIENTE_id_ficha
+    ) 
+    REFERENCES FICHA_CLIENTE 
+    ( 
+     id_ficha
+    ) 
+;
+
+ALTER TABLE REGION 
+    ADD CONSTRAINT REGION_PAIS_FK FOREIGN KEY 
+    ( 
+     PAIS_id_pais
+    ) 
+    REFERENCES PAIS 
+    ( 
+     id_pais
+    ) 
+;
+
+ALTER TABLE REGISTRAR 
+    ADD CONSTRAINT REGISTRAR_FICHA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     FICHA_CLIENTE_id_ficha
+    ) 
+    REFERENCES FICHA_CLIENTE 
+    ( 
+     id_ficha
+    ) 
+;
+
+ALTER TABLE REGISTRAR 
+    ADD CONSTRAINT REGISTRAR_METRICAS_CLIENTE_FK FOREIGN KEY 
+    ( 
+     METRICAS_CLIENTE_id_metrica
+    ) 
+    REFERENCES METRICAS_CLIENTE 
+    ( 
+     id_metrica
+    ) 
+;
+
+ALTER TABLE RUTINA 
+    ADD CONSTRAINT RUTINA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     CLIENTE_rut_cliente
+    ) 
+    REFERENCES CLIENTE 
+    ( 
+     rut_cliente
+    ) 
+;
+
+ALTER TABLE SESION_ENTRENAMIENTO 
+    ADD CONSTRAINT SESION_ENTRENAMIENTO_AGENDA_FK FOREIGN KEY 
+    ( 
+     AGENDA_id_agendar,
+     AGENDA_fecha_agendar
+    ) 
+    REFERENCES AGENDA 
+    ( 
+     id_agendar,
+     fecha_agendar
+    ) 
+;
+
+ALTER TABLE SESION_ENTRENAMIENTO 
+    ADD CONSTRAINT SESION_ENTRENAMIENTO_RUTINA_FK FOREIGN KEY 
+    ( 
+     RUTINA_id_rutina
+    ) 
+    REFERENCES RUTINA 
+    ( 
+     id_rutina
+    ) 
+;
+
+ALTER TABLE TENER 
+    ADD CONSTRAINT TENER_CLIENTE_FK FOREIGN KEY 
+    ( 
+     CLIENTE_rut_cliente
+    ) 
+    REFERENCES CLIENTE 
+    ( 
+     rut_cliente
+    ) 
+;
+
+ALTER TABLE TENER 
+    ADD CONSTRAINT TENER_FICHA_CLIENTE_FK FOREIGN KEY 
+    ( 
+     FICHA_CLIENTE_id_ficha
+    ) 
+    REFERENCES FICHA_CLIENTE 
+    ( 
+     id_ficha
+    ) 
+;
+
+
+
+
+
+-- ============================================================
+-- 3)  INSERCION DE DATOS
+-- ============================================================
 
 SET DEFINE OFF;
 
@@ -696,56 +1425,56 @@ INSERT INTO FICHA_CLIENTE (id_ficha, fecha_creacion, observaciones, fecha_observ
 INSERT INTO METRICAS_CLIENTE (id_metrica, peso_cliente, estatura_cliente, medida_pecho_cliente, medida_cintura_cliente, medida_cadera_cliente, medida_hombros_cliente, medida_brazos_cliente, medida_muslos_cliente, medidas_pantorillas_cliente, fecha_medicion_cliente) VALUES (49, 94.40, 1.80, 96.97, 93.76, 103.55, 126.51, 40.73, 58.71, 38.61, TO_DATE('2025-02-13','YYYY-MM-DD'));
 INSERT INTO FICHA_CLIENTE (id_ficha, fecha_creacion, observaciones, fecha_observacion) VALUES (50, TO_DATE('2025-05-26','YYYY-MM-DD'), 'Requiere control de presión arterial', TO_DATE('2025-05-26','YYYY-MM-DD'));
 INSERT INTO METRICAS_CLIENTE (id_metrica, peso_cliente, estatura_cliente, medida_pecho_cliente, medida_cintura_cliente, medida_cadera_cliente, medida_hombros_cliente, medida_brazos_cliente, medida_muslos_cliente, medidas_pantorillas_cliente, fecha_medicion_cliente) VALUES (50, 51.72, 1.66, 102.34, 68.34, 79.42, 96.07, 28.48, 53.50, 35.41, TO_DATE('2025-05-26','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (1, TO_DATE('2025-12-04','YYYY-MM-DD'), TO_DATE('2026-01-04','YYYY-MM-DD'), 'Vigente', 2, TO_DATE('2025-12-04','YYYY-MM-DD'), TO_DATE('2026-01-04','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (2, TO_DATE('2024-05-22','YYYY-MM-DD'), TO_DATE('2024-06-22','YYYY-MM-DD'), 'Vigente', 3, TO_DATE('2024-05-22','YYYY-MM-DD'), TO_DATE('2024-06-22','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (3, TO_DATE('2024-08-11','YYYY-MM-DD'), TO_DATE('2024-11-11','YYYY-MM-DD'), 'Vigente', 4, TO_DATE('2024-08-11','YYYY-MM-DD'), TO_DATE('2024-11-11','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (4, TO_DATE('2024-12-27','YYYY-MM-DD'), TO_DATE('2025-03-27','YYYY-MM-DD'), 'Vigente', 5, TO_DATE('2024-12-27','YYYY-MM-DD'), TO_DATE('2025-03-27','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (5, TO_DATE('2024-05-25','YYYY-MM-DD'), TO_DATE('2024-11-25','YYYY-MM-DD'), 'Vigente', 6, TO_DATE('2024-05-25','YYYY-MM-DD'), TO_DATE('2024-11-25','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (6, TO_DATE('2024-11-07','YYYY-MM-DD'), TO_DATE('2025-11-07','YYYY-MM-DD'), 'Caducado', 7, TO_DATE('2024-11-07','YYYY-MM-DD'), TO_DATE('2025-11-07','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (7, TO_DATE('2024-01-11','YYYY-MM-DD'), TO_DATE('2025-01-11','YYYY-MM-DD'), 'Vigente', 8, TO_DATE('2024-01-11','YYYY-MM-DD'), TO_DATE('2025-01-11','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (8, TO_DATE('2026-06-04','YYYY-MM-DD'), TO_DATE('2026-09-04','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2026-06-04','YYYY-MM-DD'), TO_DATE('2026-09-04','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (9, TO_DATE('2026-07-22','YYYY-MM-DD'), TO_DATE('2026-08-22','YYYY-MM-DD'), 'Vigente', 10, TO_DATE('2026-07-22','YYYY-MM-DD'), TO_DATE('2026-08-22','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (10, TO_DATE('2026-10-08','YYYY-MM-DD'), TO_DATE('2026-11-08','YYYY-MM-DD'), 'Vigente', 1, TO_DATE('2026-10-08','YYYY-MM-DD'), TO_DATE('2026-11-08','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (11, TO_DATE('2026-10-23','YYYY-MM-DD'), TO_DATE('2026-11-23','YYYY-MM-DD'), 'Vigente', 2, TO_DATE('2026-10-23','YYYY-MM-DD'), TO_DATE('2026-11-23','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (12, TO_DATE('2026-08-23','YYYY-MM-DD'), TO_DATE('2026-09-23','YYYY-MM-DD'), 'Vigente', 3, TO_DATE('2026-08-23','YYYY-MM-DD'), TO_DATE('2026-09-23','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (13, TO_DATE('2026-11-11','YYYY-MM-DD'), TO_DATE('2027-02-11','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2026-11-11','YYYY-MM-DD'), TO_DATE('2027-02-11','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (14, TO_DATE('2024-09-09','YYYY-MM-DD'), TO_DATE('2024-12-09','YYYY-MM-DD'), 'Vigente', 5, TO_DATE('2024-09-09','YYYY-MM-DD'), TO_DATE('2024-12-09','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (15, TO_DATE('2026-06-26','YYYY-MM-DD'), TO_DATE('2026-12-26','YYYY-MM-DD'), 'Vigente', 6, TO_DATE('2026-06-26','YYYY-MM-DD'), TO_DATE('2026-12-26','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (16, TO_DATE('2024-11-21','YYYY-MM-DD'), TO_DATE('2025-11-21','YYYY-MM-DD'), 'Caducado', 7, TO_DATE('2024-11-21','YYYY-MM-DD'), TO_DATE('2025-11-21','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (17, TO_DATE('2024-07-15','YYYY-MM-DD'), TO_DATE('2025-07-15','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2024-07-15','YYYY-MM-DD'), TO_DATE('2025-07-15','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (18, TO_DATE('2024-11-20','YYYY-MM-DD'), TO_DATE('2025-02-20','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2024-11-20','YYYY-MM-DD'), TO_DATE('2025-02-20','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (19, TO_DATE('2024-11-16','YYYY-MM-DD'), TO_DATE('2024-12-16','YYYY-MM-DD'), 'Vigente', 10, TO_DATE('2024-11-16','YYYY-MM-DD'), TO_DATE('2024-12-16','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (20, TO_DATE('2026-11-12','YYYY-MM-DD'), TO_DATE('2026-12-12','YYYY-MM-DD'), 'Cancelado', 1, TO_DATE('2026-11-12','YYYY-MM-DD'), TO_DATE('2026-12-12','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (21, TO_DATE('2025-02-08','YYYY-MM-DD'), TO_DATE('2025-03-08','YYYY-MM-DD'), 'Vigente', 2, TO_DATE('2025-02-08','YYYY-MM-DD'), TO_DATE('2025-03-08','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (22, TO_DATE('2026-04-09','YYYY-MM-DD'), TO_DATE('2026-05-09','YYYY-MM-DD'), 'Cancelado', 3, TO_DATE('2026-04-09','YYYY-MM-DD'), TO_DATE('2026-05-09','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (23, TO_DATE('2025-11-01','YYYY-MM-DD'), TO_DATE('2026-02-01','YYYY-MM-DD'), 'Vigente', 4, TO_DATE('2025-11-01','YYYY-MM-DD'), TO_DATE('2026-02-01','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (24, TO_DATE('2026-09-16','YYYY-MM-DD'), TO_DATE('2026-12-16','YYYY-MM-DD'), 'Vigente', 5, TO_DATE('2026-09-16','YYYY-MM-DD'), TO_DATE('2026-12-16','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (25, TO_DATE('2025-11-05','YYYY-MM-DD'), TO_DATE('2026-05-05','YYYY-MM-DD'), 'Vigente', 6, TO_DATE('2025-11-05','YYYY-MM-DD'), TO_DATE('2026-05-05','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (26, TO_DATE('2026-10-10','YYYY-MM-DD'), TO_DATE('2027-10-10','YYYY-MM-DD'), 'Vigente', 7, TO_DATE('2026-10-10','YYYY-MM-DD'), TO_DATE('2027-10-10','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (27, TO_DATE('2025-05-14','YYYY-MM-DD'), TO_DATE('2026-05-14','YYYY-MM-DD'), 'Vigente', 8, TO_DATE('2025-05-14','YYYY-MM-DD'), TO_DATE('2026-05-14','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (28, TO_DATE('2026-07-07','YYYY-MM-DD'), TO_DATE('2026-10-07','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2026-07-07','YYYY-MM-DD'), TO_DATE('2026-10-07','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (29, TO_DATE('2025-06-07','YYYY-MM-DD'), TO_DATE('2025-07-07','YYYY-MM-DD'), 'Vigente', 10, TO_DATE('2025-06-07','YYYY-MM-DD'), TO_DATE('2025-07-07','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (30, TO_DATE('2026-10-19','YYYY-MM-DD'), TO_DATE('2026-11-19','YYYY-MM-DD'), 'Vigente', 1, TO_DATE('2026-10-19','YYYY-MM-DD'), TO_DATE('2026-11-19','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (31, TO_DATE('2025-05-25','YYYY-MM-DD'), TO_DATE('2025-06-25','YYYY-MM-DD'), 'Vigente', 2, TO_DATE('2025-05-25','YYYY-MM-DD'), TO_DATE('2025-06-25','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (32, TO_DATE('2026-04-24','YYYY-MM-DD'), TO_DATE('2026-05-24','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2026-04-24','YYYY-MM-DD'), TO_DATE('2026-05-24','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (33, TO_DATE('2026-06-18','YYYY-MM-DD'), TO_DATE('2026-09-18','YYYY-MM-DD'), 'Vigente', 4, TO_DATE('2026-06-18','YYYY-MM-DD'), TO_DATE('2026-09-18','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (34, TO_DATE('2024-12-09','YYYY-MM-DD'), TO_DATE('2025-03-09','YYYY-MM-DD'), 'Vigente', 5, TO_DATE('2024-12-09','YYYY-MM-DD'), TO_DATE('2025-03-09','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (35, TO_DATE('2025-03-08','YYYY-MM-DD'), TO_DATE('2025-09-08','YYYY-MM-DD'), 'Vigente', 6, TO_DATE('2025-03-08','YYYY-MM-DD'), TO_DATE('2025-09-08','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (36, TO_DATE('2024-05-20','YYYY-MM-DD'), TO_DATE('2025-05-20','YYYY-MM-DD'), 'Vigente', 7, TO_DATE('2024-05-20','YYYY-MM-DD'), TO_DATE('2025-05-20','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (37, TO_DATE('2025-01-09','YYYY-MM-DD'), TO_DATE('2026-01-09','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2025-01-09','YYYY-MM-DD'), TO_DATE('2026-01-09','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (38, TO_DATE('2026-05-23','YYYY-MM-DD'), TO_DATE('2026-08-23','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2026-05-23','YYYY-MM-DD'), TO_DATE('2026-08-23','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (39, TO_DATE('2024-05-27','YYYY-MM-DD'), TO_DATE('2024-06-27','YYYY-MM-DD'), 'Caducado', 10, TO_DATE('2024-05-27','YYYY-MM-DD'), TO_DATE('2024-06-27','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (40, TO_DATE('2025-06-23','YYYY-MM-DD'), TO_DATE('2025-07-23','YYYY-MM-DD'), 'Vigente', 1, TO_DATE('2025-06-23','YYYY-MM-DD'), TO_DATE('2025-07-23','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (41, TO_DATE('2025-09-17','YYYY-MM-DD'), TO_DATE('2025-10-17','YYYY-MM-DD'), 'Vigente', 2, TO_DATE('2025-09-17','YYYY-MM-DD'), TO_DATE('2025-10-17','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (42, TO_DATE('2025-07-03','YYYY-MM-DD'), TO_DATE('2025-08-03','YYYY-MM-DD'), 'Vigente', 3, TO_DATE('2025-07-03','YYYY-MM-DD'), TO_DATE('2025-08-03','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (43, TO_DATE('2026-05-04','YYYY-MM-DD'), TO_DATE('2026-08-04','YYYY-MM-DD'), 'Vigente', 4, TO_DATE('2026-05-04','YYYY-MM-DD'), TO_DATE('2026-08-04','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (44, TO_DATE('2026-03-08','YYYY-MM-DD'), TO_DATE('2026-06-08','YYYY-MM-DD'), 'Cancelado', 5, TO_DATE('2026-03-08','YYYY-MM-DD'), TO_DATE('2026-06-08','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (45, TO_DATE('2026-06-08','YYYY-MM-DD'), TO_DATE('2026-12-08','YYYY-MM-DD'), 'Vigente', 6, TO_DATE('2026-06-08','YYYY-MM-DD'), TO_DATE('2026-12-08','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (46, TO_DATE('2026-05-01','YYYY-MM-DD'), TO_DATE('2027-05-01','YYYY-MM-DD'), 'Vigente', 7, TO_DATE('2026-05-01','YYYY-MM-DD'), TO_DATE('2027-05-01','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (47, TO_DATE('2024-10-09','YYYY-MM-DD'), TO_DATE('2025-10-09','YYYY-MM-DD'), 'Vigente', 8, TO_DATE('2024-10-09','YYYY-MM-DD'), TO_DATE('2025-10-09','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (48, TO_DATE('2025-08-17','YYYY-MM-DD'), TO_DATE('2025-11-17','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2025-08-17','YYYY-MM-DD'), TO_DATE('2025-11-17','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (49, TO_DATE('2026-02-25','YYYY-MM-DD'), TO_DATE('2026-03-25','YYYY-MM-DD'), 'Vigente', 10, TO_DATE('2026-02-25','YYYY-MM-DD'), TO_DATE('2026-03-25','YYYY-MM-DD'));
-INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (50, TO_DATE('2025-05-13','YYYY-MM-DD'), TO_DATE('2025-06-13','YYYY-MM-DD'), 'Vigente', 1, TO_DATE('2025-05-13','YYYY-MM-DD'), TO_DATE('2025-06-13','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (1, TO_DATE('2025-02-06','YYYY-MM-DD'), TO_DATE('2025-03-06','YYYY-MM-DD'), 'Caducado', 2, TO_DATE('2025-02-06','YYYY-MM-DD'), TO_DATE('2025-03-06','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (2, TO_DATE('2026-06-29','YYYY-MM-DD'), TO_DATE('2026-07-28','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2026-06-29','YYYY-MM-DD'), TO_DATE('2026-07-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (3, TO_DATE('2026-03-19','YYYY-MM-DD'), TO_DATE('2026-06-19','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2026-03-19','YYYY-MM-DD'), TO_DATE('2026-06-19','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (4, TO_DATE('2026-08-29','YYYY-MM-DD'), TO_DATE('2026-11-28','YYYY-MM-DD'), 'Vigente', 5, TO_DATE('2026-08-29','YYYY-MM-DD'), TO_DATE('2026-11-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (5, TO_DATE('2024-04-15','YYYY-MM-DD'), TO_DATE('2024-10-15','YYYY-MM-DD'), 'Caducado', 6, TO_DATE('2024-04-15','YYYY-MM-DD'), TO_DATE('2024-10-15','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (6, TO_DATE('2024-07-31','YYYY-MM-DD'), TO_DATE('2025-07-28','YYYY-MM-DD'), 'Caducado', 7, TO_DATE('2024-07-31','YYYY-MM-DD'), TO_DATE('2025-07-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (7, TO_DATE('2024-11-10','YYYY-MM-DD'), TO_DATE('2025-11-10','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2024-11-10','YYYY-MM-DD'), TO_DATE('2025-11-10','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (8, TO_DATE('2024-05-06','YYYY-MM-DD'), TO_DATE('2024-08-06','YYYY-MM-DD'), 'Caducado', 9, TO_DATE('2024-05-06','YYYY-MM-DD'), TO_DATE('2024-08-06','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (9, TO_DATE('2024-09-21','YYYY-MM-DD'), TO_DATE('2024-10-21','YYYY-MM-DD'), 'Caducado', 10, TO_DATE('2024-09-21','YYYY-MM-DD'), TO_DATE('2024-10-21','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (10, TO_DATE('2025-11-25','YYYY-MM-DD'), TO_DATE('2025-12-25','YYYY-MM-DD'), 'Caducado', 1, TO_DATE('2025-11-25','YYYY-MM-DD'), TO_DATE('2025-12-25','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (11, TO_DATE('2026-04-21','YYYY-MM-DD'), TO_DATE('2026-05-21','YYYY-MM-DD'), 'Caducado', 2, TO_DATE('2026-04-21','YYYY-MM-DD'), TO_DATE('2026-05-21','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (12, TO_DATE('2025-02-28','YYYY-MM-DD'), TO_DATE('2025-03-28','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2025-02-28','YYYY-MM-DD'), TO_DATE('2025-03-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (13, TO_DATE('2024-03-14','YYYY-MM-DD'), TO_DATE('2024-06-14','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2024-03-14','YYYY-MM-DD'), TO_DATE('2024-06-14','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (14, TO_DATE('2025-05-05','YYYY-MM-DD'), TO_DATE('2025-08-05','YYYY-MM-DD'), 'Caducado', 5, TO_DATE('2025-05-05','YYYY-MM-DD'), TO_DATE('2025-08-05','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (15, TO_DATE('2024-11-19','YYYY-MM-DD'), TO_DATE('2025-05-19','YYYY-MM-DD'), 'Caducado', 6, TO_DATE('2024-11-19','YYYY-MM-DD'), TO_DATE('2025-05-19','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (16, TO_DATE('2024-10-17','YYYY-MM-DD'), TO_DATE('2025-10-17','YYYY-MM-DD'), 'Caducado', 7, TO_DATE('2024-10-17','YYYY-MM-DD'), TO_DATE('2025-10-17','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (17, TO_DATE('2024-11-01','YYYY-MM-DD'), TO_DATE('2025-11-01','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2024-11-01','YYYY-MM-DD'), TO_DATE('2025-11-01','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (18, TO_DATE('2024-05-14','YYYY-MM-DD'), TO_DATE('2024-08-14','YYYY-MM-DD'), 'Caducado', 9, TO_DATE('2024-05-14','YYYY-MM-DD'), TO_DATE('2024-08-14','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (19, TO_DATE('2026-08-22','YYYY-MM-DD'), TO_DATE('2026-09-22','YYYY-MM-DD'), 'Vigente', 10, TO_DATE('2026-08-22','YYYY-MM-DD'), TO_DATE('2026-09-22','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (20, TO_DATE('2026-05-03','YYYY-MM-DD'), TO_DATE('2026-06-03','YYYY-MM-DD'), 'Caducado', 1, TO_DATE('2026-05-03','YYYY-MM-DD'), TO_DATE('2026-06-03','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (21, TO_DATE('2024-02-18','YYYY-MM-DD'), TO_DATE('2024-03-18','YYYY-MM-DD'), 'Caducado', 2, TO_DATE('2024-02-18','YYYY-MM-DD'), TO_DATE('2024-03-18','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (22, TO_DATE('2026-08-06','YYYY-MM-DD'), TO_DATE('2026-09-06','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2026-08-06','YYYY-MM-DD'), TO_DATE('2026-09-06','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (23, TO_DATE('2024-03-10','YYYY-MM-DD'), TO_DATE('2024-06-10','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2024-03-10','YYYY-MM-DD'), TO_DATE('2024-06-10','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (24, TO_DATE('2024-10-25','YYYY-MM-DD'), TO_DATE('2025-01-25','YYYY-MM-DD'), 'Caducado', 5, TO_DATE('2024-10-25','YYYY-MM-DD'), TO_DATE('2025-01-25','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (25, TO_DATE('2026-02-13','YYYY-MM-DD'), TO_DATE('2026-08-13','YYYY-MM-DD'), 'Caducado', 6, TO_DATE('2026-02-13','YYYY-MM-DD'), TO_DATE('2026-08-13','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (26, TO_DATE('2025-03-21','YYYY-MM-DD'), TO_DATE('2026-03-21','YYYY-MM-DD'), 'Caducado', 7, TO_DATE('2025-03-21','YYYY-MM-DD'), TO_DATE('2026-03-21','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (27, TO_DATE('2024-04-02','YYYY-MM-DD'), TO_DATE('2025-04-02','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2024-04-02','YYYY-MM-DD'), TO_DATE('2025-04-02','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (28, TO_DATE('2026-06-16','YYYY-MM-DD'), TO_DATE('2026-09-16','YYYY-MM-DD'), 'Vigente', 9, TO_DATE('2026-06-16','YYYY-MM-DD'), TO_DATE('2026-09-16','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (29, TO_DATE('2024-07-26','YYYY-MM-DD'), TO_DATE('2024-08-26','YYYY-MM-DD'), 'Caducado', 10, TO_DATE('2024-07-26','YYYY-MM-DD'), TO_DATE('2024-08-26','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (30, TO_DATE('2026-08-17','YYYY-MM-DD'), TO_DATE('2026-09-17','YYYY-MM-DD'), 'Vigente', 1, TO_DATE('2026-08-17','YYYY-MM-DD'), TO_DATE('2026-09-17','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (31, TO_DATE('2024-01-31','YYYY-MM-DD'), TO_DATE('2024-02-28','YYYY-MM-DD'), 'Caducado', 2, TO_DATE('2024-01-31','YYYY-MM-DD'), TO_DATE('2024-02-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (32, TO_DATE('2024-11-18','YYYY-MM-DD'), TO_DATE('2024-12-18','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2024-11-18','YYYY-MM-DD'), TO_DATE('2024-12-18','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (33, TO_DATE('2024-07-25','YYYY-MM-DD'), TO_DATE('2024-10-25','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2024-07-25','YYYY-MM-DD'), TO_DATE('2024-10-25','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (34, TO_DATE('2024-01-29','YYYY-MM-DD'), TO_DATE('2024-04-28','YYYY-MM-DD'), 'Caducado', 5, TO_DATE('2024-01-29','YYYY-MM-DD'), TO_DATE('2024-04-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (35, TO_DATE('2025-10-03','YYYY-MM-DD'), TO_DATE('2026-04-03','YYYY-MM-DD'), 'Caducado', 6, TO_DATE('2025-10-03','YYYY-MM-DD'), TO_DATE('2026-04-03','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (36, TO_DATE('2026-05-10','YYYY-MM-DD'), TO_DATE('2027-05-10','YYYY-MM-DD'), 'Vigente', 7, TO_DATE('2026-05-10','YYYY-MM-DD'), TO_DATE('2027-05-10','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (37, TO_DATE('2024-09-16','YYYY-MM-DD'), TO_DATE('2025-09-16','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2024-09-16','YYYY-MM-DD'), TO_DATE('2025-09-16','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (38, TO_DATE('2025-05-25','YYYY-MM-DD'), TO_DATE('2025-08-25','YYYY-MM-DD'), 'Caducado', 9, TO_DATE('2025-05-25','YYYY-MM-DD'), TO_DATE('2025-08-25','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (39, TO_DATE('2025-06-17','YYYY-MM-DD'), TO_DATE('2025-07-17','YYYY-MM-DD'), 'Caducado', 10, TO_DATE('2025-06-17','YYYY-MM-DD'), TO_DATE('2025-07-17','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (40, TO_DATE('2026-05-08','YYYY-MM-DD'), TO_DATE('2026-06-08','YYYY-MM-DD'), 'Caducado', 1, TO_DATE('2026-05-08','YYYY-MM-DD'), TO_DATE('2026-06-08','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (41, TO_DATE('2025-02-25','YYYY-MM-DD'), TO_DATE('2025-03-25','YYYY-MM-DD'), 'Caducado', 2, TO_DATE('2025-02-25','YYYY-MM-DD'), TO_DATE('2025-03-25','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (42, TO_DATE('2025-11-30','YYYY-MM-DD'), TO_DATE('2025-12-28','YYYY-MM-DD'), 'Caducado', 3, TO_DATE('2025-11-30','YYYY-MM-DD'), TO_DATE('2025-12-28','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (43, TO_DATE('2024-12-08','YYYY-MM-DD'), TO_DATE('2025-03-08','YYYY-MM-DD'), 'Caducado', 4, TO_DATE('2024-12-08','YYYY-MM-DD'), TO_DATE('2025-03-08','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (44, TO_DATE('2025-07-07','YYYY-MM-DD'), TO_DATE('2025-10-07','YYYY-MM-DD'), 'Caducado', 5, TO_DATE('2025-07-07','YYYY-MM-DD'), TO_DATE('2025-10-07','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (45, TO_DATE('2026-02-02','YYYY-MM-DD'), TO_DATE('2026-08-02','YYYY-MM-DD'), 'Caducado', 6, TO_DATE('2026-02-02','YYYY-MM-DD'), TO_DATE('2026-08-02','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (46, TO_DATE('2025-09-22','YYYY-MM-DD'), TO_DATE('2026-09-22','YYYY-MM-DD'), 'Vigente', 7, TO_DATE('2025-09-22','YYYY-MM-DD'), TO_DATE('2026-09-22','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (47, TO_DATE('2025-01-01','YYYY-MM-DD'), TO_DATE('2026-01-01','YYYY-MM-DD'), 'Caducado', 8, TO_DATE('2025-01-01','YYYY-MM-DD'), TO_DATE('2026-01-01','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (48, TO_DATE('2026-05-12','YYYY-MM-DD'), TO_DATE('2026-08-12','YYYY-MM-DD'), 'Caducado', 9, TO_DATE('2026-05-12','YYYY-MM-DD'), TO_DATE('2026-08-12','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (49, TO_DATE('2025-11-23','YYYY-MM-DD'), TO_DATE('2025-12-23','YYYY-MM-DD'), 'Caducado', 10, TO_DATE('2025-11-23','YYYY-MM-DD'), TO_DATE('2025-12-23','YYYY-MM-DD'));
+INSERT INTO CONTRATO (id_contrato, fecha_inicio_contrato, fecha_termino_contrato, estado_contrato, PLAN_id_plan, fecha_ini, fecha_ter) VALUES (50, TO_DATE('2025-08-12','YYYY-MM-DD'), TO_DATE('2025-09-12','YYYY-MM-DD'), 'Caducado', 1, TO_DATE('2025-08-12','YYYY-MM-DD'), TO_DATE('2025-09-12','YYYY-MM-DD'));
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (1, 'Rutina de hipertrofia 1', '11.998.500-5');
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (2, 'Rutina Full Body A 2', '15.360.060-0');
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (3, 'Rutina Full Body B 3', '18.430.815-0');
@@ -796,355 +1525,355 @@ INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (47, '
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (48, 'Rutina de pecho 48', '15.832.730-9');
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (49, 'Rutina de hombros 49', '25.591.357-3');
 INSERT INTO RUTINA (id_rutina, nombre_rutina, CLIENTE_rut_cliente) VALUES (50, 'Rutina de brazos 50', '15.983.360-7');
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (1, 24990, TO_DATE('2024-07-03','YYYY-MM-DD'), 'Pagado', 1, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (1, TO_DATE('2024-07-03','YYYY-MM-DD'), 24990, 1);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (2, 29990, TO_DATE('2024-07-25','YYYY-MM-DD'), 'Pagado', 2, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (2, TO_DATE('2024-07-25','YYYY-MM-DD'), 29990, 2);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (3, 34990, TO_DATE('2024-01-24','YYYY-MM-DD'), 'Pagado', 3, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (3, TO_DATE('2024-01-24','YYYY-MM-DD'), 34990, 3);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (4, 39990, TO_DATE('2024-02-02','YYYY-MM-DD'), 'Pendiente', 4, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (4, TO_DATE('2024-02-02','YYYY-MM-DD'), 39990, 4);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (5, 49990, TO_DATE('2024-12-02','YYYY-MM-DD'), 'Pagado', 5, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (5, TO_DATE('2024-12-02','YYYY-MM-DD'), 49990, 5);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (6, 59990, TO_DATE('2024-11-05','YYYY-MM-DD'), 'Pagado', 6, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (6, TO_DATE('2024-11-05','YYYY-MM-DD'), 59990, 6);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (7, 79990, TO_DATE('2024-08-02','YYYY-MM-DD'), 'Pagado', 7, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (7, TO_DATE('2024-08-02','YYYY-MM-DD'), 79990, 7);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (8, 44990, TO_DATE('2024-10-04','YYYY-MM-DD'), 'Pagado', 8, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (8, TO_DATE('2024-10-04','YYYY-MM-DD'), 44990, 8);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (9, 17990, TO_DATE('2024-01-07','YYYY-MM-DD'), 'Pagado', 9, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (9, TO_DATE('2024-01-07','YYYY-MM-DD'), 17990, 9);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (10, 19990, TO_DATE('2024-10-05','YYYY-MM-DD'), 'Pagado', 10, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (10, TO_DATE('2024-10-05','YYYY-MM-DD'), 19990, 10);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (11, 24990, TO_DATE('2024-04-02','YYYY-MM-DD'), 'Pagado', 11, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (11, TO_DATE('2024-04-02','YYYY-MM-DD'), 24990, 11);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (12, 29990, TO_DATE('2024-01-07','YYYY-MM-DD'), 'Pagado', 12, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (12, TO_DATE('2024-01-07','YYYY-MM-DD'), 29990, 12);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (13, 34990, TO_DATE('2024-09-17','YYYY-MM-DD'), 'Pagado', 13, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (13, TO_DATE('2024-09-17','YYYY-MM-DD'), 34990, 13);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (14, 39990, TO_DATE('2024-12-17','YYYY-MM-DD'), 'Pagado', 14, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (14, TO_DATE('2024-12-17','YYYY-MM-DD'), 39990, 14);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (15, 49990, TO_DATE('2024-02-14','YYYY-MM-DD'), 'Rechazado', 15, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (15, TO_DATE('2024-02-14','YYYY-MM-DD'), 49990, 15);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (16, 59990, TO_DATE('2024-07-28','YYYY-MM-DD'), 'Pagado', 16, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (16, TO_DATE('2024-07-28','YYYY-MM-DD'), 59990, 16);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (17, 79990, TO_DATE('2024-02-10','YYYY-MM-DD'), 'Pagado', 17, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (17, TO_DATE('2024-02-10','YYYY-MM-DD'), 79990, 17);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (18, 44990, TO_DATE('2024-06-03','YYYY-MM-DD'), 'Pagado', 18, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (18, TO_DATE('2024-06-03','YYYY-MM-DD'), 44990, 18);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (19, 17990, TO_DATE('2024-03-01','YYYY-MM-DD'), 'Pagado', 19, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (19, TO_DATE('2024-03-01','YYYY-MM-DD'), 17990, 19);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (20, 19990, TO_DATE('2024-04-02','YYYY-MM-DD'), 'Pagado', 20, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (20, TO_DATE('2024-04-02','YYYY-MM-DD'), 19990, 20);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (21, 24990, TO_DATE('2024-05-01','YYYY-MM-DD'), 'Pagado', 21, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (21, TO_DATE('2024-05-01','YYYY-MM-DD'), 24990, 21);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (22, 29990, TO_DATE('2024-01-01','YYYY-MM-DD'), 'Pagado', 22, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (22, TO_DATE('2024-01-01','YYYY-MM-DD'), 29990, 22);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (23, 34990, TO_DATE('2024-07-07','YYYY-MM-DD'), 'Pagado', 23, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (23, TO_DATE('2024-07-07','YYYY-MM-DD'), 34990, 23);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (24, 39990, TO_DATE('2024-02-14','YYYY-MM-DD'), 'Pagado', 24, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (24, TO_DATE('2024-02-14','YYYY-MM-DD'), 39990, 24);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (25, 49990, TO_DATE('2024-06-12','YYYY-MM-DD'), 'Pagado', 25, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (25, TO_DATE('2024-06-12','YYYY-MM-DD'), 49990, 25);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (26, 59990, TO_DATE('2024-10-08','YYYY-MM-DD'), 'Rechazado', 26, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (26, TO_DATE('2024-10-08','YYYY-MM-DD'), 59990, 26);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (27, 79990, TO_DATE('2024-02-05','YYYY-MM-DD'), 'Pagado', 27, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (27, TO_DATE('2024-02-05','YYYY-MM-DD'), 79990, 27);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (28, 44990, TO_DATE('2024-01-17','YYYY-MM-DD'), 'Pagado', 28, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (28, TO_DATE('2024-01-17','YYYY-MM-DD'), 44990, 28);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (29, 17990, TO_DATE('2024-03-25','YYYY-MM-DD'), 'Pagado', 29, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (29, TO_DATE('2024-03-25','YYYY-MM-DD'), 17990, 29);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (30, 19990, TO_DATE('2024-08-16','YYYY-MM-DD'), 'Pagado', 30, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (30, TO_DATE('2024-08-16','YYYY-MM-DD'), 19990, 30);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (31, 24990, TO_DATE('2024-06-26','YYYY-MM-DD'), 'Pagado', 31, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (31, TO_DATE('2024-06-26','YYYY-MM-DD'), 24990, 31);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (32, 29990, TO_DATE('2024-12-06','YYYY-MM-DD'), 'Pagado', 32, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (32, TO_DATE('2024-12-06','YYYY-MM-DD'), 29990, 32);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (33, 34990, TO_DATE('2024-10-06','YYYY-MM-DD'), 'Pagado', 33, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (33, TO_DATE('2024-10-06','YYYY-MM-DD'), 34990, 33);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (34, 39990, TO_DATE('2024-09-03','YYYY-MM-DD'), 'Pagado', 34, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (34, TO_DATE('2024-09-03','YYYY-MM-DD'), 39990, 34);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (35, 49990, TO_DATE('2024-04-07','YYYY-MM-DD'), 'Pagado', 35, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (35, TO_DATE('2024-04-07','YYYY-MM-DD'), 49990, 35);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (36, 59990, TO_DATE('2024-03-16','YYYY-MM-DD'), 'Pagado', 36, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (36, TO_DATE('2024-03-16','YYYY-MM-DD'), 59990, 36);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (37, 79990, TO_DATE('2024-02-17','YYYY-MM-DD'), 'Pagado', 37, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (37, TO_DATE('2024-02-17','YYYY-MM-DD'), 79990, 37);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (38, 44990, TO_DATE('2024-06-18','YYYY-MM-DD'), 'Pendiente', 38, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (38, TO_DATE('2024-06-18','YYYY-MM-DD'), 44990, 38);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (39, 17990, TO_DATE('2024-03-27','YYYY-MM-DD'), 'Pagado', 39, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (39, TO_DATE('2024-03-27','YYYY-MM-DD'), 17990, 39);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (40, 19990, TO_DATE('2024-10-20','YYYY-MM-DD'), 'Pagado', 40, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (40, TO_DATE('2024-10-20','YYYY-MM-DD'), 19990, 40);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (41, 24990, TO_DATE('2024-05-16','YYYY-MM-DD'), 'Rechazado', 41, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (41, TO_DATE('2024-05-16','YYYY-MM-DD'), 24990, 41);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (42, 29990, TO_DATE('2024-11-13','YYYY-MM-DD'), 'Pagado', 42, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (42, TO_DATE('2024-11-13','YYYY-MM-DD'), 29990, 42);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (43, 34990, TO_DATE('2024-06-11','YYYY-MM-DD'), 'Pagado', 43, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (43, TO_DATE('2024-06-11','YYYY-MM-DD'), 34990, 43);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (44, 39990, TO_DATE('2024-06-02','YYYY-MM-DD'), 'Pagado', 44, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (44, TO_DATE('2024-06-02','YYYY-MM-DD'), 39990, 44);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (45, 49990, TO_DATE('2024-04-27','YYYY-MM-DD'), 'Pagado', 45, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (45, TO_DATE('2024-04-27','YYYY-MM-DD'), 49990, 45);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (46, 59990, TO_DATE('2024-07-16','YYYY-MM-DD'), 'Pagado', 46, 2);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (46, TO_DATE('2024-07-16','YYYY-MM-DD'), 59990, 46);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (47, 79990, TO_DATE('2024-09-05','YYYY-MM-DD'), 'Rechazado', 47, 3);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (47, TO_DATE('2024-09-05','YYYY-MM-DD'), 79990, 47);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (48, 44990, TO_DATE('2024-06-19','YYYY-MM-DD'), 'Pagado', 48, 4);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (48, TO_DATE('2024-06-19','YYYY-MM-DD'), 44990, 48);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (49, 17990, TO_DATE('2024-05-18','YYYY-MM-DD'), 'Pagado', 49, 5);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (49, TO_DATE('2024-05-18','YYYY-MM-DD'), 17990, 49);
-INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (50, 19990, TO_DATE('2024-03-09','YYYY-MM-DD'), 'Pagado', 50, 1);
-INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (50, TO_DATE('2024-03-09','YYYY-MM-DD'), 19990, 50);
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (1, TO_DATE('2025-07-09','YYYY-MM-DD'), INTERVAL '0 10:45:00' DAY TO SECOND, 'P', '23.507.938-0', '11.998.500-5');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (2, TO_DATE('2025-09-26','YYYY-MM-DD'), INTERVAL '0 09:00:00' DAY TO SECOND, 'C', '16.314.012-8', '15.360.060-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (3, TO_DATE('2025-01-17','YYYY-MM-DD'), INTERVAL '0 18:15:00' DAY TO SECOND, 'A', '22.515.298-5', '18.430.815-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (4, TO_DATE('2025-11-05','YYYY-MM-DD'), INTERVAL '0 07:30:00' DAY TO SECOND, 'A', '18.616.569-1', '25.960.879-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (5, TO_DATE('2026-03-17','YYYY-MM-DD'), INTERVAL '0 10:45:00' DAY TO SECOND, 'A', '20.699.123-2', '18.586.960-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (6, TO_DATE('2026-01-13','YYYY-MM-DD'), INTERVAL '0 07:00:00' DAY TO SECOND, 'C', '11.280.435-8', '20.858.183-K');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (7, TO_DATE('2026-01-10','YYYY-MM-DD'), INTERVAL '0 08:30:00' DAY TO SECOND, 'A', '22.131.805-6', '24.428.415-9');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (8, TO_DATE('2026-09-02','YYYY-MM-DD'), INTERVAL '0 20:00:00' DAY TO SECOND, 'A', '15.710.873-5', '25.987.858-6');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (9, TO_DATE('2025-12-21','YYYY-MM-DD'), INTERVAL '0 09:30:00' DAY TO SECOND, 'A', '11.504.328-5', '11.721.960-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (10, TO_DATE('2026-10-12','YYYY-MM-DD'), INTERVAL '0 18:45:00' DAY TO SECOND, 'A', '19.352.468-0', '24.833.068-6');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (11, TO_DATE('2026-09-27','YYYY-MM-DD'), INTERVAL '0 19:15:00' DAY TO SECOND, 'P', '19.027.228-1', '13.746.093-9');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (12, TO_DATE('2026-12-02','YYYY-MM-DD'), INTERVAL '0 17:15:00' DAY TO SECOND, 'A', '14.900.991-4', '25.012.372-8');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (13, TO_DATE('2026-11-04','YYYY-MM-DD'), INTERVAL '0 09:00:00' DAY TO SECOND, 'A', '14.825.159-2', '20.083.621-9');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (14, TO_DATE('2026-07-02','YYYY-MM-DD'), INTERVAL '0 14:00:00' DAY TO SECOND, 'A', '17.674.700-5', '20.426.773-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (15, TO_DATE('2025-03-07','YYYY-MM-DD'), INTERVAL '0 15:45:00' DAY TO SECOND, 'C', '12.363.714-3', '19.337.510-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (16, TO_DATE('2026-10-11','YYYY-MM-DD'), INTERVAL '0 10:30:00' DAY TO SECOND, 'A', '24.704.807-3', '17.056.747-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (17, TO_DATE('2025-08-10','YYYY-MM-DD'), INTERVAL '0 19:45:00' DAY TO SECOND, 'A', '20.817.865-2', '23.142.824-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (18, TO_DATE('2026-01-03','YYYY-MM-DD'), INTERVAL '0 10:30:00' DAY TO SECOND, 'A', '21.810.749-4', '19.606.110-K');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (19, TO_DATE('2025-12-23','YYYY-MM-DD'), INTERVAL '0 19:00:00' DAY TO SECOND, 'P', '22.019.455-8', '19.190.751-5');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (20, TO_DATE('2025-12-16','YYYY-MM-DD'), INTERVAL '0 08:45:00' DAY TO SECOND, 'A', '19.687.556-5', '24.133.155-5');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (21, TO_DATE('2025-03-25','YYYY-MM-DD'), INTERVAL '0 20:30:00' DAY TO SECOND, 'A', '15.184.138-4', '22.256.410-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (22, TO_DATE('2025-11-12','YYYY-MM-DD'), INTERVAL '0 08:45:00' DAY TO SECOND, 'A', '10.415.056-K', '23.028.725-2');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (23, TO_DATE('2026-01-20','YYYY-MM-DD'), INTERVAL '0 20:45:00' DAY TO SECOND, 'C', '24.223.627-0', '22.886.836-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (24, TO_DATE('2025-02-11','YYYY-MM-DD'), INTERVAL '0 11:15:00' DAY TO SECOND, 'A', '21.926.290-6', '18.236.009-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (25, TO_DATE('2026-02-02','YYYY-MM-DD'), INTERVAL '0 10:00:00' DAY TO SECOND, 'A', '16.188.185-6', '22.600.124-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (26, TO_DATE('2025-06-01','YYYY-MM-DD'), INTERVAL '0 09:00:00' DAY TO SECOND, 'A', '16.099.226-3', '22.970.008-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (27, TO_DATE('2025-01-12','YYYY-MM-DD'), INTERVAL '0 18:00:00' DAY TO SECOND, 'A', '17.735.513-5', '19.840.186-2');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (28, TO_DATE('2026-09-05','YYYY-MM-DD'), INTERVAL '0 16:30:00' DAY TO SECOND, 'A', '17.083.634-0', '17.400.346-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (29, TO_DATE('2025-05-04','YYYY-MM-DD'), INTERVAL '0 16:00:00' DAY TO SECOND, 'C', '11.521.428-4', '14.025.425-8');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (30, TO_DATE('2025-04-17','YYYY-MM-DD'), INTERVAL '0 13:00:00' DAY TO SECOND, 'A', '16.690.306-8', '10.042.527-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (31, TO_DATE('2026-03-24','YYYY-MM-DD'), INTERVAL '0 08:15:00' DAY TO SECOND, 'A', '24.947.974-8', '20.304.637-5');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (32, TO_DATE('2025-04-23','YYYY-MM-DD'), INTERVAL '0 19:45:00' DAY TO SECOND, 'A', '19.826.714-7', '11.354.318-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (33, TO_DATE('2026-09-15','YYYY-MM-DD'), INTERVAL '0 14:45:00' DAY TO SECOND, 'A', '19.302.111-5', '11.857.850-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (34, TO_DATE('2026-12-01','YYYY-MM-DD'), INTERVAL '0 12:30:00' DAY TO SECOND, 'A', '18.362.688-4', '14.819.091-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (35, TO_DATE('2026-07-17','YYYY-MM-DD'), INTERVAL '0 18:30:00' DAY TO SECOND, 'A', '24.549.625-7', '23.702.981-K');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (36, TO_DATE('2025-05-05','YYYY-MM-DD'), INTERVAL '0 19:45:00' DAY TO SECOND, 'P', '11.953.672-3', '11.645.033-K');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (37, TO_DATE('2026-02-21','YYYY-MM-DD'), INTERVAL '0 18:15:00' DAY TO SECOND, 'C', '17.137.754-4', '17.543.956-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (38, TO_DATE('2026-05-09','YYYY-MM-DD'), INTERVAL '0 18:45:00' DAY TO SECOND, 'P', '18.495.290-4', '10.192.750-4');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (39, TO_DATE('2026-01-09','YYYY-MM-DD'), INTERVAL '0 20:45:00' DAY TO SECOND, 'A', '23.464.542-0', '23.669.449-6');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (40, TO_DATE('2025-10-08','YYYY-MM-DD'), INTERVAL '0 13:00:00' DAY TO SECOND, 'A', '22.585.374-6', '24.947.890-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (41, TO_DATE('2026-01-10','YYYY-MM-DD'), INTERVAL '0 16:45:00' DAY TO SECOND, 'A', '24.541.731-4', '21.495.380-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (42, TO_DATE('2026-01-19','YYYY-MM-DD'), INTERVAL '0 13:00:00' DAY TO SECOND, 'A', '20.069.101-6', '18.225.646-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (43, TO_DATE('2026-05-23','YYYY-MM-DD'), INTERVAL '0 10:15:00' DAY TO SECOND, 'A', '24.687.336-4', '21.398.255-9');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (44, TO_DATE('2026-11-20','YYYY-MM-DD'), INTERVAL '0 09:45:00' DAY TO SECOND, 'C', '18.238.128-4', '15.271.957-4');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (45, TO_DATE('2026-08-04','YYYY-MM-DD'), INTERVAL '0 07:45:00' DAY TO SECOND, 'A', '16.679.821-3', '13.526.984-0');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (46, TO_DATE('2026-05-13','YYYY-MM-DD'), INTERVAL '0 20:30:00' DAY TO SECOND, 'A', '25.380.590-0', '16.664.202-7');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (47, TO_DATE('2025-08-06','YYYY-MM-DD'), INTERVAL '0 07:30:00' DAY TO SECOND, 'P', '18.802.211-1', '14.219.689-1');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (48, TO_DATE('2025-03-27','YYYY-MM-DD'), INTERVAL '0 13:45:00' DAY TO SECOND, 'A', '14.339.316-K', '15.832.730-9');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (49, TO_DATE('2026-06-13','YYYY-MM-DD'), INTERVAL '0 15:45:00' DAY TO SECOND, 'A', '24.167.984-5', '25.591.357-3');
-INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (50, TO_DATE('2025-07-24','YYYY-MM-DD'), INTERVAL '0 11:00:00' DAY TO SECOND, 'P', '17.045.862-1', '15.983.360-7');
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (1, 'Lunes', INTERVAL '0 15:00:00' DAY TO SECOND, 1, TO_DATE('2025-07-09','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (2, 'Martes', INTERVAL '0 07:00:00' DAY TO SECOND, 2, TO_DATE('2025-09-26','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (3, 'Miércoles', INTERVAL '0 16:30:00' DAY TO SECOND, 3, TO_DATE('2025-01-17','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (4, 'Jueves', INTERVAL '0 09:00:00' DAY TO SECOND, 4, TO_DATE('2025-11-05','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (5, 'Viernes', INTERVAL '0 07:30:00' DAY TO SECOND, 5, TO_DATE('2026-03-17','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (6, 'Sábado', INTERVAL '0 13:30:00' DAY TO SECOND, 6, TO_DATE('2026-01-13','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (7, 'Domingo', INTERVAL '0 10:30:00' DAY TO SECOND, 7, TO_DATE('2026-01-10','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (8, 'Lunes', INTERVAL '0 08:00:00' DAY TO SECOND, 8, TO_DATE('2026-09-02','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (9, 'Martes', INTERVAL '0 07:00:00' DAY TO SECOND, 9, TO_DATE('2025-12-21','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (10, 'Miércoles', INTERVAL '0 19:30:00' DAY TO SECOND, 10, TO_DATE('2026-10-12','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (11, 'Jueves', INTERVAL '0 13:00:00' DAY TO SECOND, 11, TO_DATE('2026-09-27','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (12, 'Viernes', INTERVAL '0 07:00:00' DAY TO SECOND, 12, TO_DATE('2026-12-02','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (13, 'Sábado', INTERVAL '0 19:00:00' DAY TO SECOND, 13, TO_DATE('2026-11-04','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (14, 'Domingo', INTERVAL '0 09:00:00' DAY TO SECOND, 14, TO_DATE('2026-07-02','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (15, 'Lunes', INTERVAL '0 20:30:00' DAY TO SECOND, 15, TO_DATE('2025-03-07','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (16, 'Martes', INTERVAL '0 07:00:00' DAY TO SECOND, 16, TO_DATE('2026-10-11','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (17, 'Miércoles', INTERVAL '0 17:30:00' DAY TO SECOND, 17, TO_DATE('2025-08-10','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (18, 'Jueves', INTERVAL '0 16:00:00' DAY TO SECOND, 18, TO_DATE('2026-01-03','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (19, 'Viernes', INTERVAL '0 16:30:00' DAY TO SECOND, 19, TO_DATE('2025-12-23','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (20, 'Sábado', INTERVAL '0 11:00:00' DAY TO SECOND, 20, TO_DATE('2025-12-16','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (21, 'Domingo', INTERVAL '0 14:00:00' DAY TO SECOND, 21, TO_DATE('2025-03-25','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (22, 'Lunes', INTERVAL '0 07:30:00' DAY TO SECOND, 22, TO_DATE('2025-11-12','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (23, 'Martes', INTERVAL '0 18:00:00' DAY TO SECOND, 23, TO_DATE('2026-01-20','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (24, 'Miércoles', INTERVAL '0 11:30:00' DAY TO SECOND, 24, TO_DATE('2025-02-11','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (25, 'Jueves', INTERVAL '0 10:00:00' DAY TO SECOND, 25, TO_DATE('2026-02-02','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (26, 'Viernes', INTERVAL '0 20:30:00' DAY TO SECOND, 26, TO_DATE('2025-06-01','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (27, 'Sábado', INTERVAL '0 19:30:00' DAY TO SECOND, 27, TO_DATE('2025-01-12','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (28, 'Domingo', INTERVAL '0 11:30:00' DAY TO SECOND, 28, TO_DATE('2026-09-05','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (29, 'Lunes', INTERVAL '0 19:30:00' DAY TO SECOND, 29, TO_DATE('2025-05-04','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (30, 'Martes', INTERVAL '0 11:00:00' DAY TO SECOND, 30, TO_DATE('2025-04-17','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (31, 'Miércoles', INTERVAL '0 09:00:00' DAY TO SECOND, 31, TO_DATE('2026-03-24','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (32, 'Jueves', INTERVAL '0 08:30:00' DAY TO SECOND, 32, TO_DATE('2025-04-23','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (33, 'Viernes', INTERVAL '0 18:30:00' DAY TO SECOND, 33, TO_DATE('2026-09-15','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (34, 'Sábado', INTERVAL '0 14:30:00' DAY TO SECOND, 34, TO_DATE('2026-12-01','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (35, 'Domingo', INTERVAL '0 16:00:00' DAY TO SECOND, 35, TO_DATE('2026-07-17','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (36, 'Lunes', INTERVAL '0 08:30:00' DAY TO SECOND, 36, TO_DATE('2025-05-05','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (37, 'Martes', INTERVAL '0 08:30:00' DAY TO SECOND, 37, TO_DATE('2026-02-21','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (38, 'Miércoles', INTERVAL '0 20:00:00' DAY TO SECOND, 38, TO_DATE('2026-05-09','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (39, 'Jueves', INTERVAL '0 20:30:00' DAY TO SECOND, 39, TO_DATE('2026-01-09','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (40, 'Viernes', INTERVAL '0 11:30:00' DAY TO SECOND, 40, TO_DATE('2025-10-08','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (41, 'Sábado', INTERVAL '0 17:30:00' DAY TO SECOND, 41, TO_DATE('2026-01-10','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (42, 'Domingo', INTERVAL '0 14:00:00' DAY TO SECOND, 42, TO_DATE('2026-01-19','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (43, 'Lunes', INTERVAL '0 17:30:00' DAY TO SECOND, 43, TO_DATE('2026-05-23','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (44, 'Martes', INTERVAL '0 20:00:00' DAY TO SECOND, 44, TO_DATE('2026-11-20','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (45, 'Miércoles', INTERVAL '0 08:00:00' DAY TO SECOND, 45, TO_DATE('2026-08-04','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (46, 'Jueves', INTERVAL '0 19:00:00' DAY TO SECOND, 46, TO_DATE('2026-05-13','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (47, 'Viernes', INTERVAL '0 10:00:00' DAY TO SECOND, 47, TO_DATE('2025-08-06','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (48, 'Sábado', INTERVAL '0 08:00:00' DAY TO SECOND, 48, TO_DATE('2025-03-27','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (49, 'Domingo', INTERVAL '0 18:30:00' DAY TO SECOND, 49, TO_DATE('2026-06-13','YYYY-MM-DD'));
-INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (50, 'Lunes', INTERVAL '0 18:30:00' DAY TO SECOND, 50, TO_DATE('2025-07-24','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (1, TO_DATE('2025-01-17','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 2, 3, TO_DATE('2025-01-17','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (2, TO_DATE('2026-01-13','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 4, 6, TO_DATE('2026-01-13','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (3, TO_DATE('2025-12-21','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 6, 9, TO_DATE('2025-12-21','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (4, TO_DATE('2026-12-02','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 8, 12, TO_DATE('2026-12-02','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (5, TO_DATE('2025-03-07','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 10, 15, TO_DATE('2025-03-07','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (6, TO_DATE('2026-01-03','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 12, 18, TO_DATE('2026-01-03','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (7, TO_DATE('2025-03-25','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 14, 21, TO_DATE('2025-03-25','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (8, TO_DATE('2025-02-11','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 16, 24, TO_DATE('2025-02-11','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (9, TO_DATE('2025-01-12','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 18, 27, TO_DATE('2025-01-12','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (10, TO_DATE('2025-04-17','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 20, 30, TO_DATE('2025-04-17','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (11, TO_DATE('2026-09-15','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 22, 33, TO_DATE('2026-09-15','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (12, TO_DATE('2025-05-05','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 24, 36, TO_DATE('2025-05-05','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (13, TO_DATE('2026-01-09','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 26, 39, TO_DATE('2026-01-09','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (14, TO_DATE('2026-01-19','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 28, 42, TO_DATE('2026-01-19','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (15, TO_DATE('2026-08-04','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 30, 45, TO_DATE('2026-08-04','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (16, TO_DATE('2025-03-27','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 32, 48, TO_DATE('2025-03-27','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (17, TO_DATE('2025-07-09','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 34, 1, TO_DATE('2025-07-09','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (18, TO_DATE('2025-11-05','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 36, 4, TO_DATE('2025-11-05','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (19, TO_DATE('2026-01-10','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 38, 7, TO_DATE('2026-01-10','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (20, TO_DATE('2026-10-12','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 40, 10, TO_DATE('2026-10-12','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (21, TO_DATE('2026-11-04','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 42, 13, TO_DATE('2026-11-04','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (22, TO_DATE('2026-10-11','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 44, 16, TO_DATE('2026-10-11','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (23, TO_DATE('2025-12-23','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 46, 19, TO_DATE('2025-12-23','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (24, TO_DATE('2025-11-12','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 48, 22, TO_DATE('2025-11-12','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (25, TO_DATE('2026-02-02','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 50, 25, TO_DATE('2026-02-02','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (26, TO_DATE('2026-09-05','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 2, 28, TO_DATE('2026-09-05','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (27, TO_DATE('2026-03-24','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 4, 31, TO_DATE('2026-03-24','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (28, TO_DATE('2026-12-01','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 6, 34, TO_DATE('2026-12-01','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (29, TO_DATE('2026-02-21','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 8, 37, TO_DATE('2026-02-21','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (30, TO_DATE('2025-10-08','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 10, 40, TO_DATE('2025-10-08','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (31, TO_DATE('2026-05-23','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 12, 43, TO_DATE('2026-05-23','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (32, TO_DATE('2026-05-13','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 14, 46, TO_DATE('2026-05-13','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (33, TO_DATE('2026-06-13','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 16, 49, TO_DATE('2026-06-13','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (34, TO_DATE('2025-09-26','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 18, 2, TO_DATE('2025-09-26','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (35, TO_DATE('2026-03-17','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 20, 5, TO_DATE('2026-03-17','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (36, TO_DATE('2026-09-02','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 22, 8, TO_DATE('2026-09-02','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (37, TO_DATE('2026-09-27','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 24, 11, TO_DATE('2026-09-27','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (38, TO_DATE('2026-07-02','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 26, 14, TO_DATE('2026-07-02','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (39, TO_DATE('2025-08-10','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 28, 17, TO_DATE('2025-08-10','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (40, TO_DATE('2025-12-16','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 30, 20, TO_DATE('2025-12-16','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (41, TO_DATE('2026-01-20','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 32, 23, TO_DATE('2026-01-20','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (42, TO_DATE('2025-06-01','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 34, 26, TO_DATE('2025-06-01','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (43, TO_DATE('2025-05-04','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 36, 29, TO_DATE('2025-05-04','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (44, TO_DATE('2025-04-23','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 38, 32, TO_DATE('2025-04-23','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (45, TO_DATE('2026-07-17','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 40, 35, TO_DATE('2026-07-17','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (46, TO_DATE('2026-05-09','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 42, 38, TO_DATE('2026-05-09','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (47, TO_DATE('2026-01-10','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 44, 41, TO_DATE('2026-01-10','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (48, TO_DATE('2026-11-20','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 46, 44, TO_DATE('2026-11-20','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (49, TO_DATE('2025-08-06','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 48, 47, TO_DATE('2025-08-06','YYYY-MM-DD'));
-INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (50, TO_DATE('2025-07-24','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 50, 50, TO_DATE('2025-07-24','YYYY-MM-DD'));
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (1, 'Logró bajar 2 kg en el primer mes', TO_DATE('2026-06-24','YYYY-MM-DD'), 1);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (1, 24990, TO_DATE('2025-02-13','YYYY-MM-DD'), 'Rechazado', 1, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (1, TO_DATE('2025-02-13','YYYY-MM-DD'), 24990, 1);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (2, 29990, TO_DATE('2026-07-06','YYYY-MM-DD'), 'Pagado', 2, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (2, TO_DATE('2026-07-06','YYYY-MM-DD'), 29990, 2);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (3, 34990, TO_DATE('2026-03-19','YYYY-MM-DD'), 'Pagado', 3, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (3, TO_DATE('2026-03-19','YYYY-MM-DD'), 34990, 3);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (4, 39990, TO_DATE('2026-09-03','YYYY-MM-DD'), 'Pendiente', 4, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (4, TO_DATE('2026-09-03','YYYY-MM-DD'), 39990, 4);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (5, 49990, TO_DATE('2024-04-18','YYYY-MM-DD'), 'Pagado', 5, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (5, TO_DATE('2024-04-18','YYYY-MM-DD'), 49990, 5);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (6, 59990, TO_DATE('2024-08-04','YYYY-MM-DD'), 'Pagado', 6, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (6, TO_DATE('2024-08-04','YYYY-MM-DD'), 59990, 6);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (7, 79990, TO_DATE('2024-11-18','YYYY-MM-DD'), 'Pagado', 7, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (7, TO_DATE('2024-11-18','YYYY-MM-DD'), 79990, 7);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (8, 44990, TO_DATE('2024-05-12','YYYY-MM-DD'), 'Pagado', 8, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (8, TO_DATE('2024-05-12','YYYY-MM-DD'), 44990, 8);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (9, 17990, TO_DATE('2024-09-22','YYYY-MM-DD'), 'Pagado', 9, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (9, TO_DATE('2024-09-22','YYYY-MM-DD'), 17990, 9);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (10, 19990, TO_DATE('2025-11-25','YYYY-MM-DD'), 'Pagado', 10, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (10, TO_DATE('2025-11-25','YYYY-MM-DD'), 19990, 10);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (11, 24990, TO_DATE('2026-05-01','YYYY-MM-DD'), 'Pagado', 11, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (11, TO_DATE('2026-05-01','YYYY-MM-DD'), 24990, 11);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (12, 29990, TO_DATE('2025-03-09','YYYY-MM-DD'), 'Pagado', 12, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (12, TO_DATE('2025-03-09','YYYY-MM-DD'), 29990, 12);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (13, 34990, TO_DATE('2024-03-16','YYYY-MM-DD'), 'Pendiente', 13, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (13, TO_DATE('2024-03-16','YYYY-MM-DD'), 34990, 13);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (14, 39990, TO_DATE('2025-05-12','YYYY-MM-DD'), 'Pagado', 14, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (14, TO_DATE('2025-05-12','YYYY-MM-DD'), 39990, 14);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (15, 49990, TO_DATE('2024-11-29','YYYY-MM-DD'), 'Pendiente', 15, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (15, TO_DATE('2024-11-29','YYYY-MM-DD'), 49990, 15);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (16, 59990, TO_DATE('2024-10-18','YYYY-MM-DD'), 'Pagado', 16, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (16, TO_DATE('2024-10-18','YYYY-MM-DD'), 59990, 16);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (17, 79990, TO_DATE('2024-11-04','YYYY-MM-DD'), 'Pagado', 17, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (17, TO_DATE('2024-11-04','YYYY-MM-DD'), 79990, 17);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (18, 44990, TO_DATE('2024-05-24','YYYY-MM-DD'), 'Pagado', 18, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (18, TO_DATE('2024-05-24','YYYY-MM-DD'), 44990, 18);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (19, 17990, TO_DATE('2026-08-25','YYYY-MM-DD'), 'Pagado', 19, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (19, TO_DATE('2026-08-25','YYYY-MM-DD'), 17990, 19);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (20, 19990, TO_DATE('2026-05-13','YYYY-MM-DD'), 'Pagado', 20, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (20, TO_DATE('2026-05-13','YYYY-MM-DD'), 19990, 20);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (21, 24990, TO_DATE('2024-02-18','YYYY-MM-DD'), 'Pagado', 21, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (21, TO_DATE('2024-02-18','YYYY-MM-DD'), 24990, 21);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (22, 29990, TO_DATE('2026-08-14','YYYY-MM-DD'), 'Pagado', 22, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (22, TO_DATE('2026-08-14','YYYY-MM-DD'), 29990, 22);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (23, 34990, TO_DATE('2024-03-12','YYYY-MM-DD'), 'Pagado', 23, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (23, TO_DATE('2024-03-12','YYYY-MM-DD'), 34990, 23);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (24, 39990, TO_DATE('2024-11-04','YYYY-MM-DD'), 'Pagado', 24, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (24, TO_DATE('2024-11-04','YYYY-MM-DD'), 39990, 24);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (25, 49990, TO_DATE('2026-02-16','YYYY-MM-DD'), 'Pagado', 25, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (25, TO_DATE('2026-02-16','YYYY-MM-DD'), 49990, 25);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (26, 59990, TO_DATE('2025-03-25','YYYY-MM-DD'), 'Pagado', 26, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (26, TO_DATE('2025-03-25','YYYY-MM-DD'), 59990, 26);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (27, 79990, TO_DATE('2024-04-08','YYYY-MM-DD'), 'Pagado', 27, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (27, TO_DATE('2024-04-08','YYYY-MM-DD'), 79990, 27);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (28, 44990, TO_DATE('2026-06-22','YYYY-MM-DD'), 'Pagado', 28, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (28, TO_DATE('2026-06-22','YYYY-MM-DD'), 44990, 28);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (29, 17990, TO_DATE('2024-07-29','YYYY-MM-DD'), 'Pagado', 29, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (29, TO_DATE('2024-07-29','YYYY-MM-DD'), 17990, 29);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (30, 19990, TO_DATE('2026-08-23','YYYY-MM-DD'), 'Pendiente', 30, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (30, TO_DATE('2026-08-23','YYYY-MM-DD'), 19990, 30);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (31, 24990, TO_DATE('2024-02-03','YYYY-MM-DD'), 'Pagado', 31, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (31, TO_DATE('2024-02-03','YYYY-MM-DD'), 24990, 31);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (32, 29990, TO_DATE('2024-11-27','YYYY-MM-DD'), 'Pagado', 32, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (32, TO_DATE('2024-11-27','YYYY-MM-DD'), 29990, 32);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (33, 34990, TO_DATE('2024-08-01','YYYY-MM-DD'), 'Pagado', 33, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (33, TO_DATE('2024-08-01','YYYY-MM-DD'), 34990, 33);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (34, 39990, TO_DATE('2024-02-03','YYYY-MM-DD'), 'Rechazado', 34, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (34, TO_DATE('2024-02-03','YYYY-MM-DD'), 39990, 34);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (35, 49990, TO_DATE('2025-10-06','YYYY-MM-DD'), 'Pagado', 35, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (35, TO_DATE('2025-10-06','YYYY-MM-DD'), 49990, 35);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (36, 59990, TO_DATE('2026-05-15','YYYY-MM-DD'), 'Pagado', 36, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (36, TO_DATE('2026-05-15','YYYY-MM-DD'), 59990, 36);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (37, 79990, TO_DATE('2024-09-19','YYYY-MM-DD'), 'Pagado', 37, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (37, TO_DATE('2024-09-19','YYYY-MM-DD'), 79990, 37);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (38, 44990, TO_DATE('2025-05-27','YYYY-MM-DD'), 'Pagado', 38, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (38, TO_DATE('2025-05-27','YYYY-MM-DD'), 44990, 38);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (39, 17990, TO_DATE('2025-06-19','YYYY-MM-DD'), 'Pagado', 39, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (39, TO_DATE('2025-06-19','YYYY-MM-DD'), 17990, 39);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (40, 19990, TO_DATE('2026-05-11','YYYY-MM-DD'), 'Rechazado', 40, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (40, TO_DATE('2026-05-11','YYYY-MM-DD'), 19990, 40);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (41, 24990, TO_DATE('2025-03-06','YYYY-MM-DD'), 'Pagado', 41, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (41, TO_DATE('2025-03-06','YYYY-MM-DD'), 24990, 41);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (42, 29990, TO_DATE('2025-12-07','YYYY-MM-DD'), 'Pagado', 42, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (42, TO_DATE('2025-12-07','YYYY-MM-DD'), 29990, 42);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (43, 34990, TO_DATE('2024-12-12','YYYY-MM-DD'), 'Pendiente', 43, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (43, TO_DATE('2024-12-12','YYYY-MM-DD'), 34990, 43);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (44, 39990, TO_DATE('2025-07-11','YYYY-MM-DD'), 'Pagado', 44, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (44, TO_DATE('2025-07-11','YYYY-MM-DD'), 39990, 44);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (45, 49990, TO_DATE('2026-02-12','YYYY-MM-DD'), 'Pagado', 45, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (45, TO_DATE('2026-02-12','YYYY-MM-DD'), 49990, 45);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (46, 59990, TO_DATE('2025-09-29','YYYY-MM-DD'), 'Pagado', 46, 2);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (46, TO_DATE('2025-09-29','YYYY-MM-DD'), 59990, 46);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (47, 79990, TO_DATE('2025-01-02','YYYY-MM-DD'), 'Pagado', 47, 3);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (47, TO_DATE('2025-01-02','YYYY-MM-DD'), 79990, 47);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (48, 44990, TO_DATE('2026-05-20','YYYY-MM-DD'), 'Pagado', 48, 4);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (48, TO_DATE('2026-05-20','YYYY-MM-DD'), 44990, 48);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (49, 17990, TO_DATE('2025-11-28','YYYY-MM-DD'), 'Pagado', 49, 5);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (49, TO_DATE('2025-11-28','YYYY-MM-DD'), 17990, 49);
+INSERT INTO PAGO (id_pago, monto_pago, fecha_pago, estado_pago, CONTRATO_id_contrato, METODO_PAGO_id_metodo_pago) VALUES (50, 19990, TO_DATE('2025-08-13','YYYY-MM-DD'), 'Pagado', 50, 1);
+INSERT INTO FACTURA (id_factura, fecha_emision, total_factura, PAGO_id_pago) VALUES (50, TO_DATE('2025-08-13','YYYY-MM-DD'), 19990, 50);
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (1, TO_DATE('2026-02-23','YYYY-MM-DD'), INTERVAL '0 16:45:00' DAY TO SECOND, 'Agendada', '23.507.938-0', '11.998.500-5');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (2, TO_DATE('2025-09-28','YYYY-MM-DD'), INTERVAL '0 15:00:00' DAY TO SECOND, 'Completada', '16.314.012-8', '15.360.060-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (3, TO_DATE('2025-04-11','YYYY-MM-DD'), INTERVAL '0 09:30:00' DAY TO SECOND, 'Agendada', '22.515.298-5', '18.430.815-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (4, TO_DATE('2026-04-09','YYYY-MM-DD'), INTERVAL '0 17:15:00' DAY TO SECOND, 'Completada', '18.616.569-1', '25.960.879-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (5, TO_DATE('2026-01-22','YYYY-MM-DD'), INTERVAL '0 13:30:00' DAY TO SECOND, 'Completada', '20.699.123-2', '18.586.960-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (6, TO_DATE('2026-03-19','YYYY-MM-DD'), INTERVAL '0 10:45:00' DAY TO SECOND, 'Agendada', '11.280.435-8', '20.858.183-K');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (7, TO_DATE('2026-08-09','YYYY-MM-DD'), INTERVAL '0 09:15:00' DAY TO SECOND, 'Completada', '22.131.805-6', '24.428.415-9');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (8, TO_DATE('2026-09-25','YYYY-MM-DD'), INTERVAL '0 16:00:00' DAY TO SECOND, 'Completada', '15.710.873-5', '25.987.858-6');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (9, TO_DATE('2025-09-05','YYYY-MM-DD'), INTERVAL '0 17:15:00' DAY TO SECOND, 'Completada', '11.504.328-5', '11.721.960-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (10, TO_DATE('2026-05-13','YYYY-MM-DD'), INTERVAL '0 07:15:00' DAY TO SECOND, 'Agendada', '19.352.468-0', '24.833.068-6');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (11, TO_DATE('2025-03-13','YYYY-MM-DD'), INTERVAL '0 11:15:00' DAY TO SECOND, 'Completada', '19.027.228-1', '13.746.093-9');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (12, TO_DATE('2025-10-12','YYYY-MM-DD'), INTERVAL '0 17:15:00' DAY TO SECOND, 'Agendada', '14.900.991-4', '25.012.372-8');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (13, TO_DATE('2026-09-23','YYYY-MM-DD'), INTERVAL '0 11:15:00' DAY TO SECOND, 'Completada', '14.825.159-2', '20.083.621-9');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (14, TO_DATE('2025-12-18','YYYY-MM-DD'), INTERVAL '0 13:15:00' DAY TO SECOND, 'Completada', '17.674.700-5', '20.426.773-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (15, TO_DATE('2025-02-02','YYYY-MM-DD'), INTERVAL '0 15:15:00' DAY TO SECOND, 'Pendiente', '12.363.714-3', '19.337.510-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (16, TO_DATE('2025-12-02','YYYY-MM-DD'), INTERVAL '0 18:00:00' DAY TO SECOND, 'Completada', '24.704.807-3', '17.056.747-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (17, TO_DATE('2026-11-05','YYYY-MM-DD'), INTERVAL '0 19:30:00' DAY TO SECOND, 'Completada', '20.817.865-2', '23.142.824-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (18, TO_DATE('2025-01-16','YYYY-MM-DD'), INTERVAL '0 07:45:00' DAY TO SECOND, 'Completada', '21.810.749-4', '19.606.110-K');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (19, TO_DATE('2025-01-19','YYYY-MM-DD'), INTERVAL '0 07:00:00' DAY TO SECOND, 'Completada', '22.019.455-8', '19.190.751-5');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (20, TO_DATE('2025-08-25','YYYY-MM-DD'), INTERVAL '0 15:45:00' DAY TO SECOND, 'Agendada', '19.687.556-5', '24.133.155-5');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (21, TO_DATE('2025-04-25','YYYY-MM-DD'), INTERVAL '0 08:30:00' DAY TO SECOND, 'Completada', '15.184.138-4', '22.256.410-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (22, TO_DATE('2025-08-07','YYYY-MM-DD'), INTERVAL '0 08:45:00' DAY TO SECOND, 'Completada', '10.415.056-K', '23.028.725-2');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (23, TO_DATE('2025-01-12','YYYY-MM-DD'), INTERVAL '0 15:00:00' DAY TO SECOND, 'Completada', '24.223.627-0', '22.886.836-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (24, TO_DATE('2026-01-07','YYYY-MM-DD'), INTERVAL '0 20:00:00' DAY TO SECOND, 'Completada', '21.926.290-6', '18.236.009-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (25, TO_DATE('2025-05-17','YYYY-MM-DD'), INTERVAL '0 10:15:00' DAY TO SECOND, 'Completada', '16.188.185-6', '22.600.124-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (26, TO_DATE('2026-08-23','YYYY-MM-DD'), INTERVAL '0 18:15:00' DAY TO SECOND, 'Completada', '16.099.226-3', '22.970.008-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (27, TO_DATE('2025-07-23','YYYY-MM-DD'), INTERVAL '0 12:15:00' DAY TO SECOND, 'Completada', '17.735.513-5', '19.840.186-2');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (28, TO_DATE('2026-02-04','YYYY-MM-DD'), INTERVAL '0 13:30:00' DAY TO SECOND, 'Completada', '17.083.634-0', '17.400.346-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (29, TO_DATE('2026-07-08','YYYY-MM-DD'), INTERVAL '0 18:45:00' DAY TO SECOND, 'Completada', '11.521.428-4', '14.025.425-8');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (30, TO_DATE('2026-02-03','YYYY-MM-DD'), INTERVAL '0 18:15:00' DAY TO SECOND, 'Pendiente', '16.690.306-8', '10.042.527-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (31, TO_DATE('2025-03-01','YYYY-MM-DD'), INTERVAL '0 14:15:00' DAY TO SECOND, 'Completada', '24.947.974-8', '20.304.637-5');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (32, TO_DATE('2025-09-08','YYYY-MM-DD'), INTERVAL '0 14:45:00' DAY TO SECOND, 'Completada', '19.826.714-7', '11.354.318-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (33, TO_DATE('2025-01-28','YYYY-MM-DD'), INTERVAL '0 18:00:00' DAY TO SECOND, 'Completada', '19.302.111-5', '11.857.850-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (34, TO_DATE('2026-01-21','YYYY-MM-DD'), INTERVAL '0 17:15:00' DAY TO SECOND, 'Agendada', '18.362.688-4', '14.819.091-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (35, TO_DATE('2025-01-01','YYYY-MM-DD'), INTERVAL '0 20:45:00' DAY TO SECOND, 'Completada', '24.549.625-7', '23.702.981-K');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (36, TO_DATE('2026-03-13','YYYY-MM-DD'), INTERVAL '0 17:00:00' DAY TO SECOND, 'Completada', '11.953.672-3', '11.645.033-K');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (37, TO_DATE('2025-08-03','YYYY-MM-DD'), INTERVAL '0 09:00:00' DAY TO SECOND, 'Agendada', '17.137.754-4', '17.543.956-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (38, TO_DATE('2026-08-04','YYYY-MM-DD'), INTERVAL '0 12:45:00' DAY TO SECOND, 'Completada', '18.495.290-4', '10.192.750-4');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (39, TO_DATE('2026-06-06','YYYY-MM-DD'), INTERVAL '0 07:45:00' DAY TO SECOND, 'Completada', '23.464.542-0', '23.669.449-6');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (40, TO_DATE('2025-01-03','YYYY-MM-DD'), INTERVAL '0 07:00:00' DAY TO SECOND, 'Agendada', '22.585.374-6', '24.947.890-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (41, TO_DATE('2025-07-15','YYYY-MM-DD'), INTERVAL '0 10:45:00' DAY TO SECOND, 'Completada', '24.541.731-4', '21.495.380-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (42, TO_DATE('2025-09-23','YYYY-MM-DD'), INTERVAL '0 19:45:00' DAY TO SECOND, 'Agendada', '20.069.101-6', '18.225.646-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (43, TO_DATE('2025-03-25','YYYY-MM-DD'), INTERVAL '0 12:15:00' DAY TO SECOND, 'Completada', '24.687.336-4', '21.398.255-9');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (44, TO_DATE('2026-08-01','YYYY-MM-DD'), INTERVAL '0 11:15:00' DAY TO SECOND, 'Completada', '18.238.128-4', '15.271.957-4');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (45, TO_DATE('2026-08-20','YYYY-MM-DD'), INTERVAL '0 09:45:00' DAY TO SECOND, 'Completada', '16.679.821-3', '13.526.984-0');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (46, TO_DATE('2025-10-23','YYYY-MM-DD'), INTERVAL '0 11:45:00' DAY TO SECOND, 'Pendiente', '25.380.590-0', '16.664.202-7');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (47, TO_DATE('2025-04-20','YYYY-MM-DD'), INTERVAL '0 20:30:00' DAY TO SECOND, 'Completada', '18.802.211-1', '14.219.689-1');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (48, TO_DATE('2025-12-07','YYYY-MM-DD'), INTERVAL '0 07:00:00' DAY TO SECOND, 'Agendada', '14.339.316-K', '15.832.730-9');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (49, TO_DATE('2025-08-02','YYYY-MM-DD'), INTERVAL '0 18:30:00' DAY TO SECOND, 'Agendada', '24.167.984-5', '25.591.357-3');
+INSERT INTO AGENDA (id_agendar, fecha_agendar, hora_agendar, estado_agendar, PREPARADOR_FISICO_rut_prep, CLIENTE_rut_cliente) VALUES (50, TO_DATE('2025-08-22','YYYY-MM-DD'), INTERVAL '0 18:00:00' DAY TO SECOND, 'Completada', '17.045.862-1', '15.983.360-7');
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (1, 'Lunes', INTERVAL '0 13:00:00' DAY TO SECOND, 1, TO_DATE('2026-02-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (2, 'Domingo', INTERVAL '0 18:30:00' DAY TO SECOND, 2, TO_DATE('2025-09-28','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (3, 'Viernes', INTERVAL '0 08:30:00' DAY TO SECOND, 3, TO_DATE('2025-04-11','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (4, 'Jueves', INTERVAL '0 08:00:00' DAY TO SECOND, 4, TO_DATE('2026-04-09','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (5, 'Jueves', INTERVAL '0 09:30:00' DAY TO SECOND, 5, TO_DATE('2026-01-22','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (6, 'Jueves', INTERVAL '0 10:00:00' DAY TO SECOND, 6, TO_DATE('2026-03-19','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (7, 'Domingo', INTERVAL '0 17:30:00' DAY TO SECOND, 7, TO_DATE('2026-08-09','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (8, 'Viernes', INTERVAL '0 08:30:00' DAY TO SECOND, 8, TO_DATE('2026-09-25','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (9, 'Viernes', INTERVAL '0 12:30:00' DAY TO SECOND, 9, TO_DATE('2025-09-05','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (10, 'Miércoles', INTERVAL '0 07:30:00' DAY TO SECOND, 10, TO_DATE('2026-05-13','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (11, 'Jueves', INTERVAL '0 15:00:00' DAY TO SECOND, 11, TO_DATE('2025-03-13','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (12, 'Domingo', INTERVAL '0 19:00:00' DAY TO SECOND, 12, TO_DATE('2025-10-12','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (13, 'Miércoles', INTERVAL '0 12:30:00' DAY TO SECOND, 13, TO_DATE('2026-09-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (14, 'Jueves', INTERVAL '0 10:00:00' DAY TO SECOND, 14, TO_DATE('2025-12-18','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (15, 'Domingo', INTERVAL '0 13:00:00' DAY TO SECOND, 15, TO_DATE('2025-02-02','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (16, 'Martes', INTERVAL '0 07:00:00' DAY TO SECOND, 16, TO_DATE('2025-12-02','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (17, 'Jueves', INTERVAL '0 17:00:00' DAY TO SECOND, 17, TO_DATE('2026-11-05','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (18, 'Jueves', INTERVAL '0 09:00:00' DAY TO SECOND, 18, TO_DATE('2025-01-16','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (19, 'Domingo', INTERVAL '0 12:00:00' DAY TO SECOND, 19, TO_DATE('2025-01-19','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (20, 'Lunes', INTERVAL '0 09:00:00' DAY TO SECOND, 20, TO_DATE('2025-08-25','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (21, 'Viernes', INTERVAL '0 12:00:00' DAY TO SECOND, 21, TO_DATE('2025-04-25','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (22, 'Jueves', INTERVAL '0 07:30:00' DAY TO SECOND, 22, TO_DATE('2025-08-07','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (23, 'Domingo', INTERVAL '0 18:00:00' DAY TO SECOND, 23, TO_DATE('2025-01-12','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (24, 'Miércoles', INTERVAL '0 08:30:00' DAY TO SECOND, 24, TO_DATE('2026-01-07','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (25, 'Sábado', INTERVAL '0 15:00:00' DAY TO SECOND, 25, TO_DATE('2025-05-17','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (26, 'Domingo', INTERVAL '0 16:30:00' DAY TO SECOND, 26, TO_DATE('2026-08-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (27, 'Miércoles', INTERVAL '0 20:00:00' DAY TO SECOND, 27, TO_DATE('2025-07-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (28, 'Miércoles', INTERVAL '0 19:00:00' DAY TO SECOND, 28, TO_DATE('2026-02-04','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (29, 'Miércoles', INTERVAL '0 11:00:00' DAY TO SECOND, 29, TO_DATE('2026-07-08','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (30, 'Martes', INTERVAL '0 16:00:00' DAY TO SECOND, 30, TO_DATE('2026-02-03','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (31, 'Sábado', INTERVAL '0 20:00:00' DAY TO SECOND, 31, TO_DATE('2025-03-01','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (32, 'Lunes', INTERVAL '0 19:00:00' DAY TO SECOND, 32, TO_DATE('2025-09-08','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (33, 'Martes', INTERVAL '0 15:30:00' DAY TO SECOND, 33, TO_DATE('2025-01-28','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (34, 'Miércoles', INTERVAL '0 18:00:00' DAY TO SECOND, 34, TO_DATE('2026-01-21','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (35, 'Miércoles', INTERVAL '0 20:00:00' DAY TO SECOND, 35, TO_DATE('2025-01-01','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (36, 'Viernes', INTERVAL '0 12:00:00' DAY TO SECOND, 36, TO_DATE('2026-03-13','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (37, 'Domingo', INTERVAL '0 18:00:00' DAY TO SECOND, 37, TO_DATE('2025-08-03','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (38, 'Martes', INTERVAL '0 18:00:00' DAY TO SECOND, 38, TO_DATE('2026-08-04','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (39, 'Sábado', INTERVAL '0 09:00:00' DAY TO SECOND, 39, TO_DATE('2026-06-06','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (40, 'Viernes', INTERVAL '0 10:30:00' DAY TO SECOND, 40, TO_DATE('2025-01-03','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (41, 'Martes', INTERVAL '0 10:30:00' DAY TO SECOND, 41, TO_DATE('2025-07-15','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (42, 'Martes', INTERVAL '0 19:30:00' DAY TO SECOND, 42, TO_DATE('2025-09-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (43, 'Martes', INTERVAL '0 14:30:00' DAY TO SECOND, 43, TO_DATE('2025-03-25','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (44, 'Sábado', INTERVAL '0 07:30:00' DAY TO SECOND, 44, TO_DATE('2026-08-01','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (45, 'Jueves', INTERVAL '0 18:00:00' DAY TO SECOND, 45, TO_DATE('2026-08-20','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (46, 'Jueves', INTERVAL '0 12:30:00' DAY TO SECOND, 46, TO_DATE('2025-10-23','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (47, 'Domingo', INTERVAL '0 09:30:00' DAY TO SECOND, 47, TO_DATE('2025-04-20','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (48, 'Domingo', INTERVAL '0 20:30:00' DAY TO SECOND, 48, TO_DATE('2025-12-07','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (49, 'Sábado', INTERVAL '0 15:30:00' DAY TO SECOND, 49, TO_DATE('2025-08-02','YYYY-MM-DD'));
+INSERT INTO BLOQUE_HORARIO (id_bloque, dia_bloque, hora_bloque, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (50, 'Viernes', INTERVAL '0 11:00:00' DAY TO SECOND, 50, TO_DATE('2025-08-22','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (1, TO_DATE('2025-09-28','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 2, 2, TO_DATE('2025-09-28','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (2, TO_DATE('2026-04-09','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 4, 4, TO_DATE('2026-04-09','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (3, TO_DATE('2026-01-22','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 6, 5, TO_DATE('2026-01-22','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (4, TO_DATE('2026-08-09','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 8, 7, TO_DATE('2026-08-09','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (5, TO_DATE('2026-09-25','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 10, 8, TO_DATE('2026-09-25','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (6, TO_DATE('2025-09-05','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 12, 9, TO_DATE('2025-09-05','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (7, TO_DATE('2025-03-13','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 14, 11, TO_DATE('2025-03-13','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (8, TO_DATE('2026-09-23','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 16, 13, TO_DATE('2026-09-23','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (9, TO_DATE('2025-12-18','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 18, 14, TO_DATE('2025-12-18','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (10, TO_DATE('2025-12-02','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 20, 16, TO_DATE('2025-12-02','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (11, TO_DATE('2026-11-05','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 22, 17, TO_DATE('2026-11-05','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (12, TO_DATE('2025-01-16','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 24, 18, TO_DATE('2025-01-16','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (13, TO_DATE('2025-01-19','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 26, 19, TO_DATE('2025-01-19','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (14, TO_DATE('2025-04-25','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 28, 21, TO_DATE('2025-04-25','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (15, TO_DATE('2025-08-07','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 30, 22, TO_DATE('2025-08-07','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (16, TO_DATE('2025-01-12','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 32, 23, TO_DATE('2025-01-12','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (17, TO_DATE('2026-01-07','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 34, 24, TO_DATE('2026-01-07','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (18, TO_DATE('2025-05-17','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 36, 25, TO_DATE('2025-05-17','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (19, TO_DATE('2026-08-23','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 38, 26, TO_DATE('2026-08-23','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (20, TO_DATE('2025-07-23','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 40, 27, TO_DATE('2025-07-23','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (21, TO_DATE('2026-02-04','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 42, 28, TO_DATE('2026-02-04','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (22, TO_DATE('2026-07-08','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 44, 29, TO_DATE('2026-07-08','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (23, TO_DATE('2025-03-01','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 46, 31, TO_DATE('2025-03-01','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (24, TO_DATE('2025-09-08','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 48, 32, TO_DATE('2025-09-08','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (25, TO_DATE('2025-01-28','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 50, 33, TO_DATE('2025-01-28','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (26, TO_DATE('2025-01-01','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 2, 35, TO_DATE('2025-01-01','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (27, TO_DATE('2026-03-13','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 4, 36, TO_DATE('2026-03-13','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (28, TO_DATE('2026-08-04','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 6, 38, TO_DATE('2026-08-04','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (29, TO_DATE('2026-06-06','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 8, 39, TO_DATE('2026-06-06','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (30, TO_DATE('2025-07-15','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 10, 41, TO_DATE('2025-07-15','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (31, TO_DATE('2025-03-25','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 12, 43, TO_DATE('2025-03-25','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (32, TO_DATE('2026-08-01','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 14, 44, TO_DATE('2026-08-01','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (33, TO_DATE('2026-08-20','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 16, 45, TO_DATE('2026-08-20','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (34, TO_DATE('2025-04-20','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 18, 47, TO_DATE('2025-04-20','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (35, TO_DATE('2025-08-22','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 20, 50, TO_DATE('2025-08-22','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (36, TO_DATE('2025-09-28','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 22, 2, TO_DATE('2025-09-28','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (37, TO_DATE('2026-04-09','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 24, 4, TO_DATE('2026-04-09','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (38, TO_DATE('2026-01-22','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 26, 5, TO_DATE('2026-01-22','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (39, TO_DATE('2026-08-09','YYYY-MM-DD'), INTERVAL '0 01:00:00' DAY TO SECOND, 28, 7, TO_DATE('2026-08-09','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (40, TO_DATE('2026-09-25','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 30, 8, TO_DATE('2026-09-25','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (41, TO_DATE('2025-09-05','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 32, 9, TO_DATE('2025-09-05','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (42, TO_DATE('2025-03-13','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 34, 11, TO_DATE('2025-03-13','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (43, TO_DATE('2026-09-23','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 36, 13, TO_DATE('2026-09-23','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (44, TO_DATE('2025-12-18','YYYY-MM-DD'), INTERVAL '0 00:45:00' DAY TO SECOND, 38, 14, TO_DATE('2025-12-18','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (45, TO_DATE('2025-12-02','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 40, 16, TO_DATE('2025-12-02','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (46, TO_DATE('2026-11-05','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 42, 17, TO_DATE('2026-11-05','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (47, TO_DATE('2025-01-16','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 44, 18, TO_DATE('2025-01-16','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (48, TO_DATE('2025-01-19','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 46, 19, TO_DATE('2025-01-19','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (49, TO_DATE('2025-04-25','YYYY-MM-DD'), INTERVAL '0 01:30:00' DAY TO SECOND, 48, 21, TO_DATE('2025-04-25','YYYY-MM-DD'));
+INSERT INTO SESION_ENTRENAMIENTO (id_sesion, fecha_sesion, duracion_sesion, RUTINA_id_rutina, AGENDA_id_agendar, AGENDA_fecha_agendar) VALUES (50, TO_DATE('2025-08-07','YYYY-MM-DD'), INTERVAL '0 01:15:00' DAY TO SECOND, 50, 22, TO_DATE('2025-08-07','YYYY-MM-DD'));
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (1, 'Logró bajar 2 kg en el primer mes', TO_DATE('2025-04-15','YYYY-MM-DD'), 1);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (1, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 1, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (2, 'Aumentó su masa muscular visiblemente', TO_DATE('2025-01-15','YYYY-MM-DD'), 2);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (2, 'Aumentó su masa muscular visiblemente', TO_DATE('2025-01-11','YYYY-MM-DD'), 2);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (2, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 2, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (3, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-12-17','YYYY-MM-DD'), 3);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (3, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-09-08','YYYY-MM-DD'), 3);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (3, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 3, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (4, 'Completó el plan de definición', TO_DATE('2026-02-10','YYYY-MM-DD'), 4);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (4, 'Completó el plan de definición', TO_DATE('2025-07-13','YYYY-MM-DD'), 4);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (4, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 4, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (5, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-01-04','YYYY-MM-DD'), 5);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (5, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-08-11','YYYY-MM-DD'), 5);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (5, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 5, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (6, 'Redujo su porcentaje de grasa corporal', TO_DATE('2025-04-03','YYYY-MM-DD'), 6);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (6, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-09-19','YYYY-MM-DD'), 6);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (6, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 6, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (7, 'Mejoró su postura y movilidad', TO_DATE('2026-07-02','YYYY-MM-DD'), 7);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (7, 'Mejoró su postura y movilidad', TO_DATE('2026-06-03','YYYY-MM-DD'), 7);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (7, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 7, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (8, 'Logró su primera dominada', TO_DATE('2026-11-01','YYYY-MM-DD'), 8);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (8, 'Logró su primera dominada', TO_DATE('2026-12-10','YYYY-MM-DD'), 8);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (8, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 8, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (9, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-08-17','YYYY-MM-DD'), 9);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (9, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-08-18','YYYY-MM-DD'), 9);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (9, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 9, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (10, 'Mantuvo constancia en la asistencia', TO_DATE('2025-10-11','YYYY-MM-DD'), 10);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (10, 'Mantuvo constancia en la asistencia', TO_DATE('2025-01-22','YYYY-MM-DD'), 10);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (10, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 10, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (11, 'Logró bajar 2 kg en el primer mes', TO_DATE('2026-02-01','YYYY-MM-DD'), 11);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (11, 'Logró bajar 2 kg en el primer mes', TO_DATE('2025-10-14','YYYY-MM-DD'), 11);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (11, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 11, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (12, 'Aumentó su masa muscular visiblemente', TO_DATE('2025-01-04','YYYY-MM-DD'), 12);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (12, 'Aumentó su masa muscular visiblemente', TO_DATE('2025-03-02','YYYY-MM-DD'), 12);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (12, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 12, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (13, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-12-10','YYYY-MM-DD'), 13);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (13, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-07-19','YYYY-MM-DD'), 13);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (13, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 13, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (14, 'Completó el plan de definición', TO_DATE('2026-05-13','YYYY-MM-DD'), 14);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (14, 'Completó el plan de definición', TO_DATE('2026-04-24','YYYY-MM-DD'), 14);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (14, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 14, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (15, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-06-04','YYYY-MM-DD'), 15);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (15, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2026-02-04','YYYY-MM-DD'), 15);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (15, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 15, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (16, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-08-12','YYYY-MM-DD'), 16);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (16, 'Redujo su porcentaje de grasa corporal', TO_DATE('2025-01-25','YYYY-MM-DD'), 16);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (16, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 16, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (17, 'Mejoró su postura y movilidad', TO_DATE('2025-10-21','YYYY-MM-DD'), 17);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (17, 'Mejoró su postura y movilidad', TO_DATE('2026-07-22','YYYY-MM-DD'), 17);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (17, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 17, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (18, 'Logró su primera dominada', TO_DATE('2025-02-02','YYYY-MM-DD'), 18);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (18, 'Logró su primera dominada', TO_DATE('2025-01-06','YYYY-MM-DD'), 18);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (18, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 18, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (19, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-06-10','YYYY-MM-DD'), 19);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (19, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-03-28','YYYY-MM-DD'), 19);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (19, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 19, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (20, 'Mantuvo constancia en la asistencia', TO_DATE('2025-11-20','YYYY-MM-DD'), 20);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (20, 'Mantuvo constancia en la asistencia', TO_DATE('2025-08-01','YYYY-MM-DD'), 20);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (20, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 20, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (21, 'Logró bajar 2 kg en el primer mes', TO_DATE('2025-11-27','YYYY-MM-DD'), 21);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (21, 'Logró bajar 2 kg en el primer mes', TO_DATE('2025-11-26','YYYY-MM-DD'), 21);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (21, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 21, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (22, 'Aumentó su masa muscular visiblemente', TO_DATE('2025-09-21','YYYY-MM-DD'), 22);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (22, 'Aumentó su masa muscular visiblemente', TO_DATE('2026-10-05','YYYY-MM-DD'), 22);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (22, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 22, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (23, 'Mejoró su resistencia cardiovascular', TO_DATE('2025-05-19','YYYY-MM-DD'), 23);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (23, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-05-06','YYYY-MM-DD'), 23);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (23, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 23, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (24, 'Completó el plan de definición', TO_DATE('2026-04-03','YYYY-MM-DD'), 24);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (24, 'Completó el plan de definición', TO_DATE('2026-09-05','YYYY-MM-DD'), 24);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (24, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 24, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (25, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2026-03-08','YYYY-MM-DD'), 25);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (25, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-12-13','YYYY-MM-DD'), 25);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (25, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 25, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (26, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-11-08','YYYY-MM-DD'), 26);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (26, 'Redujo su porcentaje de grasa corporal', TO_DATE('2025-05-28','YYYY-MM-DD'), 26);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (26, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 26, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (27, 'Mejoró su postura y movilidad', TO_DATE('2025-11-13','YYYY-MM-DD'), 27);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (27, 'Mejoró su postura y movilidad', TO_DATE('2026-04-03','YYYY-MM-DD'), 27);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (27, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 27, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (28, 'Logró su primera dominada', TO_DATE('2026-10-11','YYYY-MM-DD'), 28);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (28, 'Logró su primera dominada', TO_DATE('2026-08-09','YYYY-MM-DD'), 28);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (28, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 28, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (29, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-07-17','YYYY-MM-DD'), 29);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (29, 'Incrementó su flexibilidad notablemente', TO_DATE('2026-07-09','YYYY-MM-DD'), 29);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (29, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 29, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (30, 'Mantuvo constancia en la asistencia', TO_DATE('2026-05-05','YYYY-MM-DD'), 30);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (30, 'Mantuvo constancia en la asistencia', TO_DATE('2025-03-21','YYYY-MM-DD'), 30);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (30, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 30, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (31, 'Logró bajar 2 kg en el primer mes', TO_DATE('2026-08-10','YYYY-MM-DD'), 31);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (31, 'Logró bajar 2 kg en el primer mes', TO_DATE('2025-02-14','YYYY-MM-DD'), 31);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (31, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 31, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (32, 'Aumentó su masa muscular visiblemente', TO_DATE('2026-12-17','YYYY-MM-DD'), 32);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (32, 'Aumentó su masa muscular visiblemente', TO_DATE('2026-08-15','YYYY-MM-DD'), 32);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (32, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 32, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (33, 'Mejoró su resistencia cardiovascular', TO_DATE('2025-06-19','YYYY-MM-DD'), 33);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (33, 'Mejoró su resistencia cardiovascular', TO_DATE('2025-02-10','YYYY-MM-DD'), 33);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (33, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 33, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (34, 'Completó el plan de definición', TO_DATE('2026-10-17','YYYY-MM-DD'), 34);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (34, 'Completó el plan de definición', TO_DATE('2025-12-12','YYYY-MM-DD'), 34);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (34, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 34, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (35, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-12-13','YYYY-MM-DD'), 35);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (35, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-05-10','YYYY-MM-DD'), 35);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (35, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 35, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (36, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-06-17','YYYY-MM-DD'), 36);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (36, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-11-26','YYYY-MM-DD'), 36);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (36, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 36, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (37, 'Mejoró su postura y movilidad', TO_DATE('2026-07-24','YYYY-MM-DD'), 37);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (37, 'Mejoró su postura y movilidad', TO_DATE('2026-08-05','YYYY-MM-DD'), 37);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (37, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 37, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (38, 'Logró su primera dominada', TO_DATE('2025-06-06','YYYY-MM-DD'), 38);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (38, 'Logró su primera dominada', TO_DATE('2026-03-03','YYYY-MM-DD'), 38);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (38, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 38, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (39, 'Incrementó su flexibilidad notablemente', TO_DATE('2026-06-25','YYYY-MM-DD'), 39);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (39, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-04-07','YYYY-MM-DD'), 39);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (39, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 39, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (40, 'Mantuvo constancia en la asistencia', TO_DATE('2026-02-17','YYYY-MM-DD'), 40);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (40, 'Mantuvo constancia en la asistencia', TO_DATE('2025-02-05','YYYY-MM-DD'), 40);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (40, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 40, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (41, 'Logró bajar 2 kg en el primer mes', TO_DATE('2026-12-07','YYYY-MM-DD'), 41);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (41, 'Logró bajar 2 kg en el primer mes', TO_DATE('2026-12-13','YYYY-MM-DD'), 41);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (41, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 41, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (42, 'Aumentó su masa muscular visiblemente', TO_DATE('2026-01-21','YYYY-MM-DD'), 42);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (42, 'Aumentó su masa muscular visiblemente', TO_DATE('2026-10-06','YYYY-MM-DD'), 42);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (42, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 42, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (43, 'Mejoró su resistencia cardiovascular', TO_DATE('2026-07-03','YYYY-MM-DD'), 43);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (43, 'Mejoró su resistencia cardiovascular', TO_DATE('2025-08-27','YYYY-MM-DD'), 43);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (43, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 43, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (44, 'Completó el plan de definición', TO_DATE('2025-06-16','YYYY-MM-DD'), 44);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (44, 'Completó el plan de definición', TO_DATE('2025-04-17','YYYY-MM-DD'), 44);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (44, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 44, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (45, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2026-01-14','YYYY-MM-DD'), 45);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (45, 'Aumentó su carga de trabajo en sentadilla', TO_DATE('2025-02-06','YYYY-MM-DD'), 45);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (45, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 45, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (46, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-03-14','YYYY-MM-DD'), 46);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (46, 'Redujo su porcentaje de grasa corporal', TO_DATE('2026-12-16','YYYY-MM-DD'), 46);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (46, 'Asma bronquial', 'Respiratoria', 'Moderado', 'Crónica', 46, 2);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (47, 'Mejoró su postura y movilidad', TO_DATE('2026-11-20','YYYY-MM-DD'), 47);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (47, 'Mejoró su postura y movilidad', TO_DATE('2025-06-22','YYYY-MM-DD'), 47);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (47, 'Escoliosis leve', 'Osteoarticular', 'Leve', 'Permanente', 47, 4);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (48, 'Logró su primera dominada', TO_DATE('2025-11-10','YYYY-MM-DD'), 48);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (48, 'Logró su primera dominada', TO_DATE('2025-11-05','YYYY-MM-DD'), 48);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (48, 'Reflujo gastroesofágico', 'Digestiva', 'Leve', 'Crónica', 48, 7);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (49, 'Incrementó su flexibilidad notablemente', TO_DATE('2025-04-03','YYYY-MM-DD'), 49);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (49, 'Incrementó su flexibilidad notablemente', TO_DATE('2026-03-20','YYYY-MM-DD'), 49);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (49, 'Artritis reumatoide', 'Autoinmune', 'Moderado', 'Crónica', 49, 8);
-INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (50, 'Mantuvo constancia en la asistencia', TO_DATE('2026-10-03','YYYY-MM-DD'), 50);
+INSERT INTO PROGRE_CLI (id_progreso, descripcion_progreso, fecha_progreso, FICHA_CLIENTE_id_ficha) VALUES (50, 'Mantuvo constancia en la asistencia', TO_DATE('2025-01-16','YYYY-MM-DD'), 50);
 INSERT INTO PATOLOGIAS (id_patologia, nombre_patologia, tipo_patologia, grado_patologia, duracion_patologia, FICHA_CLIENTE_id_ficha, CAT_PATOLOGIA_id_cat) VALUES (50, 'Bronquitis crónica', 'Respiratoria', 'Leve', 'Crónica', 50, 2);
 INSERT INTO TENER (CLIENTE_rut_cliente, FICHA_CLIENTE_id_ficha) VALUES ('11.998.500-5', 1);
 INSERT INTO REGISTRAR (METRICAS_CLIENTE_id_metrica, FICHA_CLIENTE_id_ficha) VALUES (1, 1);
