@@ -10,6 +10,7 @@
 <showRelAttributes>true</showRelAttributes>
 <gridEnabled>false</gridEnabled>
 <showGrid>true</showGrid>
+<showPageGrid>true</showPageGrid>
 <diagramColor>-1</diagramColor>
 <legendPosX>1918</legendPosX>
 <legendPosY>956</legendPosY>
