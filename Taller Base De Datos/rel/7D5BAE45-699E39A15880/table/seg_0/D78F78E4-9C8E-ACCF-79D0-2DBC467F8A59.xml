@@ -100,7 +100,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="3FB42CE3-5972-F8FC-7789-478317B5C0A3" name="CONTRATO_PK">
+<ind_PK_UK id="3FB42CE3-5972-F8FC-7789-478317B5C0A3" name="CONTRATO_CLI_PK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>BF60D0B7-3C26-4790-D6EF-63DDAB13E39E</generatorID>

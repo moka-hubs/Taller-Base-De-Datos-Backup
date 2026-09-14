@@ -44,6 +44,35 @@
 <ownDataTypeParameters>13,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="COMUNA_id_comuna" id="979199EC-5BF2-12CA-412C-5AE2ED619127">
+<createdBy>paulo</createdBy>
+<createdTime>2026-09-14 18:52:26 UTC</createdTime>
+<generatorID>9CA97169-A1AF-8426-7C5B-5C979DC8C390</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7C194373-9DDB-0604-5F09-C403B9882A3D" referredColumn="C7FE20B7-24B9-CD11-5A3B-44D70FD6D3BE"/>
+</associations>
+</Column>
+<Column name="dir_centro" id="ED924725-B03C-D2C3-580F-D6AEB5B1F519">
+<createdBy>paulo</createdBy>
+<createdTime>2026-09-14 18:52:26 UTC</createdTime>
+<generatorID>50B69E1F-808A-E1FE-CC03-7D8571295C9A</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150</dataTypeSize>
+<ownDataTypeParameters>150,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="03446D6D-3BC6-702F-4860-887BCF2D6053" name="CENTRO_DEPORTIVO_PK">
@@ -56,6 +85,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="3EE0C60D-D4E9-16A3-A4D6-B3D0C0DA1461"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FB0D2201-4A15-987F-0780-071C8AB72757" name="CENTRO_DEP_COMUNA_FK">
+<createdBy>paulo</createdBy>
+<createdTime>2026-09-14 18:52:26 UTC</createdTime>
+<generatorID>DAD8DAE2-2A25-CAEF-5D8A-0AB0D874E1E1</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="979199EC-5BF2-12CA-412C-5AE2ED619127"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

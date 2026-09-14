@@ -3,6 +3,9 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-21 01:46:01 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
 <fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
@@ -16,6 +19,9 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:47:23 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -26,6 +32,9 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:47:52 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -37,6 +46,9 @@
 <createdTime>2026-08-22 16:05:13 UTC</createdTime>
 <generatorID>D7B1A412-8097-6AF4-3D95-8D3A7DF7DB80</generatorID>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
 <referedAttribute>262EBB77-8FF2-377E-ACBD-C5231A4420F7</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -50,6 +62,10 @@
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 15:47:50 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="false"/>
+</engineerTo>
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>67F76670-8BE0-BCB9-0C15-827F3FC84B8E</attributeRef>

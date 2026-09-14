@@ -63,8 +63,9 @@
 <createdBy>paulo</createdBy>
 <createdTime>2026-08-23 14:33:02 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>

@@ -46,7 +46,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="ED72907C-BB9A-3080-F877-6D6489363DCB" name="METODO_PAGO_PK">
+<ind_PK_UK id="ED72907C-BB9A-3080-F877-6D6489363DCB" name="METODO_PAGO_CLI_PK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>10895AC8-D824-DD0C-AC1F-A36182796A3C</generatorID>
