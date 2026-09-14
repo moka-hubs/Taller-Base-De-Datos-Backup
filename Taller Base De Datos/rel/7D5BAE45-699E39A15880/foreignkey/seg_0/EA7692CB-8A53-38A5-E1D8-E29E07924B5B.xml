@@ -1,10 +1,10 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="EA7692CB-8A53-38A5-E1D8-E29E07924B5B" containerWithKeyObject="B355981A-A986-B6AF-7562-21D5D2284A6F" localFKIndex="D462835F-0358-27FB-AE40-091BE7931D04" name="PAGO_METODO_PAGO_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="EA7692CB-8A53-38A5-E1D8-E29E07924B5B" containerWithKeyObject="B355981A-A986-B6AF-7562-21D5D2284A6F" localFKIndex="D462835F-0358-27FB-AE40-091BE7931D04" name="PAGO_METODO_PAGO_CLI_FK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>6CD367EE-85DA-7B54-F34C-D230CD111E0C</generatorID>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<referredTableLongName>METODO_PAGO</referredTableLongName>
+<referredTableLongName>METODO_PAGO_CLI</referredTableLongName>
 <deleteRule>NO ACTION</deleteRule>
 <referredTableID>07DB664A-B8B0-5844-FCD3-4D7216DD38C1</referredTableID>
 <keyObject>ED72907C-BB9A-3080-F877-6D6489363DCB</keyObject>

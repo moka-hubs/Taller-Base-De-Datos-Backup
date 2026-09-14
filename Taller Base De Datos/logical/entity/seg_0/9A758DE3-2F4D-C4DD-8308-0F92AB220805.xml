@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="5A188DA2-54F2-8763-D01B-DC81D5B0077B" name="RUTINA">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:29:45 UTC</createdTime>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="9A758DE3-2F4D-C4DD-8308-0F92AB220805" name="CENTRO_DEP">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 12:55:11 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_rutina" id="4A2DC6C8-1990-01E2-291E-8851D4AFC4F1">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:30:38 UTC</createdTime>
+<Attribute name="id_centro" id="955A5DDC-50F8-39B8-756D-85D36679C980">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 12:55:21 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -25,12 +25,12 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nombre_rutina" id="4955973D-519D-F7E9-526C-4195EDC15DA0">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:30:44 UTC</createdTime>
+<Attribute name="nombre_centro" id="0C24D84E-8840-A4CF-0B3C-D570601900B9">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 12:55:48 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -38,19 +38,16 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>50</dataTypeSize>
-<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="rut_cliente" id="E4EFF74A-481B-639C-477D-9FDC3D65CFD4">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-30 02:15:31 UTC</createdTime>
-<generatorID>F1EDF219-A5CF-DAB5-9CA5-82F1E4B9D01E</generatorID>
+<Attribute name="rut_centro" id="DE2FC4ED-C991-47F1-8CE5-9E2891179CD5">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 12:59:51 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<referedAttribute>4C4AD86F-A81D-0B7F-347F-18872B98F7B1</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -59,16 +56,18 @@
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="69E7C950-71A9-2CA1-A857-84162FFE7C63" name="RUTINA PK">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:33:02 UTC</createdTime>
+<identifier id="19CE8C90-D4CA-1400-EA1E-FD0517151C87" name="CENTRO_DEP_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 12:55:46 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="false"/>
 </engineerTo>
 <pk>true</pk>
+<newElementsIDs>955A5DDC-50F8-39B8-756D-85D36679C980</newElementsIDs>
 <usedAttributes>
-<attributeRef>4A2DC6C8-1990-01E2-291E-8851D4AFC4F1</attributeRef>
+<attributeRef>955A5DDC-50F8-39B8-756D-85D36679C980</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

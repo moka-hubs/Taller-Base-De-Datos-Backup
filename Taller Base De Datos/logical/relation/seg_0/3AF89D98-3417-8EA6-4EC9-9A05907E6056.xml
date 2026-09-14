@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ADHERIR" directorySegmentName="seg_0" id="3AF89D98-3417-8EA6-4EC9-9A05907E6056">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:16:02 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
+<sourcePk>59A8616F-9A9D-656E-756C-A642502ADA7E</sourcePk>
+<targetPk>19CE8C90-D4CA-1400-EA1E-FD0517151C87</targetPk>
+<identifying>false</identifying>
+<nameOnSource>adhiere</nameOnSource>
+<nameOnTarget>es adherido</nameOnTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>true</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>EF57F77F-1639-FECA-431C-A91BF7359D1E</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>9A758DE3-2F4D-C4DD-8308-0F92AB220805</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

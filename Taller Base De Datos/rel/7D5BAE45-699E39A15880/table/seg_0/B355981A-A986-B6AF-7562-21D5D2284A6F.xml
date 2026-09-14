@@ -55,7 +55,7 @@
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="CONTRATO_id_contrato" id="B3FA057F-7130-94E5-52D8-0EB7F2A68CDB">
+<Column name="CONTRATO_CLI_id_contrato" id="B3FA057F-7130-94E5-52D8-0EB7F2A68CDB">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>02D8B492-0F51-74AA-C488-4FA15B3134F7</generatorID>
@@ -64,14 +64,14 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="92F3F2D7-EFB5-99AE-410D-3A17CF82F240" referredColumn="16BB02DF-3253-2379-4059-3AF4CD6912B0"/>
 </associations>
 </Column>
-<Column name="METODO_PAGO_id_metodo_pago" id="509DB4C8-C7D6-0869-A3C8-F0C0B6869CEE">
+<Column name="METODO_PAGO_CLI_id_metodo_pago" id="509DB4C8-C7D6-0869-A3C8-F0C0B6869CEE">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>D85F9EAA-9208-1EAD-7D63-80C7C25D107F</generatorID>
@@ -80,7 +80,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -101,7 +101,7 @@
 <colUsage columnID="0DCEEF46-AADF-2579-F2DA-80E7D459FEC6"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="3A1BF55D-3767-CDF3-A7A7-CE2501396CFB" name="PAGO_CONTRATO_FK">
+<ind_PK_UK id="3A1BF55D-3767-CDF3-A7A7-CE2501396CFB" name="PAGO_CONTRATO_CLI_FK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>BB64ECDA-E676-4573-56B1-EB9812EA6964</generatorID>
@@ -112,7 +112,7 @@
 <colUsage columnID="B3FA057F-7130-94E5-52D8-0EB7F2A68CDB"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D462835F-0358-27FB-AE40-091BE7931D04" name="PAGO_METODO_PAGO_FK">
+<ind_PK_UK id="D462835F-0358-27FB-AE40-091BE7931D04" name="PAGO_METODO_PAGO_CLI_FK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>6CD367EE-85DA-7B54-F34C-D230CD111E0C</generatorID>

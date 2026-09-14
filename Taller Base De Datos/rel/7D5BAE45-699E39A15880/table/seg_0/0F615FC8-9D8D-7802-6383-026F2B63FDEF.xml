@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0F615FC8-9D8D-7802-6383-026F2B63FDEF" name="CENTRO_DEP">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>9A758DE3-2F4D-C4DD-8308-0F92AB220805</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_centro" id="3EE0C60D-D4E9-16A3-A4D6-B3D0C0DA1461">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>955A5DDC-50F8-39B8-756D-85D36679C980</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_centro" id="1308D4D9-2366-82BB-2494-BC52EB9BB62F">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>0C24D84E-8840-A4CF-0B3C-D570601900B9</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="rut_centro" id="F5443F05-6E37-583A-B26B-055259B0406D">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>DE2FC4ED-C991-47F1-8CE5-9E2891179CD5</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>13,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="03446D6D-3BC6-702F-4860-887BCF2D6053" name="CENTRO_DEPORTIVO_PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>19CE8C90-D4CA-1400-EA1E-FD0517151C87</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EE0C60D-D4E9-16A3-A4D6-B3D0C0DA1461"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

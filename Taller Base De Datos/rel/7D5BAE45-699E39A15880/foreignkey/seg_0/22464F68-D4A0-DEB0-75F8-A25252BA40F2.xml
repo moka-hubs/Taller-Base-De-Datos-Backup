@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="22464F68-D4A0-DEB0-75F8-A25252BA40F2" containerWithKeyObject="5469FAF9-CBCF-3786-6FEA-5E3A5C013D90" localFKIndex="2EEAF8C7-568B-ECDD-4AC9-8A5A5FC6C5CC" name="PAGO_APP_MET_PAGO_EMP_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>86956740-4A82-7449-A4DA-F8C954100D9B</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>MET_PAGO_EMP</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>8D73CD06-4898-3ACF-290E-1D0E25078EB9</referredTableID>
+<keyObject>C13B114F-BDAE-9BDC-779D-CAE0B4A33BB6</keyObject>
+<referredKeyID>C13B114F-BDAE-9BDC-779D-CAE0B4A33BB6</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_met_pago_emp</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

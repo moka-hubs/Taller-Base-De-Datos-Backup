@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="69CD5778-3232-0F18-86C6-E1A1C5259BEA" containerWithKeyObject="D8A88B60-2A8E-36D7-D27E-107F64C26617" localFKIndex="E2AC3CC6-AFAC-4F09-427A-E378ABFEE407" name="CONTRATO_APP_CENTRO_DEP_FK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:41:05 UTC</createdTime>
+<generatorID>3AF89D98-3417-8EA6-4EC9-9A05907E6056</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>CENTRO_DEP</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0F615FC8-9D8D-7802-6383-026F2B63FDEF</referredTableID>
+<keyObject>03446D6D-3BC6-702F-4860-887BCF2D6053</keyObject>
+<referredKeyID>03446D6D-3BC6-702F-4860-887BCF2D6053</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_centro</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

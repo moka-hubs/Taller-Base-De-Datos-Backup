@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D78F78E4-9C8E-ACCF-79D0-2DBC467F8A59" name="CONTRATO">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D78F78E4-9C8E-ACCF-79D0-2DBC467F8A59" name="CONTRATO_CLI">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>AA551FCA-D83E-4FBB-355E-5236553207F2</generatorID>
@@ -63,7 +63,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
@@ -112,7 +112,7 @@
 <colUsage columnID="16BB02DF-3253-2379-4059-3AF4CD6912B0"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="518A8C38-FA8E-E12D-8CD6-76FF913651E8" name="CONTRATO_PLAN_FK">
+<ind_PK_UK id="518A8C38-FA8E-E12D-8CD6-76FF913651E8" name="CONTRATO_CLI_PLAN_FK">
 <createdBy>moka</createdBy>
 <createdTime>2026-09-10 01:43:29 UTC</createdTime>
 <generatorID>0057DBC4-B138-2884-45CD-7945A8F5B4A5</generatorID>

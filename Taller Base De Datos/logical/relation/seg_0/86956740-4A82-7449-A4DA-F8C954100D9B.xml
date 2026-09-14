@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="EFECTUAR" directorySegmentName="seg_0" id="86956740-4A82-7449-A4DA-F8C954100D9B">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:40:37 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
+<sourcePk>6A13D5C9-67FA-583D-2D36-E1433D8FCE9F</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>efectua</nameOnSource>
+<nameOnTarget>es efectuado</nameOnTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>9FCC6683-AD7F-6781-D58B-B1AD416C3584</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D1B20882-BC6F-57AB-93DA-B5D7912F2D68</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

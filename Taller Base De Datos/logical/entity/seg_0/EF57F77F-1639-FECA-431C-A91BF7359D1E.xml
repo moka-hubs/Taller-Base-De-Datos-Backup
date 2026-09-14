@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7DD684C2-D1BE-A25F-9DFD-17F77D26584E" name="PAGO">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:55:26 UTC</createdTime>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="EF57F77F-1639-FECA-431C-A91BF7359D1E" name="CONTRATO_APP">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_pago" id="5C7AFD24-C56E-4449-3263-E146B3A8D165">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:55:38 UTC</createdTime>
+<Attribute name="id_contrato_app" id="8FDE257C-3848-3F68-9AF7-190DB96C7A39">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -28,22 +28,9 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="monto_pago" id="4600279F-2D2D-15E6-E783-1CA9AB5E88E7">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:55:48 UTC</createdTime>
-<ownerDesignName>Taller Base De Datos</ownerDesignName>
-<engineerTo>
-<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>6</dataTypePrecision>
-<ownDataTypeParameters>,6,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="fecha_pago" id="7DB93AE5-6341-F0CE-CDBE-39FEACB6655E">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:56:03 UTC</createdTime>
+<Attribute name="fecha_inicio_contrato" id="3CD7F7AA-DB64-B140-84A6-30E2B8ED94A8">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -53,9 +40,21 @@
 <logicalDatatype>LOGDT007</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="estado_pago" id="2B9A4BE8-2034-6163-1C33-DD5280F5D4B6">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:56:13 UTC</createdTime>
+<Attribute name="fecha_termino_contrato" id="B6B8A87A-5AB7-AB9F-1FE9-37843C5FC7EF">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="estado_contrato" id="A389ADBD-1E07-42A1-8EEB-6370AA895813">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
@@ -66,48 +65,47 @@
 <dataTypeSize>30</dataTypeSize>
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_contrato" id="02D8B492-0F51-74AA-C488-4FA15B3134F7">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 23:01:25 UTC</createdTime>
-<generatorID>BB64ECDA-E676-4573-56B1-EB9812EA6964</generatorID>
+<Attribute name="tipo_contrato" id="B4E7ED94-2AC7-7900-AF8E-9A9CC0522136">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
 </engineerTo>
-<referedAttribute>D46B7DE7-07EF-F214-B7EC-0F75F5090842</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_metodo_pago" id="D85F9EAA-9208-1EAD-7D63-80C7C25D107F">
-<createdBy>moka</createdBy>
-<createdTime>2026-08-28 23:03:57 UTC</createdTime>
-<generatorID>6CD367EE-85DA-7B54-F34C-D230CD111E0C</generatorID>
+<Attribute name="id_centro1" id="1C80422E-DD9B-BD6A-B5EE-BE7ED4A4E1A3">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:17:01 UTC</createdTime>
+<generatorID>3AF89D98-3417-8EA6-4EC9-9A05907E6056</generatorID>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
 <engineerTo>
 <item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
 </engineerTo>
-<referedAttribute>BEE285FD-31C1-1108-2105-4A99A3AAD5B3</referedAttribute>
+<referedAttribute>955A5DDC-50F8-39B8-756D-85D36679C980</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>7</dataTypePrecision>
+<dataTypePrecision>6</dataTypePrecision>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="FD0602CF-F8D8-93F0-9FCE-DB4F3E4CB375" name="PAGO PK">
-<createdBy>paulo</createdBy>
-<createdTime>2026-08-23 14:55:48 UTC</createdTime>
+<identifier id="59A8616F-9A9D-656E-756C-A642502ADA7E" name="CONTRATO PK">
+<createdBy>SJ-Alumno</createdBy>
+<createdTime>2026-09-14 13:14:58 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>5C7AFD24-C56E-4449-3263-E146B3A8D165</attributeRef>
+<attributeRef>8FDE257C-3848-3F68-9AF7-190DB96C7A39</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
