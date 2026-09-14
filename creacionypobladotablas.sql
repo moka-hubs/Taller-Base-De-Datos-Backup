@@ -5,6 +5,7 @@
 DROP TABLE AGENDA CASCADE CONSTRAINTS PURGE;
 DROP TABLE BLOQUE_HORARIO CASCADE CONSTRAINTS PURGE;
 DROP TABLE CAT_PATOLOGIA CASCADE CONSTRAINTS PURGE;
+DROP TABLE CENTRO_DEP CASCADE CONSTRAINTS PURGE;
 DROP TABLE CIUDAD CASCADE CONSTRAINTS PURGE;
 DROP TABLE CLIENTE CASCADE CONSTRAINTS PURGE;
 DROP TABLE COMUNA CASCADE CONSTRAINTS PURGE;
@@ -71,6 +72,19 @@ CREATE TABLE CAT_PATOLOGIA
 
 ALTER TABLE CAT_PATOLOGIA 
     ADD CONSTRAINT CAT_PATOLOGIA_PK PRIMARY KEY ( id_cat ) ;
+
+CREATE TABLE CENTRO_DEP 
+    ( 
+     id_centro        NUMBER (6)  NOT NULL , 
+     nombre_centro    VARCHAR2 (100)  NOT NULL , 
+     rut_centro       VARCHAR2 (13)  NOT NULL , 
+     COMUNA_id_comuna NUMBER (3) , 
+     dir_centro       VARCHAR2 (150)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE CENTRO_DEP 
+    ADD CONSTRAINT CENTRO_DEPORTIVO_PK PRIMARY KEY ( id_centro ) ;
 
 CREATE TABLE CIUDAD 
     ( 
@@ -410,6 +424,17 @@ ALTER TABLE BLOQUE_HORARIO
     ( 
      id_agendar,
      fecha_agendar
+    ) 
+;
+
+ALTER TABLE CENTRO_DEP 
+    ADD CONSTRAINT CENTRO_DEP_COMUNA_FK FOREIGN KEY 
+    ( 
+     COMUNA_id_comuna
+    ) 
+    REFERENCES COMUNA 
+    ( 
+     id_comuna
     ) 
 ;
 
@@ -1152,6 +1177,21 @@ INSERT INTO COMUNA (id_comuna, nombre_comuna, CIUDAD_id_ciudad) VALUES (343, 'Pr
 INSERT INTO COMUNA (id_comuna, nombre_comuna, CIUDAD_id_ciudad) VALUES (344, 'Timaukel', 55);
 INSERT INTO COMUNA (id_comuna, nombre_comuna, CIUDAD_id_ciudad) VALUES (345, 'Antártica', 56);
 INSERT INTO COMUNA (id_comuna, nombre_comuna, CIUDAD_id_ciudad) VALUES (346, 'Cabo de Hornos', 56);
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (1, 'Centro Deportivo Central Santiago', '76.101.234-5', 113, 'Av. Libertador Bernardo O''Higgins 1234');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (2, 'Centro Deportivo Providencia Sport', '76.202.345-6', 104, 'Av. Providencia 2150');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (3, 'Centro Deportivo Las Condes Fitness', '76.303.456-7', 95, 'Av. Apoquindo 4500');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (4, 'Centro Deportivo Ñuñoa Activa', '76.404.567-8', 101, 'Av. Irarrázaval 3205');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (5, 'Centro Deportivo Maipú Fuerza', '76.505.678-9', 100, 'Av. Pajaritos 1890');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (6, 'Centro Deportivo La Florida Gym', '76.606.789-K', 91, 'Av. Vicuña Mackenna 7200');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (7, 'Centro Deportivo Viña Marina', '77.101.890-1', 51, 'Av. Libertad 850');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (8, 'Centro Deportivo Valparaíso Puerto', '77.202.901-2', 50, 'Calle Condell 1420');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (9, 'Centro Deportivo Antofagasta Costa', '77.303.012-3', 12, 'Av. Grecia 1650');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (10, 'Centro Deportivo La Serena Sol', '77.404.123-4', 33, 'Av. Francisco de Aguirre 420');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (11, 'Centro Deportivo Rancagua Salud', '77.505.234-5', 148, 'Paseo Independencia 630');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (12, 'Centro Deportivo Talca Centro', '77.606.345-6', 186, 'Calle 1 Sur 1120');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (13, 'Centro Deportivo Concepción Bío Bío', '78.101.456-7', 220, 'Calle Barros Arana 780');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (14, 'Centro Deportivo Temuco Araucanía', '78.202.567-8', 268, 'Av. Alemania 0825');
+INSERT INTO CENTRO_DEP (id_centro, nombre_centro, rut_centro, COMUNA_id_comuna, dir_centro) VALUES (15, 'Centro Deportivo Puerto Montt Sur', '78.303.678-9', 303, 'Av. Diego Portales 1500');
 INSERT INTO PLAN (id_plan, nombre_plan, precio_plan, duracion_plan, descripcion_plan) VALUES (1, 'Plan Inicial', 19990, '1 mes', 'Acceso completo en horario restringido (lunes a viernes hasta las 18:00 hrs).');
 INSERT INTO PLAN (id_plan, nombre_plan, precio_plan, duracion_plan, descripcion_plan) VALUES (2, 'Plan Básico', 24990, '1 mes', 'Acceso al gimnasio en horario completo y uso de máquinas de musculación.');
 INSERT INTO PLAN (id_plan, nombre_plan, precio_plan, duracion_plan, descripcion_plan) VALUES (3, 'Plan Full', 29990, '1 mes', 'Acceso libre al gimnasio, clases grupales y evaluación física inicial.');
