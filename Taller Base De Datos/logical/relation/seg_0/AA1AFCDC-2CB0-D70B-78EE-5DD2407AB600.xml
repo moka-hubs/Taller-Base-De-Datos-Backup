@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="CONTENER" directorySegmentName="seg_0" id="AA1AFCDC-2CB0-D70B-78EE-5DD2407AB600">
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="PERTENECE" directorySegmentName="seg_0" id="AA1AFCDC-2CB0-D70B-78EE-5DD2407AB600">
 <createdBy>moka</createdBy>
 <createdTime>2026-08-22 16:04:41 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>

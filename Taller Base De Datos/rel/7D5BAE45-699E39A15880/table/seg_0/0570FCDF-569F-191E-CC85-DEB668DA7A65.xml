@@ -3,7 +3,7 @@
 <createdBy>paulo</createdBy>
 <createdTime>2026-09-14 18:53:54 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
-<ordsAlias>contenerv2</ordsAlias>
+<ordsAlias>contener</ordsAlias>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
@@ -40,7 +40,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="7A7CC7CC-28D4-32FC-7ACA-9A5CED933835" name="CONTENERv2_PK">
+<ind_PK_UK id="7A7CC7CC-28D4-32FC-7ACA-9A5CED933835" name="CONTENER_PK">
 <createdBy>paulo</createdBy>
 <createdTime>2026-09-14 18:53:54 UTC</createdTime>
 <ownerDesignName>Taller Base De Datos</ownerDesignName>
@@ -52,7 +52,7 @@
 <colUsage columnID="F911354D-793E-9AA4-9F98-FD3DAF33CB62"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="5E1B639A-237B-FEB3-6F0B-053646BE9A1A" name="CONTENERv2_RUTINA_FK">
+<ind_PK_UK id="5E1B639A-237B-FEB3-6F0B-053646BE9A1A" name="CONTENER_RUTINA_FK">
 <createdBy>paulo</createdBy>
 <createdTime>2026-09-14 18:53:54 UTC</createdTime>
 <generatorID>13672174-59DC-AC33-D906-683C9BF40DCB</generatorID>
@@ -63,7 +63,7 @@
 <colUsage columnID="6A43BBF7-FCE2-8AA4-C6F0-C79C402BD805"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="D00A8147-3336-6E09-C3DC-EB6AB6DD4094" name="CONTENERv2_EJERCICIO_FK">
+<ind_PK_UK id="D00A8147-3336-6E09-C3DC-EB6AB6DD4094" name="CONTENER_EJERCICIO_FK">
 <createdBy>paulo</createdBy>
 <createdTime>2026-09-14 18:53:54 UTC</createdTime>
 <generatorID>13672174-59DC-AC33-D906-683C9BF40DCB</generatorID>
