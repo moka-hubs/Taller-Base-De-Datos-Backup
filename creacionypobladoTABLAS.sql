@@ -179,7 +179,7 @@ ALTER TABLE DISENAR
 CREATE TABLE EJERCICIO 
     ( 
      id_ejercicio           NUMBER (7)  NOT NULL , 
-     nombre_ejercicio       VARCHAR2 (30)  NOT NULL , 
+     nombre_ejercicio       VARCHAR2 (50)  NOT NULL , 
      descripcion_ejercicio  VARCHAR2 (200)  NOT NULL , 
      repeticiones_ejercicio NUMBER (2)  NOT NULL , 
      peso_ejercicio         NUMBER (3)  NOT NULL 
