@@ -108,7 +108,8 @@ CREATE TABLE CONTRATO_CLI
      estado_contrato        VARCHAR2 (30)  NOT NULL , 
      PLAN_id_plan           NUMBER (7)  NOT NULL , 
      fecha_ini              DATE , 
-     fecha_ter              DATE 
+     fecha_ter              DATE ,
+     CLIENTE_rut_cliente    VARCHAR2 (13)  NOT NULL
     ) 
 ;
 
@@ -486,6 +487,17 @@ ALTER TABLE CONTRATO_CLI
     ( 
      id_plan
     ) 
+;
+
+ALTER TABLE CONTRATO_CLI
+    ADD CONSTRAINT CONTRATO_CLI_CLIENTE_FK FOREIGN KEY
+    (
+     CLIENTE_rut_cliente
+    )
+    REFERENCES CLIENTE
+    (
+     rut_cliente
+    )
 ;
 
 ALTER TABLE DEFINIR 
