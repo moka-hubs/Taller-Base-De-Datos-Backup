@@ -80,6 +80,21 @@
 <dataTypePrecision>7</dataTypePrecision>
 <ownDataTypeParameters>,7,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="rut_cliente" id="95CCE04C-3DEA-4CA4-B51D-72971DD6E41A">
+<createdBy>moka</createdBy>
+<createdTime>2026-10-25 00:00:00 UTC</createdTime>
+<generatorID>9ED41B77-4E14-4453-9870-18E20FFCBC4B</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="7D5BAE45-853B-C04D-4B79-699E39A15880" value="true"/>
+</engineerTo>
+<referedAttribute>4C4AD86F-A81D-0B7F-347F-18872B98F7B1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>13</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="BF60D0B7-3C26-4790-D6EF-63DDAB13E39E" name="CONTRATO PK">
