@@ -6,7 +6,8 @@ CREATE TABLE AGENDA
      hora_agendar               INTERVAL DAY (9) TO SECOND (0)  NOT NULL , 
      estado_agendar             VARCHAR2 (15)  NOT NULL , 
      PREPARADOR_FISICO_rut_prep VARCHAR2 (13)  NOT NULL , 
-     CLIENTE_rut_cliente        VARCHAR2 (13)  NOT NULL 
+     CLIENTE_rut_cliente        VARCHAR2 (13)  NOT NULL , 
+     CONTRATO_CLI_id_contrato   NUMBER (7)  NOT NULL 
     ) 
 ;
 
@@ -385,6 +386,17 @@ ALTER TABLE AGENDA
     REFERENCES PREPARADOR_FISICO 
     ( 
      rut_prep
+    ) 
+;
+
+ALTER TABLE AGENDA 
+    ADD CONSTRAINT AGENDA_CONTRATO_CLI_FK FOREIGN KEY 
+    ( 
+     CONTRATO_CLI_id_contrato
+    ) 
+    REFERENCES CONTRATO_CLI 
+    ( 
+     id_contrato
     ) 
 ;
 

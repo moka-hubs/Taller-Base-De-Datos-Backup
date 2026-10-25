@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ASOCIAR" directorySegmentName="seg_0" id="748741AB-DAB5-47D9-B1CD-DAA9F37D601C">
+<createdBy>moka</createdBy>
+<createdTime>2026-10-25 00:00:00 UTC</createdTime>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<engineerTo>
+<item key="65D13D49-1303-ADAB-B81A-DBD275312825" value="true"/>
+</engineerTo>
+<sourcePk>BF60D0B7-3C26-4790-D6EF-63DDAB13E39E</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>asocia</nameOnSource>
+<nameOnTarget>es asociada</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>AA551FCA-D83E-4FBB-355E-5236553207F2</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>8F92FA56-4BA4-CD46-A7A2-B294E5A5F125</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

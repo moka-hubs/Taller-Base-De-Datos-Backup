@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="5F5CE10B-C092-42F5-82BC-B359EDB8A164" containerWithKeyObject="1943906F-EA0C-8041-EA90-A3705EFB23CA" localFKIndex="CB8D859F-20B8-4ADB-B564-A9D8848E900B" name="AGENDA_CONTRATO_CLI_FK">
+<createdBy>moka</createdBy>
+<createdTime>2026-10-25 00:00:00 UTC</createdTime>
+<generatorID>748741AB-DAB5-47D9-B1CD-DAA9F37D601C</generatorID>
+<ownerDesignName>Taller Base De Datos</ownerDesignName>
+<referredTableLongName>CONTRATO_CLI</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>D78F78E4-9C8E-ACCF-79D0-2DBC467F8A59</referredTableID>
+<keyObject>3FB42CE3-5972-F8FC-7789-478317B5C0A3</keyObject>
+<referredKeyID>3FB42CE3-5972-F8FC-7789-478317B5C0A3</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_contrato</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
