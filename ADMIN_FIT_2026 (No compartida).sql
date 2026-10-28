@@ -1,5 +1,5 @@
 --============================================================================
--- PROYECTO GIMNASIO - PL/SQL
+-- FIT MANAGER PRO  - PL/SQL
 -- 3 FUNCIONES ALMACENADAS + 3 PROCEDIMIENTOS ALMACENADOS + BLOQUE ANONIMO
 -- El bloque recorre TODOS los contratos de la base de datos, obtiene los
 -- datos de cada cliente y guarda un resumen en RESUMEN_CONTRATO_CLI.
@@ -7,23 +7,18 @@
 --   SECCION A : FUNCIONES ALMACENADAS
 --   SECCION B : PROCEDIMIENTOS ALMACENADAS
 --   SECCION C : BLOQUE ANONIMO
---
 --============================================================================
 
 SET SERVEROUTPUT ON SIZE 1000000;
 SET LINESIZE 200;
 
-
---############################################################################
 -- SECCION A - FUNCIONES ALMACENADAS
---############################################################################
-
 --============================================================================
--- FUNCION 1 - FN_GIM_TOTAL_PAGADO
+-- FUNCION 1 - FN_TOTAL_PAGADO
 -- Suma todos los pagos reales de un contrato.
 -- Retorna 0 si el contrato no tiene pagos.
 --============================================================================
-CREATE OR REPLACE FUNCTION FN_GIM_TOTAL_PAGADO (
+CREATE OR REPLACE FUNCTION FN_TOTAL_PAGADO (
     VFN_ID_CONTRATO IN NUMBER
 ) RETURN NUMBER
 IS
@@ -35,14 +30,14 @@ BEGIN
      WHERE P.CONTRATO_CLI_ID_CONTRATO = VFN_ID_CONTRATO;
 
     RETURN VFN_TOTAL;
-END FN_GIM_TOTAL_PAGADO;
+END FN_TOTAL_PAGADO;
 /
 
 --============================================================================
--- FUNCION 2 - FN_GIM_CALCULAR_EDAD
+-- FUNCION 2 - FN_CALCULAR_EDAD
 -- Calcula la edad del cliente a la fecha del sistema.
 --============================================================================
-CREATE OR REPLACE FUNCTION FN_GIM_CALCULAR_EDAD (
+CREATE OR REPLACE FUNCTION FN_CALCULAR_EDAD (
     VFN_FECHA_NAC_CLIENTE IN DATE
 ) RETURN NUMBER
 IS
@@ -52,15 +47,15 @@ BEGIN
     END IF;
 
     RETURN TRUNC(MONTHS_BETWEEN(SYSDATE, VFN_FECHA_NAC_CLIENTE) / 12);
-END FN_GIM_CALCULAR_EDAD;
+END FN_CALCULAR_EDAD;
 /
 
 --============================================================================
--- FUNCION 3 - FN_GIM_DIAS_VIGENCIA
+-- FUNCION 3 - FN_DIAS_VIGENCIA
 -- Calcula los dias que faltan para el termino del contrato.
 -- Si la fecha ya paso, retorna cero
 --============================================================================
-CREATE OR REPLACE FUNCTION FN_GIM_DIAS_VIGENCIA (
+CREATE OR REPLACE FUNCTION FN_DIAS_VIGENCIA (
     VFN_FECHA_TERMINO IN DATE
 ) RETURN NUMBER
 IS
@@ -70,19 +65,16 @@ BEGIN
     END IF;
 
     RETURN GREATEST(0, TRUNC(VFN_FECHA_TERMINO) - TRUNC(SYSDATE));
-END FN_GIM_DIAS_VIGENCIA;
+END FN_DIAS_VIGENCIA;
 /
 
---############################################################################
 -- SECCION B - PROCEDIMIENTOS ALMACENADOS
---############################################################################
-
 --============================================================================
--- PROCEDIMIENTO 1 - SP_GIM_OBTENER_ULTIMO_PAGO
+-- PROCEDIMIENTO 1 - SP_OBTENER_ULTIMO_PAGO
 -- Obtiene el pago real mas reciente del contrato.
 -- Si no hay pagos, devuelve NULL en los tres parametros.
 --============================================================================
-CREATE OR REPLACE PROCEDURE SP_GIM_OBTENER_ULTIMO_PAGO (
+CREATE OR REPLACE PROCEDURE SP_OBTENER_ULTIMO_PAGO (
     VPC_ID_CONTRATO IN  NUMBER,
     VPC_ID_PAGO     OUT NUMBER,
     VPC_MONTO       OUT NUMBER,
@@ -110,15 +102,15 @@ EXCEPTION
         VPC_ID_PAGO := NULL;
         VPC_MONTO := NULL;
         VPC_FECHA_PAGO := NULL;
-END SP_GIM_OBTENER_ULTIMO_PAGO;
+END SP_OBTENER_ULTIMO_PAGO;
 /
 
 --============================================================================
--- PROCEDIMIENTO 2 - SP_GIM_OBTENER_ULTIMA_FACTURA
+-- PROCEDIMIENTO 2 - SP_OBTENER_ULTIMA_FACTURA
 -- Obtiene la factura real mas reciente asociada al contrato.
 -- Si no hay facturas, devuelve NULL en los tres parametros.
 --============================================================================
-CREATE OR REPLACE PROCEDURE SP_GIM_OBTENER_ULTIMA_FACTURA (
+CREATE OR REPLACE PROCEDURE SP_OBTENER_ULTIMA_FACTURA (
     VPC_ID_CONTRATO   IN  NUMBER,
     VPC_ID_FACTURA    OUT NUMBER,
     VPC_TOTAL_FACTURA OUT NUMBER,
@@ -147,15 +139,15 @@ EXCEPTION
         VPC_ID_FACTURA := NULL;
         VPC_TOTAL_FACTURA := NULL;
         VPC_FECHA_EMISION := NULL;
-END SP_GIM_OBTENER_ULTIMA_FACTURA;
+END SP_OBTENER_ULTIMA_FACTURA;
 /
 
 --============================================================================
--- PROCEDIMIENTO 3 - SP_GIM_INSERTAR_RESUMEN
+-- PROCEDIMIENTO 3 - SP_INSERTAR_RESUMEN
 -- Inserta una fila en RESUMEN_CONTRATO_CLI con todos los datos obtenidos.
 -- Los parametros van en el mismo orden de las columnas de la tabla.
 --============================================================================
-CREATE OR REPLACE PROCEDURE SP_GIM_INSERTAR_RESUMEN (
+CREATE OR REPLACE PROCEDURE SP_INSERTAR_RESUMEN (
     VPC_ID_RESUMEN               IN  NUMBER,
     VPC_ID_CONTRATO              IN  NUMBER,
     VPC_RUT_CLIENTE              IN  VARCHAR2,
@@ -245,12 +237,11 @@ BEGIN
     );
 
     VPC_FILAS_INSERTADAS := SQL%ROWCOUNT;
-END SP_GIM_INSERTAR_RESUMEN;
+END SP_INSERTAR_RESUMEN;
 /
 
---############################################################################
 -- SECCION C - BLOQUE ANONIMO
---############################################################################
+
 
 DECLARE
     --========================================================================
@@ -328,7 +319,7 @@ DECLARE
 BEGIN
 
     DBMS_OUTPUT.PUT_LINE('===============================================================');
-    DBMS_OUTPUT.PUT_LINE(' GIMNASIO - RESUMEN DE CONTRATOS Y CLIENTES');
+    DBMS_OUTPUT.PUT_LINE('RESUMEN DE CONTRATOS Y CLIENTES');
     DBMS_OUTPUT.PUT_LINE(' FECHA DE PROCESO: ' || TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS'));
     DBMS_OUTPUT.PUT_LINE('===============================================================');
 
@@ -350,15 +341,13 @@ BEGIN
 
             OBJ_RESUMEN.ID_CONTRATO := i.ID_CONTRATO;
             OBJ_RESUMEN.RUT_CLIENTE := i.CLIENTE_RUT_CLIENTE;
-            OBJ_RESUMEN.NOMBRE_CLIENTE := TRIM(
-                i.PNOMBRE_CLIENTE || ' ' ||
-                NVL(i.SNOMBRE_CLIENTE, '') || ' ' ||
+            OBJ_RESUMEN.NOMBRE_CLIENTE := TRIM( i.PNOMBRE_CLIENTE || ' ' ||NVL(i.SNOMBRE_CLIENTE, '') || ' ' ||
                 i.PAPELLIDO_CLIENTE || ' ' ||
                 NVL(i.SAPELLIDO_CLIENTE, '')
             );
 
             OBJ_RESUMEN.FECHA_NAC_CLIENTE := i.FECHA_NAC_CLIENTE;
-            OBJ_RESUMEN.EDAD_CLIENTE := FN_GIM_CALCULAR_EDAD(i.FECHA_NAC_CLIENTE);
+            OBJ_RESUMEN.EDAD_CLIENTE := FN_CALCULAR_EDAD(i.FECHA_NAC_CLIENTE);
             OBJ_RESUMEN.NACIONALIDAD_CLIENTE := i.NACIONALIDAD_CLIENTE;
             OBJ_RESUMEN.TELEFONO_CLIENTE := i.TELEFONO_CLIENTE;
             OBJ_RESUMEN.CORREO_CLIENTE := i.CORREO_CLIENTE;
@@ -372,18 +361,18 @@ BEGIN
             OBJ_RESUMEN.FECHA_TERMINO_CONTRATO := i.FECHA_TERMINO_CONTRATO;
             OBJ_RESUMEN.ESTADO_CONTRATO := i.ESTADO_CONTRATO;
 
-            OBJ_RESUMEN.TOTAL_PAGADO := FN_GIM_TOTAL_PAGADO(i.ID_CONTRATO);
+            OBJ_RESUMEN.TOTAL_PAGADO := FN_TOTAL_PAGADO(i.ID_CONTRATO);
             OBJ_RESUMEN.SALDO_PLAN := i.PRECIO_PLAN - OBJ_RESUMEN.TOTAL_PAGADO;
-            OBJ_RESUMEN.DIAS_VIGENCIA := FN_GIM_DIAS_VIGENCIA(i.FECHA_TERMINO_CONTRATO);
+            OBJ_RESUMEN.DIAS_VIGENCIA := FN_DIAS_VIGENCIA(i.FECHA_TERMINO_CONTRATO);
 
-            SP_GIM_OBTENER_ULTIMO_PAGO(
+            SP_OBTENER_ULTIMO_PAGO(
                 i.ID_CONTRATO,
                 OBJ_RESUMEN.ID_ULTIMO_PAGO,
                 OBJ_RESUMEN.MONTO_ULTIMO_PAGO,
                 OBJ_RESUMEN.FECHA_ULTIMO_PAGO
             );
 
-            SP_GIM_OBTENER_ULTIMA_FACTURA(
+            SP_OBTENER_ULTIMA_FACTURA(
                 i.ID_CONTRATO,
                 OBJ_RESUMEN.ID_ULTIMA_FACTURA,
                 OBJ_RESUMEN.TOTAL_ULTIMA_FACTURA,
@@ -393,7 +382,7 @@ BEGIN
             --========================================================================
             -- INSERCION EN LA TABLA NUEVA
             --========================================================================
-            SP_GIM_INSERTAR_RESUMEN(
+            SP_INSERTAR_RESUMEN(
                 OBJ_RESUMEN.ID_RESUMEN,
                 OBJ_RESUMEN.ID_CONTRATO,
                 OBJ_RESUMEN.RUT_CLIENTE,
@@ -489,14 +478,14 @@ BEGIN
             WHEN DUP_VAL_ON_INDEX THEN
                 ROLLBACK;
                 V_CONT_ERRORES := V_CONT_ERRORES + 1;
-                DBMS_OUTPUT.PUT_LINE('ERROR CONTRATO ' || i.ID_CONTRATO ||
-                                     ': ID_RESUMEN duplicado.');
+                DBMS_OUTPUT.PUT_LINE('ERROR CONTRATO ' || i.ID_CONTRATO ||': ID_RESUMEN duplicado.');
+                                     
 
             WHEN OTHERS THEN
                 ROLLBACK;
                 V_CONT_ERRORES := V_CONT_ERRORES + 1;
-                DBMS_OUTPUT.PUT_LINE('ERROR CONTRATO ' || i.ID_CONTRATO ||
-                                     ': ' || SQLERRM);
+                DBMS_OUTPUT.PUT_LINE('ERROR CONTRATO ' || i.ID_CONTRATO || ': ' || SQLERRM);
+                                     
         END;
 
     END LOOP;
@@ -515,12 +504,9 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('===============================================================');
     DBMS_OUTPUT.PUT_LINE('CONTRATOS PROCESADOS : ' || V_CONT_PROCESADOS);
     DBMS_OUTPUT.PUT_LINE('CONTRATOS CON ERROR  : ' || V_CONT_ERRORES);
-    DBMS_OUTPUT.PUT_LINE('SUMA TOTAL PAGADO    : ' ||
-                         TO_CHAR(V_SUMA_TOTAL_PAGADO, 'FML999G999G999G999'));
-    DBMS_OUTPUT.PUT_LINE('SUMA SALDOS          : ' ||
-                         TO_CHAR(V_SUMA_SALDO, 'FML999G999G999G999'));
-    DBMS_OUTPUT.PUT_LINE('PROMEDIO PAGADO      : ' ||
-                         TO_CHAR(V_PROMEDIO_TOTAL, 'FML999G999G999G999'));
+    DBMS_OUTPUT.PUT_LINE('SUMA TOTAL PAGADO    : ' || TO_CHAR(V_SUMA_TOTAL_PAGADO, 'FML999G999G999G999'));          
+    DBMS_OUTPUT.PUT_LINE('SUMA SALDOS          : ' || TO_CHAR(V_SUMA_SALDO, 'FML999G999G999G999'));                   
+    DBMS_OUTPUT.PUT_LINE('PROMEDIO PAGADO      : ' || TO_CHAR(V_PROMEDIO_TOTAL, 'FML999G999G999G999'));                  
     DBMS_OUTPUT.PUT_LINE('===============================================================');
     DBMS_OUTPUT.PUT_LINE('PROCESO FINALIZADO CON COMMIT.');
     DBMS_OUTPUT.PUT_LINE('===============================================================');
@@ -532,5 +518,4 @@ EXCEPTION
 END;
 /
 
--- Consulta de verificacion:
--- SELECT * FROM RESUMEN_CONTRATO_CLI ORDER BY id_resumen DESC;
+
