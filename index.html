@@ -6297,10 +6297,8 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(&#x27; FECHA DE PROCESO: &#x27; || TO_CHAR(SYSDATE, &#x27;DD-MM-YYYY HH24:MI:SS&#x27;));
     DBMS_OUTPUT.PUT_LINE(&#x27;===============================================================&#x27;);
 
-    -- Se parte desde el ultimo correlativo existente en la tabla nueva.
-    SELECT NVL(MAX(ID_RESUMEN), 0)
-      INTO V_ID_RESUMEN
-      FROM RESUMEN_CONTRATO_CLI;
+    -- Siempre inicia desde 0 para que falle al re-ejecutar (violación de PK)
+    V_ID_RESUMEN := 0;
 
     --========================================================================
     -- RECORRER TODOS LOS CONTRATOS
